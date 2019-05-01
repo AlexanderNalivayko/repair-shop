@@ -1,0 +1,11 @@
+body {background-color: #1d2024 !important; }
+
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    color: cyan !important;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    color: cyan !important;
+    background-color: #343a40;
+}
