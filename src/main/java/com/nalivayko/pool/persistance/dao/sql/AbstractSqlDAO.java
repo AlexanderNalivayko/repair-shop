@@ -1,0 +1,106 @@
+package com.nalivayko.pool.persistance.dao.sql;
+
+import com.nalivayko.pool.exceptions.InternalAppException;
+import com.nalivayko.pool.persistance.dbcp.ConnectionManager;
+import com.nalivayko.pool.persistance.mappers.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class AbstractSqlDAO<T> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractSqlDAO.class);
+
+    private ConnectionManager connectionManager;
+
+    public AbstractSqlDAO(ConnectionManager connectionManager) {
+        this.connectionManager = connectionManager;
+    }
+
+    /**
+     * @return key(id) auto-generated for created row
+     */
+    protected int create(String sqlQuery, PreparedStatementConsumer preparedStatementConsumer) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatementConsumer.prepare(preparedStatement);
+            int result = preparedStatement.executeUpdate();
+            ResultSet tableKeys = preparedStatement.getGeneratedKeys();
+            if (result > 0 && tableKeys.next()) {
+                return tableKeys.getInt(1);
+            } else {
+                InternalAppException internalAppException = new InternalAppException("Can't create data in db");
+                LOGGER.error(internalAppException.getMessage());
+                throw internalAppException;
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            throw new InternalAppException(e.getMessage());
+        }
+    }
+
+    protected <T> T find(String sql, PreparedStatementConsumer preparedStatementConsumer, Mapper<T> mapper) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatementConsumer.prepare(preparedStatement);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return mapper.getEntity(resultSet);
+                } else {
+                    InternalAppException internalAppException = new InternalAppException("Can't find data in db");
+                    LOGGER.error(internalAppException.getMessage());
+                    throw internalAppException;
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            throw new InternalAppException(e);
+        }
+    }
+
+    protected List<T> findAll(String query, Mapper<T> mapper) {
+        List<T> list = new ArrayList<>();
+        try (Connection connection = connectionManager.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                list.add(mapper.getEntity(resultSet));
+            }
+            return list;
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            throw new InternalAppException(e);
+        }
+    }
+
+    protected List<T> findAll(String sql, PreparedStatementConsumer preparedStatementConsumer, Mapper<T> mapper) {
+        List<T> list = new ArrayList<>();
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatementConsumer.prepare(preparedStatement);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next())
+                    list.add(mapper.getEntity(resultSet));
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            throw new InternalAppException(e);
+        }
+        return list;
+    }
+
+    protected boolean updateDelete(String sql, PreparedStatementConsumer preparedStatementConsumer) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatementConsumer.prepare(preparedStatement);
+            int affectedRows = preparedStatement.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            throw new InternalAppException(e);
+        }
+    }
+}

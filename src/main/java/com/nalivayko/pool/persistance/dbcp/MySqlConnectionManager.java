@@ -1,7 +1,6 @@
-package com.nalivayko.pool.repositories.sql;
+package com.nalivayko.pool.persistance.dbcp;
 
 import com.nalivayko.pool.exceptions.InternalAppException;
-import com.nalivayko.pool.repositories.ConnectionManager;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

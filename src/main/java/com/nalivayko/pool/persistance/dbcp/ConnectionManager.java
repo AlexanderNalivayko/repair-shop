@@ -1,4 +1,4 @@
-package com.nalivayko.pool.repositories;
+package com.nalivayko.pool.persistance.dbcp;
 
 import java.sql.Connection;
 

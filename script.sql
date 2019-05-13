@@ -5,7 +5,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- fixapp.contacts
 -- ------------------------------------------
 DROP TABLE IF EXISTS contacts;
-CREATE TABLE IF NOT EXISTS contacts (
+CREATE TABLE IF NOT EXISTS contact_information (
     id INT AUTO_INCREMENT NOT NULL,
     email VARCHAR(100),
     phone VARCHAR(16),
@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS users (
       ON DELETE CASCADE
     ) ENGINE=InnoDB CHARACTER SET=UTF8;
 INSERT INTO users (id, username, password, first_name, last_name, role, contacts_id)
-VALUES (1, 'admin', 'admin', 'John','Smith', 'ADMIN', 1),
-(2, 'manager', 'manager', 'Jane','Richardson', 'MANAGER', 2),
+VALUES (1, 'admin', 'admin', 'John', 'Smith', 'ADMIN', 1),
+(2, 'manager', 'manager', 'Jane', 'Richardson', 'MANAGER', 2),
 (3, 'user', 'user', 'Tony', 'Black', 'USER', 3);
 
 -- ------------------------------------------

@@ -1,4 +1,4 @@
-package com.nalivayko.pool.domain;
+package com.nalivayko.pool.model.enums;
 
 public enum RepairStatus {
     NEW,

@@ -24,9 +24,9 @@
                 </li>
                 <li class="nav-item"><a class="nav-link" href="app/home.jsp"><fmt:message key="header.about"/></a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="app/home.jsp"><fmt:message key="header.repair"/></a>
+                <li class="nav-item"><a class="nav-link" href="app/home.jsp"><fmt:message key="header.repairRequest"/></a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="app/home.jsp"><fmt:message key="header.account"/></a>
+                <li class="nav-item"><a class="nav-link" href="app/home.jsp"><fmt:message key="header.user"/></a>
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto">
