@@ -2,10 +2,9 @@ package com.nalivayko.pool.persistance.dao.sql;
 
 import com.nalivayko.pool.model.RepairRequest;
 import com.nalivayko.pool.model.enums.RepairStatus;
-import com.nalivayko.pool.persistance.dao.ItemDAO;
+import com.nalivayko.pool.persistance.TransactionManager;
 import com.nalivayko.pool.persistance.dao.RepairRequestDAO;
 import com.nalivayko.pool.persistance.dao.sql.query.RepairQuery;
-import com.nalivayko.pool.persistance.dbcp.ConnectionManager;
 import com.nalivayko.pool.persistance.mappers.RepairRequestMapper;
 
 import java.util.List;
@@ -13,20 +12,17 @@ import java.util.List;
 
 public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implements RepairRequestDAO {
 
-    private ItemDAO itemDAO;
 
-    public RepairRequestSqlDAO(ConnectionManager connectionManager, ItemDAO itemDAO) {
-        super(connectionManager);
-        this.itemDAO = itemDAO;
+    public RepairRequestSqlDAO(TransactionManager transactionManager) {
+        super(transactionManager);
     }
 
     @Override
     public int create(RepairRequest repairRequest) {
-        int itemGeneratedId = itemDAO.create(repairRequest.getItem());
         return create(RepairQuery.INSERT, preparedStatement -> {
             preparedStatement.setString(1, repairRequest.getRepairStatus().toString());
             preparedStatement.setInt(2, repairRequest.getUser().getId());
-            preparedStatement.setInt(3, itemGeneratedId);
+            preparedStatement.setInt(3, repairRequest.getId());
             preparedStatement.setString(4, repairRequest.getDescription());
             preparedStatement.setLong(5, repairRequest.getCost());
         });
@@ -51,8 +47,6 @@ public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implement
 
     @Override
     public boolean update(RepairRequest repairRequest) {
-        //todo the is problem
-        itemDAO.update(repairRequest.getItem());
         return updateDelete(RepairQuery.UPDATE_BY_ID, preparedStatement -> {
             preparedStatement.setString(1, repairRequest.getRepairStatus().toString());
             preparedStatement.setInt(2, repairRequest.getUser().getId());

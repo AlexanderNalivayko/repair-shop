@@ -1,14 +1,14 @@
 package com.nalivayko.pool.persistance.dao.sql;
 
 import com.nalivayko.pool.model.Contacts;
+import com.nalivayko.pool.persistance.TransactionManager;
 import com.nalivayko.pool.persistance.dao.ContactsDAO;
-import com.nalivayko.pool.persistance.dbcp.ConnectionManager;
 import com.nalivayko.pool.persistance.dao.sql.query.ContactsQuery;
 
 public class ContactsSqlDAO extends AbstractSqlDAO<Contacts> implements ContactsDAO {
 
-    public ContactsSqlDAO(ConnectionManager connectionManager) {
-        super(connectionManager);
+    public ContactsSqlDAO(TransactionManager transactionManager) {
+        super(transactionManager);
     }
 
     @Override

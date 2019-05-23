@@ -1,5 +1,6 @@
 package com.nalivayko.pool.persistance.dbcp;
 
+import com.nalivayko.pool.exceptions.AppInitialisationException;
 import com.nalivayko.pool.exceptions.InternalAppException;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
@@ -15,28 +16,21 @@ public class MySqlConnectionManager implements ConnectionManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(MySqlConnectionManager.class);
     private static final String PROP_FILE_NAME = "dbcp";
 
-    private final String url;
-    private final String username;
-    private final String pass;
-    private final int initialSize;
-    private final int maxSize;
+    private static final String url = getProperty("url", PROP_FILE_NAME);
+    private static final String username = getProperty("username", PROP_FILE_NAME);
+    private static final String pass = getProperty("pass", PROP_FILE_NAME);
+    private static final int initialSize = Integer.parseInt(getProperty("initial", PROP_FILE_NAME));
+    private static final int maxSize = Integer.parseInt(getProperty("max", PROP_FILE_NAME));
 
-    private BasicDataSource instance;
+    private static BasicDataSource instance;
 
-    {
-        this.url = getProperty("url", PROP_FILE_NAME);
-        this.username = getProperty("username", PROP_FILE_NAME);
-        this.pass = getProperty("pass", PROP_FILE_NAME);
-        this.initialSize = Integer.parseInt(getProperty("initial", PROP_FILE_NAME));
-        this.maxSize = Integer.parseInt(getProperty("max", PROP_FILE_NAME));
+    public MySqlConnectionManager() {
         try {
             instance = setupDriver();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
+            throw new AppInitialisationException("Can't start DBCP");
         }
-    }
-
-    public MySqlConnectionManager() {
     }
 
     public synchronized Connection getConnection() {
@@ -48,7 +42,7 @@ public class MySqlConnectionManager implements ConnectionManager {
         }
     }
 
-    private BasicDataSource setupDriver() throws Exception {
+    private static BasicDataSource setupDriver() throws Exception {
         BasicDataSource dbcp = new BasicDataSource();
         dbcp.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dbcp.setUrl(url);

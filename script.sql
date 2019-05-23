@@ -1,11 +1,11 @@
 USE fixapp;
-SET FOREIGN_KEY_CHECKS=0;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- ------------------------------------------
 -- fixapp.contacts
 -- ------------------------------------------
 DROP TABLE IF EXISTS contacts;
-CREATE TABLE IF NOT EXISTS contact_information (
+CREATE TABLE IF NOT EXISTS contacts (
     id INT AUTO_INCREMENT NOT NULL,
     email VARCHAR(100),
     phone VARCHAR(16),
@@ -22,20 +22,20 @@ VALUES (1, 'admin@fix.com', '+38067-777-77-77'),
 DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT NOT NULL,
+    contacts_id INT NOT NULL,
     username VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
     first_name VARCHAR(100),
     last_name VARCHAR(100),
     role VARCHAR(20),
-    contacts_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (contacts_id) REFERENCES contacts (id)
       ON DELETE CASCADE
     ) ENGINE=InnoDB CHARACTER SET=UTF8;
-INSERT INTO users (id, username, password, first_name, last_name, role, contacts_id)
-VALUES (1, 'admin', 'admin', 'John', 'Smith', 'ADMIN', 1),
-(2, 'manager', 'manager', 'Jane', 'Richardson', 'MANAGER', 2),
-(3, 'user', 'user', 'Tony', 'Black', 'USER', 3);
+INSERT INTO users (id, contacts_id, username, password, first_name, last_name, role)
+VALUES (1, 1, 'admin', 'admin', 'John', 'Smith', 'ADMIN'),
+(2, 2, 'manager', 'manager', 'Jane', 'Richardson', 'MANAGER'),
+(3, 3, 'user', 'user', 'Tony', 'Black', 'USER');
 
 -- ------------------------------------------
 -- fixapp.items
@@ -60,9 +60,10 @@ VALUES (1, 'phone', 'Nokia', 'lumia 720'),
 DROP TABLE IF EXISTS repair_requests;
 CREATE TABLE IF NOT EXISTS repair_requests (
     id INT AUTO_INCREMENT NOT NULL,
-    status VARCHAR(20),
     user_id INT NOT NULL,
     item_id INT NOT NULL,
+    status VARCHAR(20),
+    creation_date DATETIME,
     description VARCHAR(250),
     cost BIGINT DEFAULT NULL,
       PRIMARY KEY (id),
@@ -71,11 +72,11 @@ CREATE TABLE IF NOT EXISTS repair_requests (
     FOREIGN KEY (item_id) REFERENCES items (id)
       ON DELETE CASCADE
     ) ENGINE=InnoDB CHARACTER SET=UTF8;
-INSERT INTO repair_requests (id, status, user_id, item_id, description, cost)
-VALUES (1, 'NEW', 3, 1, 'not charging', null),
-(2, 'APPROVED', 3, 2, 'black stripes on the screen', 1000),
-(3, 'DECLINED', 3, 3, 'bad breaks', null),
-(4, 'DONE', 3, 4, 'spinning but not heating', 2890);
+INSERT INTO repair_requests (id, user_id, item_id, status, creation_date, description, cost)
+VALUES (1, 3, 1, 'NEW', NOW(), 'not charging', null),
+(2, 3, 2, 'APPROVED', NOW(), 'black stripes on the screen', 1000),
+(3, 3, 3, 'DECLINED', NOW(), 'bad breaks', null),
+(4, 3, 4, 'DONE', NOW(), 'spinning but not heating', 2890);
 
 -- ------------------------------------------
 -- fixapp.feedback
@@ -93,4 +94,4 @@ INSERT INTO feedback (id, user_id, text)
 VALUES (1, 3, 'Thank you for quick repair.');
 
 
-SET FOREIGN_KEY_CHECKS=1;
+SET FOREIGN_KEY_CHECKS = 1;

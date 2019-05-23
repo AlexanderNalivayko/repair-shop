@@ -2,24 +2,26 @@ package com.nalivayko.pool.persistance.dao.sql.query;
 
 public class RepairQuery {
 
+    public static final String TABLE_NAME = "repair_requests";
+
     public static final String ID = "id";
-    public static final String STATUS = "status";
     public static final String USER_ID = "user_id";
     public static final String ITEM_ID = "item_id";
+    public static final String STATUS = "status";
+    public static final String CREATION_DATE = "creation_date";
     public static final String DESCRIPTION = "description";
     public static final String COST = "cost";
 
-    public static final String TABLE_NAME = "repair_requests";
-
     public static final String INSERT = "INSERT INTO " + TABLE_NAME
             + " ("
-            + STATUS + ", "
             + USER_ID + ", "
             + ITEM_ID + ", "
+            + STATUS + ", "
+            + CREATION_DATE + ", "
             + DESCRIPTION + ", "
             + COST
             + ") "
-            + " VALUES (?, ?, ?, ?, ?)";
+            + " VALUES (?, ?, ?, NOW(), ?, ?)";
 
     public static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME
             + " INNER JOIN " + ItemQuery.TABLE_NAME
@@ -48,9 +50,9 @@ public class RepairQuery {
 
     public static final String UPDATE_BY_ID = "UPDATE " + TABLE_NAME
             + " SET"
-            + STATUS + " = ?, "
             + USER_ID + " = ?, "
             + ITEM_ID + " = ?, "
+            + STATUS + " = ?, "
             + DESCRIPTION + " = ?, "
             + COST + " = ? "
             + " WHERE "

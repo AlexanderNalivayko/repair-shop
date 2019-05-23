@@ -1,7 +1,7 @@
 package com.nalivayko.pool.persistance.dao.sql;
 
 import com.nalivayko.pool.exceptions.InternalAppException;
-import com.nalivayko.pool.persistance.dbcp.ConnectionManager;
+import com.nalivayko.pool.persistance.TransactionManager;
 import com.nalivayko.pool.persistance.mappers.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,18 +14,19 @@ public abstract class AbstractSqlDAO<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractSqlDAO.class);
 
-    private ConnectionManager connectionManager;
+    private TransactionManager transactionManager;
 
-    public AbstractSqlDAO(ConnectionManager connectionManager) {
-        this.connectionManager = connectionManager;
+    public AbstractSqlDAO(TransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
     }
 
     /**
-     * @return key(id) auto-generated for created row
+     * @return auto-generated key(id) for created row
      */
     protected int create(String sqlQuery, PreparedStatementConsumer preparedStatementConsumer) {
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
+        Connection connection = transactionManager.getConnection();
+        try (PreparedStatement preparedStatement =
+                     connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatementConsumer.prepare(preparedStatement);
             int result = preparedStatement.executeUpdate();
             ResultSet tableKeys = preparedStatement.getGeneratedKeys();
@@ -42,9 +43,9 @@ public abstract class AbstractSqlDAO<T> {
         }
     }
 
-    protected <T> T find(String sql, PreparedStatementConsumer preparedStatementConsumer, Mapper<T> mapper) {
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+    protected T find(String sql, PreparedStatementConsumer preparedStatementConsumer, Mapper<T> mapper) {
+        Connection connection = transactionManager.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatementConsumer.prepare(preparedStatement);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -62,9 +63,9 @@ public abstract class AbstractSqlDAO<T> {
     }
 
     protected List<T> findAll(String query, Mapper<T> mapper) {
+        Connection connection = transactionManager.getConnection();
         List<T> list = new ArrayList<>();
-        try (Connection connection = connectionManager.getConnection();
-             Statement statement = connection.createStatement();
+        try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
             while (resultSet.next()) {
                 list.add(mapper.getEntity(resultSet));
@@ -77,9 +78,9 @@ public abstract class AbstractSqlDAO<T> {
     }
 
     protected List<T> findAll(String sql, PreparedStatementConsumer preparedStatementConsumer, Mapper<T> mapper) {
+        Connection connection = transactionManager.getConnection();
         List<T> list = new ArrayList<>();
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatementConsumer.prepare(preparedStatement);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next())
@@ -93,8 +94,8 @@ public abstract class AbstractSqlDAO<T> {
     }
 
     protected boolean updateDelete(String sql, PreparedStatementConsumer preparedStatementConsumer) {
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        Connection connection = transactionManager.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatementConsumer.prepare(preparedStatement);
             int affectedRows = preparedStatement.executeUpdate();
             return affectedRows > 0;

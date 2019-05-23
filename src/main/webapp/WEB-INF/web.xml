@@ -6,6 +6,8 @@
 
     <display-name>fix-shop</display-name>
 
+
+
     <filter>
         <filter-name>internationalisationFilter</filter-name>
         <filter-class>com.nalivayko.pool.filters.InternationalisationFilter</filter-class>
@@ -16,9 +18,24 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+
+    <!--<filter>-->
+        <!--<filter-name>encodingFilter</filter-name>-->
+        <!--<filter-class>com.nalivayko.pool.filters.EncodingFilter</filter-class>-->
+        <!--<init-param>-->
+            <!--<param-name>encoding_type</param-name>-->
+            <!--<param-value>UTF8</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+
+    <!--<filter-mapping>-->
+        <!--<filter-name>encodingFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
     <servlet>
         <servlet-name>appServlet</servlet-name>
-        <servlet-class>com.nalivayko.pool.controller.AppServlet</servlet-class>
+        <servlet-class>com.nalivayko.pool.web.AppServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>appServlet</servlet-name>

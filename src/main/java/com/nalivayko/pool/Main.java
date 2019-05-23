@@ -10,9 +10,9 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        ConnectionManager connectionManager = new MySqlConnectionManager();
-        RepairRequestDAO repairRequestDAO = new RepairRequestSqlDAO(connectionManager);
-        System.out.println(repairRequestDAO.findByUserId(2).toString());
+//        ConnectionManager connectionManager = new MySqlConnectionManager();
+//        RepairRequestDAO repairRequestDAO = new RepairRequestSqlDAO(connectionManager);
+//        System.out.println(repairRequestDAO.findByUserId(2).toString());
 //
 //        repairRequestDAO.add(new RepairRequest.Builder()
 //                .setId(10L)

@@ -1,4 +1,4 @@
-package com.nalivayko.pool.controller;
+package com.nalivayko.pool.web;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +11,7 @@ public class AppServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Locale locale = new Locale("en");
-        req.setAttribute("locale", locale);
+        req.setAttribute("locale", "en");
         req.getRequestDispatcher("pages/home.jsp").forward(req, resp);
     }
 

@@ -1,17 +1,17 @@
 package com.nalivayko.pool.persistance.dao.sql;
 
 import com.nalivayko.pool.model.Feedback;
+import com.nalivayko.pool.persistance.TransactionManager;
 import com.nalivayko.pool.persistance.dao.FeedbackDAO;
 import com.nalivayko.pool.persistance.dao.sql.query.FeedbackQuery;
-import com.nalivayko.pool.persistance.dbcp.ConnectionManager;
 import com.nalivayko.pool.persistance.mappers.FeedbackMapper;
 
 import java.util.List;
 
 public class FeedbackSqlDAO extends AbstractSqlDAO<Feedback> implements FeedbackDAO {
 
-    public FeedbackSqlDAO(ConnectionManager connectionManager) {
-        super(connectionManager);
+    public FeedbackSqlDAO(TransactionManager transactionManager) {
+        super(transactionManager);
     }
 
     @Override
