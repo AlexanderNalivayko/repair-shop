@@ -2,7 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<fmt:setLocale value="${locale}"/>
+<fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="lang"/>
 
 <meta charset="utf-8">
@@ -42,11 +42,11 @@
             </ul>
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
-                    <form action="/language" method="get">
+                    <form>
                         <select class="form-control form-control-sm" name="locale" onchange="this.form.submit();">
-                            <option value="en" ${locale == "en" ? "selected" : ""}><fmt:message
+                            <option value="en" ${sessionScope.locale == "en" ? "selected" : ""}><fmt:message
                                     key="language.en"/></option>
-                            <option value="ru" ${locale == "ru" ? "selected" : ""}><fmt:message
+                            <option value="ru" ${sessionScope.locale == "ru" ? "selected" : ""}><fmt:message
                                     key="language.ru"/></option>
                         </select>
                     </form>

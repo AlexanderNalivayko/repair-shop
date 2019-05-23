@@ -21,7 +21,7 @@
                     <fmt:message key="error.oops"/>
                 </h1>
                 <h2>
-                    <fmt:message key="error.msg404"/>
+                    <fmt:message key="error.msg500"/>
                 </h2>
                 <div class="error-actions">
                     <a href="/site" class="btn btn-success btn-lg">

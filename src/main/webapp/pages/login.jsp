@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<fmt:setLocale value="${locale}"/>
+<fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="lang"/>
 
 <meta charset="utf-8">
@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm pl-0 pr-1">
-                    <a href="/app" class="btn btn-danger btn-block" data-dismiss="modal">
+                    <a href="/site" class="btn btn-danger btn-block" data-dismiss="modal">
                         <fmt:message key="login.btn.home"/>
                     </a>
                 </div>
