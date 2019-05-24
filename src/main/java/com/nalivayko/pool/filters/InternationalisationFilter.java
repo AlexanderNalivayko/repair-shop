@@ -2,38 +2,37 @@ package com.nalivayko.pool.filters;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Locale;
 
 public class InternationalisationFilter implements Filter {
+    private static final String LOCALE = "locale";
+    private static final String BUNDLE = "bundle";
+    private String defaultBundle;
+    private String defaultLocale;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
+        defaultBundle = filterConfig.getInitParameter(BUNDLE);
+        defaultLocale = filterConfig.getInitParameter(LOCALE);
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-//        servletRequest.setAttribute("locale", "ru");
-
-        String localeParameter = servletRequest.getParameter("locale");
-        String defaultLocale = "ru";
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest)servletRequest;
+        String localeParameter = request.getParameter(LOCALE);
+        HttpSession session = request.getSession();
 
         if (localeParameter != null) {
-            Locale locale = new Locale(localeParameter);
-
-            ((HttpServletRequest) servletRequest).getSession().setAttribute("locale", locale);
-
-            String uri = ((HttpServletRequest) servletRequest).getRequestURI();
-            HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
-            httpResponse.sendRedirect(uri);
+            session.setAttribute(LOCALE, localeParameter);
         } else {
-            Locale locale = (Locale) ((HttpServletRequest) servletRequest).getSession().getAttribute("locale");
-            if (locale == null) {
-                ((HttpServletRequest) servletRequest).getSession().setAttribute("locale", new Locale(defaultLocale));
+            if (request.getSession().getAttribute(LOCALE) == null) {
+                session.setAttribute(LOCALE, defaultLocale);
             }
-            filterChain.doFilter(servletRequest, servletResponse);
         }
+        session.setAttribute(BUNDLE, defaultBundle);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
