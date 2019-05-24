@@ -12,9 +12,17 @@
         <filter-name>internationalisationFilter</filter-name>
         <filter-class>com.nalivayko.pool.filters.InternationalisationFilter</filter-class>
     </filter>
-
     <filter-mapping>
         <filter-name>internationalisationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.nalivayko.pool.filters.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
@@ -35,13 +43,12 @@
 
     <servlet>
         <servlet-name>appServlet</servlet-name>
-        <servlet-class>com.nalivayko.pool.web.AppServlet</servlet-class>
+        <servlet-class>com.nalivayko.pool.web.DispatcherServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>appServlet</servlet-name>
         <url-pattern>/site/*</url-pattern>
     </servlet-mapping>
-
 
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>

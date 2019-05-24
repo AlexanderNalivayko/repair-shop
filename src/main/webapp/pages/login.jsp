@@ -26,7 +26,7 @@
 
 <body>
 <div id="logreg-forms">
-    <form class="form-signin shadow">
+    <form class="form-signin shadow" action="${pageContext.request.contextPath}/site/login_page/login">
         <h1 class="h3 mb-3 font-weight-normal">
             <fmt:message key="login.msg"/>
         </h1>
@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm pl-0 pr-1">
-                    <a href="/site" class="btn btn-danger btn-block" data-dismiss="modal">
+                    <a href="${pageContext.request.contextPath}/site/home_page" class="btn btn-danger btn-block">
                         <fmt:message key="login.btn.home"/>
                     </a>
                 </div>

@@ -21,7 +21,7 @@
                     <fmt:message key="error.oops"/>
                 </h1>
                 <h2>
-                    <fmt:message key="error.msg500"/>
+                    <fmt:message key="error.msg403"/>
                 </h2>
                 <div class="error-actions">
                     <a href="${pageContext.request.contextPath}/site/home_page" class="btn btn-success btn-lg">

@@ -24,7 +24,7 @@
                     <fmt:message key="error.msg404"/>
                 </h2>
                 <div class="error-actions">
-                    <a href="/site" class="btn btn-success btn-lg">
+                    <a href="${pageContext.request.contextPath}/site/home_page" class="btn btn-success btn-lg">
                         <fmt:message key="error.btn.home"/>
                     </a>
                 </div>

@@ -11,8 +11,8 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-color rounded-20">
-        <a class="navbar-brand font-weight-bolder" href="app/home.jsp">FIX-SHOP</a>
+    <nav class="navbar navbar-expand-md navbar-dark bg-color rounded-20 text-uppercase">
+        <a class="navbar-brand font-weight-bolder" href="site/home">FIX-SHOP</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -20,14 +20,20 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link font-weight-bolder" href="app/home.jsp"><fmt:message
-                        key="header.home"/></a>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bolder" href="${pageContext.request.contextPath}/site/home_page">
+                        <fmt:message key="header.home"/>
+                    </a>
                 </li>
-                <li class="nav-item"><a class="nav-link font-weight-bolder" href="app/home.jsp"><fmt:message
-                        key="header.about"/></a>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bolder" href="${pageContext.request.contextPath}/site/about_page">
+                        <fmt:message key="header.about"/>
+                    </a>
                 </li>
-                <li class="nav-item"><a class="nav-link font-weight-bolder" href="app/home.jsp"><fmt:message
-                        key="header.repairRequest"/></a>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bolder" href="${pageContext.request.contextPath}/site/repair_page">
+                        <fmt:message key="header.repairRequest"/>
+                    </a>
                 </li>
                 <li class="nav-item dropdown font-weight-bolder">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -35,8 +41,8 @@
                         <fmt:message key="header.user"/>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" data-toggle="modal" href="#exampleModal"><fmt:message key="action.sign.in"/></a>
-                        <a class="dropdown-item" href="#"><fmt:message key="action.sign.up"/></a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/site/login_page"><fmt:message key="action.login"/></a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/site/signup_page"><fmt:message key="action.signup"/></a>
                     </div>
                 </li>
             </ul>
@@ -44,10 +50,10 @@
                 <li class="nav-item">
                     <form>
                         <select class="form-control form-control-sm" name="locale" onchange="this.form.submit();">
-                            <option value="en" ${sessionScope.locale == "en" ? "selected" : ""}><fmt:message
-                                    key="language.en"/></option>
-                            <option value="ru" ${sessionScope.locale == "ru" ? "selected" : ""}><fmt:message
-                                    key="language.ru"/></option>
+                            <option value="en" ${sessionScope.locale == "en" ? "selected" : ""}>
+                                <fmt:message key="language.en"/></option>
+                            <option value="ru" ${sessionScope.locale == "ru" ? "selected" : ""}>
+                                <fmt:message key="language.ru"/></option>
                         </select>
                     </form>
                 </li>
@@ -55,5 +61,3 @@
         </div>
     </nav>
 </header>
-
-<jsp:include page="login-popup.jsp"></jsp:include>
