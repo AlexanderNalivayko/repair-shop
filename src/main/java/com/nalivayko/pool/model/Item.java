@@ -1,7 +1,6 @@
 package com.nalivayko.pool.model;
 
 public class Item {
-
     private int id;
     private String productType;
     private String brand;

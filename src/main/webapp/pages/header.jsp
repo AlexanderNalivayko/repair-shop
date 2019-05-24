@@ -12,7 +12,7 @@
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-color rounded-20 text-uppercase">
-        <a class="navbar-brand font-weight-bolder" href="site/home">FIX-SHOP</a>
+        <a class="navbar-brand font-weight-bolder" href="site/home_page">FIX-SHOP</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

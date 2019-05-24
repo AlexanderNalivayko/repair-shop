@@ -1,7 +1,6 @@
 package com.nalivayko.pool.model;
 
 public class Contacts {
-
     private int id;
     private String email;
     private String phone;

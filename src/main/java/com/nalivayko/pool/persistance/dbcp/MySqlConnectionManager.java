@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import static com.nalivayko.pool.util.PropertiesUtil.getProperty;
 
 public class MySqlConnectionManager implements ConnectionManager {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(MySqlConnectionManager.class);
     private static final String PROP_FILE_NAME = "dbcp";
 

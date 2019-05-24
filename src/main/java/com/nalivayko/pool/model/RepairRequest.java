@@ -5,7 +5,6 @@ import com.nalivayko.pool.model.enums.RepairStatus;
 import java.util.Date;
 
 public class RepairRequest {
-
     private Integer id;
     private User user;
     private Item item;

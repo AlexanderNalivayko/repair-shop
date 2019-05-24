@@ -1,7 +1,6 @@
 package com.nalivayko.pool.model;
 
 public class Feedback {
-
     private int id;
     private User user;
     private String text;

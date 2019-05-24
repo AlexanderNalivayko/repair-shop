@@ -15,7 +15,7 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     public void init() {
-        commandManager = new CommandManager(null, null); //todo
+        commandManager = new CommandManager(null, null); //todo provide parameters
     }
 
     @Override

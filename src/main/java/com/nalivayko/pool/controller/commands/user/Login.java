@@ -10,11 +10,11 @@ import java.io.IOException;
 
 public class Login extends Command {
 
-    private UserService userService;        //****
+    private UserService userService;
 
-    public Login(UserService userService) { //****
-        this.userService = userService;     //****
-    }                                       //****
+    public Login(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

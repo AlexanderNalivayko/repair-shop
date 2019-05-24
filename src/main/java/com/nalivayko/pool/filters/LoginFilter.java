@@ -2,7 +2,7 @@ package com.nalivayko.pool.filters;
 
 import com.nalivayko.pool.model.User;
 import com.nalivayko.pool.model.enums.UserRole;
-import com.nalivayko.pool.util.Pages;
+import com.nalivayko.pool.util.PagesPath;
 import com.nalivayko.pool.util.UrlRequests;
 
 import javax.servlet.*;
@@ -12,13 +12,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginFilter implements Filter {
-
     private static final String[] restrictedForRegistered = {UrlRequests.LOGIN_PAGE};
     private static final String[] restrictedForUnregistered = {UrlRequests.MANAGER_PAGE,
             UrlRequests.MASTER_PAGE,
             UrlRequests.CUSTOMER};
 
-    private String contextPath;//todo check
+    private String contextPath;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -38,7 +37,7 @@ public class LoginFilter implements Filter {
             for (String restrictedUrl : restrictedForUnregistered) {
                 if (requestPath.contains(restrictedUrl)) {
                     // send to login page if trying to access pages that permitted only for registered users
-                    response.sendRedirect(contextPath + Pages.LOGIN);
+                    response.sendRedirect(contextPath + PagesPath.LOGIN);
                     return;
                 }
             }
@@ -46,12 +45,12 @@ public class LoginFilter implements Filter {
             for (String restrictedUrl : restrictedForRegistered) {
                 if (requestPath.contains(restrictedUrl)) {
                     // send to main page if trying to access pages that permitted only for unregistered
-                    response.sendRedirect(contextPath + Pages.ERROR_403);
+                    response.sendRedirect(contextPath + PagesPath.ERROR_403);
                     return;
                 }
             }
             if (!userPermittedToPerformRequest(user, requestPath)) {
-                response.sendRedirect(contextPath + Pages.ERROR_403);
+                response.sendRedirect(contextPath + PagesPath.ERROR_403);
                 return;
             }
         }

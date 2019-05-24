@@ -12,7 +12,6 @@ import java.util.List;
 
 public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implements RepairRequestDAO {
 
-
     public RepairRequestSqlDAO(TransactionManager transactionManager) {
         super(transactionManager);
     }

@@ -3,7 +3,6 @@ package com.nalivayko.pool.model;
 import com.nalivayko.pool.model.enums.UserRole;
 
 public class User {
-
     private Integer id;
     private String username;
     private String password;

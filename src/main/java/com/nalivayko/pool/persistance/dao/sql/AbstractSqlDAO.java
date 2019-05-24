@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractSqlDAO<T> {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractSqlDAO.class);
-
     private TransactionManager transactionManager;
 
     public AbstractSqlDAO(TransactionManager transactionManager) {

@@ -9,11 +9,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DefaultTransactionManager implements TransactionManager {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultTransactionManager.class);
 
-    ThreadLocal<Connection> threadConnection;
-    ConnectionManager connectionManager;
+    private ThreadLocal<Connection> threadConnection;
+    private ConnectionManager connectionManager;
 
     public DefaultTransactionManager(ConnectionManager connectionManager) {
         this.connectionManager = connectionManager;
@@ -72,7 +71,6 @@ public class DefaultTransactionManager implements TransactionManager {
         }
         closeConnection();
     }
-
 
     private void createConnection() {
         if (threadConnection.get() == null) {
