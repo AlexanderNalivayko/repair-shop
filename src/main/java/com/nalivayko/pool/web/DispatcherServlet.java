@@ -11,15 +11,20 @@ import java.io.IOException;
 
 public class DispatcherServlet extends HttpServlet {
 
+    private CommandManager commandManager;
+
+    @Override
+    public void init() {
+        commandManager = new CommandManager(null, null); //todo
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        req.getRequestDispatcher("pages/home.jsp").forward(req, resp);
-        CommandManager commandManager = new CommandManager();
         commandManager.perform(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        commandManager.perform(req, resp);
     }
 }

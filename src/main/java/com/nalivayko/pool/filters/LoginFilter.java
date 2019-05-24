@@ -4,7 +4,6 @@ import com.nalivayko.pool.model.User;
 import com.nalivayko.pool.model.enums.UserRole;
 import com.nalivayko.pool.util.Pages;
 import com.nalivayko.pool.util.UrlRequests;
-import org.apache.commons.lang3.ArrayUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -14,16 +13,12 @@ import java.io.IOException;
 
 public class LoginFilter implements Filter {
 
-    private static final String[] managerPermitted = {UrlRequests.MANAGER_PAGE};
-    private static final String[] masterPermitted = {UrlRequests.MASTER_PAGE};
-    private static final String[] customerPermitted = {UrlRequests.CUSTOMER};
     private static final String[] restrictedForRegistered = {UrlRequests.LOGIN_PAGE};
-    private static final String[] restrictedForUnregistered = (String[]) ArrayUtils.addAll(
-            managerPermitted,
-            masterPermitted,
-            customerPermitted);
+    private static final String[] restrictedForUnregistered = {UrlRequests.MANAGER_PAGE,
+            UrlRequests.MASTER_PAGE,
+            UrlRequests.CUSTOMER};
 
-    private String contextPath;
+    private String contextPath;//todo check
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -55,7 +50,7 @@ public class LoginFilter implements Filter {
                     return;
                 }
             }
-            if (!userPermittedToPerformRequest(user, requestPath)){
+            if (!userPermittedToPerformRequest(user, requestPath)) {
                 response.sendRedirect(contextPath + Pages.ERROR_403);
                 return;
             }
@@ -64,10 +59,9 @@ public class LoginFilter implements Filter {
     }
 
     /**
-     *
      * @param user - current session user
-     * @param url - request url
-     * @return
+     * @param url  - request url
+     * @return true - if user permitted to perform request represented by url
      */
     private boolean userPermittedToPerformRequest(User user, String url) {
         UserRole userRole = user.getUserRole();

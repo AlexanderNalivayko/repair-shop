@@ -26,13 +26,14 @@
 
 <body>
 <div id="logreg-forms">
-    <form class="form-signin shadow" action="${pageContext.request.contextPath}/site/login_page/login">
+    <form class="form-signin shadow" method="post" action="${pageContext.request.contextPath}/site/login_page/login">
         <h1 class="h3 mb-3 font-weight-normal">
             <fmt:message key="login.msg"/>
         </h1>
 
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+        <%--<input type="email" class="form-control" placeholder="Email address" required="" autofocus="">--%>
+        <input type="text" name="login" class="form-control"  placeholder="username" required="" autofocus="">
+        <input type="password" name="password" class="form-control" placeholder="password" required="">
         <div class="container">
             <div class="row">
                 <div class="col-sm pl-0 pr-1">

@@ -11,10 +11,6 @@ import java.io.IOException;
 
 public class OpenLoginPage extends Command {
 
-    public OpenLoginPage(UserRole... permittedUsers) {
-        super(permittedUsers);
-    }
-
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(Pages.LOGIN).forward(request, response);
