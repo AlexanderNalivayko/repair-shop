@@ -1,3 +1,3 @@
-# fix-shop
+# repair-shop
 
-`java` jdbc-included scriptlets-free servlet-based logging/testing-provided web-app
+java jdbc-included scriptlets-free servlet-based logging/testing-provided web-app
