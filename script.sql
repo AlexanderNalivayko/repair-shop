@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS contacts (
 INSERT INTO contacts (id, email, phone)
 VALUES (1, 'admin@fix.com', '+38067-777-77-77'),
 (2, 'manager@fix.com', '+38093-333-33-33'),
-(3, 'user@user.com', '+38098-475-21-30');
+(3, 'user@user.com', '+38098-475-21-30'),
+(4, 'user@user.com', '+38098-475-21-30');
 
 -- ------------------------------------------
 -- fixapp.users
@@ -33,9 +34,10 @@ CREATE TABLE IF NOT EXISTS users (
       ON DELETE CASCADE
     ) ENGINE=InnoDB CHARACTER SET=UTF8;
 INSERT INTO users (id, contacts_id, username, password, first_name, last_name, role)
-VALUES (1, 1, 'admin', 'admin', 'John', 'Smith', 'ADMIN'),
+VALUES (1, 1, 'admin', 'admin', 'John', 'Smith', 'MASTER'),
 (2, 2, 'manager', 'manager', 'Jane', 'Richardson', 'MANAGER'),
-(3, 3, 'user', 'user', 'Tony', 'Black', 'USER');
+(3, 3, 'alex777', 'user', 'Tony', 'Black', 'CUSTOMER'),
+(4, 4, 'johny', 'user', 'John', 'Snow', 'CUSTOMER');
 
 -- ------------------------------------------
 -- fixapp.items
@@ -91,7 +93,8 @@ CREATE TABLE IF NOT EXISTS feedback (
       ON DELETE CASCADE
     ) ENGINE=InnoDB CHARACTER SET=UTF8;
 INSERT INTO feedback (id, user_id, text)
-VALUES (1, 3, 'Thank you for quick repair.');
+VALUES (1, 3, 'Thank you for quick repair.'),
+(2, 4, 'Вы просто огонь! Спасибо что так качественно починили мой телефон!');
 
 
 SET FOREIGN_KEY_CHECKS = 1;
