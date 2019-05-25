@@ -22,7 +22,9 @@
 
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-<div class="container-fluid mt-5">
+
+
+<div class="container-fluid my-5">
     <div class="row justify-content-md-center">
         <div class="col-md-10">
             <h2 class="text-muted">
@@ -30,13 +32,25 @@
             </h2>
         </div>
     </div>
-    <hr>
     <div class="row justify-content-md-center">
         <div class="col-md-10">
+            <hr>
             <h3 class="text-muted">
                 <fmt:message key="about.feedback"/>
             </h3>
-
+            <c:forEach var="feedbackMsg" items="${requestScope.feedback}">
+                <div class="card my-1">
+                    <div class="card-body">
+                        <p class="text-muted">
+                            <fmt:message key="about.user"/>
+                                ${feedbackMsg.user.username}
+                        </p>
+                        <hr>
+                        <p class="text-muted">${feedbackMsg.text}</p>
+                    </div>
+                </div>
+            </c:forEach>
+            <hr>
             <form action="${pageContext.request.contextPath}site/about_page/feedback" class="form-signup">
                 <p class="text-muted"><fmt:message key="about.leave.feedback"/></p>
                 <c:if test="${sessionScope.user == null}">
@@ -45,7 +59,8 @@
                     </p>
                 </c:if>
                 <textarea name="feedback" class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
-                <button class="btn btn-success float-right" type="submit" ${sessionScope.user == null ? "disabled" : ""}>
+                <button class="btn btn-success float-right"
+                        type="submit" ${sessionScope.user == null ? "disabled" : ""}>
                     <fmt:message key="about.send"/>
                 </button>
             </form>

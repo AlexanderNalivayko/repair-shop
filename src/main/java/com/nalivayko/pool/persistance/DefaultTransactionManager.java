@@ -8,10 +8,11 @@ import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+//todo implement autocloseable
 public class DefaultTransactionManager implements TransactionManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultTransactionManager.class);
 
-    private ThreadLocal<Connection> threadConnection;
+    private ThreadLocal<Connection> threadConnection = new ThreadLocal<>();
     private ConnectionManager connectionManager;
 
     public DefaultTransactionManager(ConnectionManager connectionManager) {
@@ -35,10 +36,16 @@ public class DefaultTransactionManager implements TransactionManager {
     }
 
     @Override
-    public void startTransaction() throws SQLException {
+    public void startTransaction() {
         Connection connection = getConnection();
-        connection.setAutoCommit(false);
-        connection.setSavepoint();
+        try {
+            connection.setAutoCommit(false);
+            connection.setSavepoint();
+        } catch (SQLException e) {
+            InternalAppException exception = new InternalAppException("Can't start transaction.");
+            LOGGER.error(exception.getMessage());
+            throw exception;
+        }
     }
 
     @Override

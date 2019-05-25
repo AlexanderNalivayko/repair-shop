@@ -9,7 +9,7 @@ public interface TransactionManager {
 
     void closeConnection();
 
-    void startTransaction() throws SQLException;
+    void startTransaction();
 
     void endTransaction() throws SQLException;
 }

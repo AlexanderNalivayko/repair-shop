@@ -19,21 +19,14 @@ import java.util.Map;
 
 public class CommandManager {
     private Map<String, Command> commands = new HashMap<>();
-    private UserService userService;
-    private FeedbackService feedbackService;
 
-    {
+    public CommandManager(UserService userService, FeedbackService feedbackService) {
         final OpenHomePage openHomePage = new OpenHomePage();
         commands.put("", openHomePage);
         commands.put(UrlRequests.HOME_PAGE, openHomePage);
-        commands.put(UrlRequests.ABOUT, new OpenAboutPage());
+        commands.put(UrlRequests.ABOUT, new OpenAboutPage(feedbackService));
         commands.put(UrlRequests.LOGIN_PAGE, new OpenLoginPage());
         commands.put(UrlRequests.LOGIN_PAGE_LOGIN, new Login(userService));
-    }
-
-    public CommandManager(UserService userService, FeedbackService feedbackService) {
-        this.userService = userService;
-        this.feedbackService = feedbackService;
     }
 
     /**

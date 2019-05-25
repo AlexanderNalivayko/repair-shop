@@ -1,5 +1,11 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     background-color: white !important;
+    margin-bottom: 100px !important;
 }
 
 /*.navbar-nav .nav-item.active .nav-link,*/
@@ -39,7 +45,10 @@ body {
 }
 
 .page-footer {
-
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .form-control {
@@ -52,21 +61,21 @@ body {
 }
 
 /* sign in FORM */
-#logreg-forms {
+.logreg-forms {
     width: 412px;
     margin: 15vh auto;
     border-radius: 8px;
     background-color: white;
 }
 
-#logreg-forms form {
+.logreg-forms form {
     width: 100%;
     max-width: 410px;
     padding: 15px;
     margin: auto;
 }
 
-#logreg-forms .form-control {
+.logreg-forms .form-control {
     position: relative;
     box-sizing: border-box;
     height: auto;
@@ -74,31 +83,31 @@ body {
     font-size: 16px;
 }
 
-#logreg-forms .form-control:focus {
+.logreg-forms .form-control:focus {
     z-index: 2;
 }
 
-#logreg-forms .form-signin input[type="email"] {
+.logreg-forms .form-signin input[type="email"] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-#logreg-forms .form-signin input[type="password"] {
+.logreg-forms .form-signin input[type="password"] {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
 
-#logreg-form .lines {
+.logreg-form .lines {
     width: 200px;
     border: 1px solid red;
 }
 
-#logreg-forms .form-reset, #logreg-forms .form-signup {
+.logreg-forms .form-reset, .logreg-forms .form-signup {
     display: none;
 }
 
-#logreg-forms .form-signup input {
+.logreg-forms .form-signup input {
     margin-bottom: 2px;
 }
 

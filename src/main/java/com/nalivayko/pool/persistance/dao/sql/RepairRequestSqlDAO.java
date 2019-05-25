@@ -9,7 +9,6 @@ import com.nalivayko.pool.persistance.mappers.RepairRequestMapper;
 
 import java.util.List;
 
-
 public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implements RepairRequestDAO {
 
     public RepairRequestSqlDAO(TransactionManager transactionManager) {
