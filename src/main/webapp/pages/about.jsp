@@ -30,6 +30,28 @@
             </h2>
         </div>
     </div>
+    <hr>
+    <div class="row justify-content-md-center">
+        <div class="col-md-10">
+            <h3 class="text-muted">
+                <fmt:message key="about.feedback"/>
+            </h3>
+
+            <form action="${pageContext.request.contextPath}site/about_page/feedback" class="form-signup">
+                <p class="text-muted"><fmt:message key="about.leave.feedback"/></p>
+                <c:if test="${sessionScope.user == null}">
+                    <p class="text-danger">
+                        <fmt:message key="about.msg.registration"/>
+                    </p>
+                </c:if>
+                <textarea name="feedback" class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
+                <button class="btn btn-success float-right" type="submit" ${sessionScope.user == null ? "disabled" : ""}>
+                    <fmt:message key="about.send"/>
+                </button>
+            </form>
+            <br/>
+        </div>
+    </div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
