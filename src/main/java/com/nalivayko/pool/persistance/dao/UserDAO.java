@@ -8,7 +8,7 @@ public interface UserDAO {
 
     public int create(User user, int contactsId);
 
-    public User findByEmail(String email);
+    public User findByUsername(String email);
 
     public List<User> findAll();
 

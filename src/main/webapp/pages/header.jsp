@@ -39,6 +39,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         <fmt:message key="header.user"/>
+                        (${sessionScope.user.username})
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/site/login_page"><fmt:message key="action.login"/></a>

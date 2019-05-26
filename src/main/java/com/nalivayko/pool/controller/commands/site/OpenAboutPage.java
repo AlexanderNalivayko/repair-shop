@@ -11,6 +11,8 @@ import java.io.IOException;
 
 public class OpenAboutPage extends Command {
 
+    private static final String FEEDBACK = "feedback";
+
     private FeedbackService feedbackService;
 
     public OpenAboutPage(FeedbackService feedbackService) {
@@ -19,7 +21,7 @@ public class OpenAboutPage extends Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("feedback", feedbackService.getAll());
+        request.setAttribute(FEEDBACK, feedbackService.getAll());
         request.getRequestDispatcher(PagesPath.ABOUT).forward(request, response);
     }
 }

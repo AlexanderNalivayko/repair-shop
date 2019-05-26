@@ -4,7 +4,9 @@ import com.nalivayko.pool.controller.CommandManager;
 import com.nalivayko.pool.persistance.DefaultTransactionManager;
 import com.nalivayko.pool.persistance.TransactionManager;
 import com.nalivayko.pool.persistance.dao.FeedbackDAO;
+import com.nalivayko.pool.persistance.dao.UserDAO;
 import com.nalivayko.pool.persistance.dao.sql.FeedbackSqlDAO;
+import com.nalivayko.pool.persistance.dao.sql.UserSqlDAO;
 import com.nalivayko.pool.persistance.dbcp.ConnectionManager;
 import com.nalivayko.pool.persistance.dbcp.MySqlConnectionManager;
 import com.nalivayko.pool.services.DefaultFeedbackService;
@@ -24,13 +26,16 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     public void init() {
-        UserService userService = new DefaultUserService();
 
         ConnectionManager connectionManager = new MySqlConnectionManager();
         TransactionManager transactionManager = new DefaultTransactionManager(connectionManager);
-        FeedbackDAO feedbackDAO = new FeedbackSqlDAO(transactionManager);
 
+        UserDAO userDAO = new UserSqlDAO(transactionManager);
+        UserService userService = new DefaultUserService(userDAO);
+
+        FeedbackDAO feedbackDAO = new FeedbackSqlDAO(transactionManager);
         FeedbackService feedbackService = new DefaultFeedbackService(transactionManager, feedbackDAO);
+
         commandManager = new CommandManager(userService, feedbackService); //todo provide parameters
     }
 

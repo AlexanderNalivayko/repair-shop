@@ -49,9 +49,7 @@ public abstract class AbstractSqlDAO<T> {
                 if (resultSet.next()) {
                     return mapper.getEntity(resultSet);
                 } else {
-                    InternalAppException internalAppException = new InternalAppException("Can't find data in db");
-                    LOGGER.error(internalAppException.getMessage());
-                    throw internalAppException;
+                    return null;
                 }
             }
         } catch (SQLException e) {

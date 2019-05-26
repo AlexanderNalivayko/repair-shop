@@ -27,9 +27,9 @@ public class UserSqlDAO extends AbstractSqlDAO<User> implements UserDAO {
     }
 
     @Override
-    public User findByEmail(String email) {
+    public User findByUsername(String username) {
         return find(UserQuery.SELECT_BY_USERNAME, preparedStatement ->
-                preparedStatement.setString(1, email), new UserMapper());
+                preparedStatement.setString(1, username), new UserMapper());
     }
 
     @Override

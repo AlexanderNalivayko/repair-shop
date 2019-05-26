@@ -21,18 +21,17 @@
 </head>
 
 <body class="bg-color">
-
-<%--<jsp:include page="header.jsp"></jsp:include>--%>
-
-<body>
-<div id="logreg-forms">
+<div class="logreg-forms">
     <form class="form-signin shadow" method="post" action="${pageContext.request.contextPath}/site/login_page/login">
         <h1 class="h3 mb-3 font-weight-normal">
             <fmt:message key="login.msg"/>
         </h1>
-
-        <%--<input type="email" class="form-control" placeholder="Email address" required="" autofocus="">--%>
-        <input type="text" name="login" class="form-control"  placeholder="username" required="" autofocus="">
+        <c:if test="${wrong_input == true}">
+            <p class="text-warning">
+                <fmt:message key="login.msg.wrong_input"/>
+            </p>
+        </c:if>
+        <input type="text" name="login" class="form-control" placeholder="username" required="" autofocus="">
         <input type="password" name="password" class="form-control" placeholder="password" required="">
         <div class="container">
             <div class="row">
@@ -57,8 +56,5 @@
         </button>
     </form>
 </div>
-
-<%--<jsp:include page="footer.jsp"></jsp:include>--%>
-
 </body>
 </html>
