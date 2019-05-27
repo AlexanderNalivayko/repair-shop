@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -21,8 +20,8 @@
 </head>
 
 <body>
-<jsp:include page="header.jsp"></jsp:include>
 
+<jsp:include page="header.jsp"></jsp:include>
 
 <div class="container-fluid my-5">
     <div class="row justify-content-md-center">
@@ -51,14 +50,17 @@
                 </div>
             </c:forEach>
             <hr>
-            <form action="${pageContext.request.contextPath}site/about_page/feedback" class="form-signup">
-                <p class="text-muted"><fmt:message key="about.leave.feedback"/></p>
+            <form action="${pageContext.request.contextPath}site/about_page/leave_feedback" method="post"
+                  class="form-signup">
+                <p class="text-muted">
+                    <fmt:message key="about.leave.feedback"/>
+                </p>
                 <c:if test="${sessionScope.user == null}">
                     <p class="text-danger">
                         <fmt:message key="about.msg.registration"/>
                     </p>
                 </c:if>
-                <textarea name="feedback" class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
+                <textarea name="feedback_msg" class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
                 <button class="btn btn-success float-right"
                         type="submit" ${sessionScope.user == null ? "disabled" : ""}>
                     <fmt:message key="about.send"/>
@@ -68,6 +70,8 @@
         </div>
     </div>
 </div>
+
 <jsp:include page="footer.jsp"></jsp:include>
+
 </body>
 </html>

@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-//todo implement autocloseable
 public class DefaultTransactionManager implements TransactionManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultTransactionManager.class);
 
@@ -28,7 +27,10 @@ public class DefaultTransactionManager implements TransactionManager {
     @Override
     public void closeConnection() {
         try {
-            threadConnection.get().close();
+            Connection connection = threadConnection.get();
+            if (connection != null) {
+                connection.close();
+            }
             threadConnection.remove();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
@@ -49,7 +51,7 @@ public class DefaultTransactionManager implements TransactionManager {
     }
 
     @Override
-    public void endTransaction()  {
+    public void endTransaction() {
         Connection connection = getConnection();
         if (connection == null) {
             InternalAppException exception = new InternalAppException("Can't end transaction. Connection is null.");

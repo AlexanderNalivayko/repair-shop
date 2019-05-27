@@ -1,4 +1,4 @@
-package com.nalivayko.pool.controller.commands.site;
+package com.nalivayko.pool.controller.commands.about;
 
 import com.nalivayko.pool.controller.commands.Command;
 import com.nalivayko.pool.services.FeedbackService;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class OpenAboutPage extends Command {
+public class OpenAboutPage implements Command {
 
     private static final String FEEDBACK = "feedback";
 

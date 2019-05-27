@@ -5,6 +5,11 @@ public class Feedback {
     private User user;
     private String text;
 
+    public Feedback(User user, String text) {
+        this.user = user;
+        this.text = text;
+    }
+
     public Feedback(int id, User user, String text) {
         this.id = id;
         this.user = user;

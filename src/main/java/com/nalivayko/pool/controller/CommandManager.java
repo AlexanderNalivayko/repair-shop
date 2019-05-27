@@ -1,9 +1,11 @@
 package com.nalivayko.pool.controller;
 
 import com.nalivayko.pool.controller.commands.Command;
-import com.nalivayko.pool.controller.commands.site.OpenAboutPage;
+import com.nalivayko.pool.controller.commands.about.LeaveFeedback;
+import com.nalivayko.pool.controller.commands.about.OpenAboutPage;
 import com.nalivayko.pool.controller.commands.site.OpenHomePage;
 import com.nalivayko.pool.controller.commands.user.Login;
+import com.nalivayko.pool.controller.commands.user.Logout;
 import com.nalivayko.pool.controller.commands.user.OpenLoginPage;
 import com.nalivayko.pool.services.FeedbackService;
 import com.nalivayko.pool.services.UserService;
@@ -24,9 +26,13 @@ public class CommandManager {
         final OpenHomePage openHomePage = new OpenHomePage();
         commands.put("", openHomePage);
         commands.put(UrlRequests.HOME_PAGE, openHomePage);
-        commands.put(UrlRequests.ABOUT, new OpenAboutPage(feedbackService));
+
+        commands.put(UrlRequests.ABOUT_PAGE, new OpenAboutPage(feedbackService));
+        commands.put(UrlRequests.ABOUT_PAGE_FEEDBACK, new LeaveFeedback(feedbackService));
+
         commands.put(UrlRequests.LOGIN_PAGE, new OpenLoginPage());
         commands.put(UrlRequests.LOGIN_PAGE_LOGIN, new Login(userService));
+        commands.put(UrlRequests.LOGOUT, new Logout());
     }
 
     /**

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class LoginFilter implements Filter {
+public class UserAccessFilter implements Filter {
     private static final String[] restrictedForRegistered = {UrlRequests.LOGIN_PAGE};
     private static final String[] restrictedForUnregistered = {UrlRequests.MANAGER_PAGE,
             UrlRequests.MASTER_PAGE,
@@ -20,7 +20,7 @@ public class LoginFilter implements Filter {
     private String contextPath;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         contextPath = filterConfig.getServletContext().getContextPath();
     }
 
@@ -44,7 +44,7 @@ public class LoginFilter implements Filter {
         } else {
             for (String restrictedUrl : restrictedForRegistered) {
                 if (requestPath.contains(restrictedUrl)) {
-                    // send to main page if trying to access pages that permitted only for unregistered
+                    // send to 403 page if trying to access pages that permitted only for unregistered
                     response.sendRedirect(contextPath + PagesPath.ERROR_403);
                     return;
                 }
@@ -58,6 +58,7 @@ public class LoginFilter implements Filter {
     }
 
     /**
+     *
      * @param user - current session user
      * @param url  - request url
      * @return true - if user permitted to perform request represented by url

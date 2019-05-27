@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class Login extends Command {
+public class Login implements Command {
 
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";

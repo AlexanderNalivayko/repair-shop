@@ -83,7 +83,7 @@ VALUES (1, 3, 1, 'NEW', NOW(), 'not charging', null),
 -- ------------------------------------------
 -- fixapp.feedback
 -- ------------------------------------------
-DROP TABLE IF EXISTS feedback;
+DROP TABLE IF EXISTS feedback; --todo add date
 CREATE TABLE IF NOT EXISTS feedback (
     id INT AUTO_INCREMENT NOT NULL,
     user_id INT NOT NULL,

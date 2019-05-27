@@ -11,7 +11,7 @@ public class FeedbackQuery {
     public static final String INSERT = "INSERT INTO " + TABLE_NAME
             + " ("
             + USER_ID + ", "
-            + TEXT + "text"
+            + TEXT
             + ") "
             + " VALUES (?, ?)";
 
