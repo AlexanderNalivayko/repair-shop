@@ -7,6 +7,7 @@ public class FeedbackQuery {
     public static final String ID = "id";
     public static final String USER_ID = "user_id";
     public static final String TEXT = "text";
+    public static final String CREATION_TIME = "creation_time";
 
     public static final String INSERT = "INSERT INTO " + TABLE_NAME
             + " ("
@@ -21,11 +22,7 @@ public class FeedbackQuery {
             + UserQuery.TABLE_NAME + "." + UserQuery.ID
             + " = "
             + TABLE_NAME + "." + USER_ID
-            + " INNER JOIN " + ContactsQuery.TABLE_NAME
-            + " ON "
-            + ContactsQuery.TABLE_NAME + "." + ContactsQuery.ID
-            + " = "
-            + UserQuery.TABLE_NAME + "." + UserQuery.CONTACTS_ID;
+            + " ORDER BY " + TABLE_NAME + "." + ID + " DESC";
 
     public static final String DELETE_BY_ID = "DELETE FROM TABLE " + TABLE_NAME
             + "WHERE "

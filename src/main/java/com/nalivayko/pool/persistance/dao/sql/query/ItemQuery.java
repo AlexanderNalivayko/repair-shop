@@ -18,7 +18,7 @@ public class ItemQuery {
             + "VALUES (?, ?, ?)";
 
     public static final String UPDATE = "UPDATE " + TABLE_NAME
-            + " SET"
+            + " SET "
             + PRODUCT_TYPE + " = ?, "
             + BRAND + " = ?, "
             + PRODUCT_NAME + " = ? "

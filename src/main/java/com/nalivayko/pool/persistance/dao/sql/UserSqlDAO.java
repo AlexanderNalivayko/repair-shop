@@ -17,12 +17,13 @@ public class UserSqlDAO extends AbstractSqlDAO<User> implements UserDAO {
     @Override
     public int create(User user, int contactsId) {
         return create(UserQuery.INSERT, preparedStatement -> {
-            preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, user.getPassword()); //todo encrypting!!!!
-            preparedStatement.setString(3, user.getFirstName());
-            preparedStatement.setString(4, user.getLastName());
-            preparedStatement.setString(5, user.getUserRole().toString());
-            preparedStatement.setInt(6, contactsId);
+            preparedStatement.setString(1, user.getUserRole().toString());
+            preparedStatement.setString(2, user.getUsername());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(4, user.getFirstName());
+            preparedStatement.setString(5, user.getLastName());
+            preparedStatement.setString(6, user.getEmail());
+            preparedStatement.setString(7, user.getPhone());
         });
     }
 
@@ -40,18 +41,19 @@ public class UserSqlDAO extends AbstractSqlDAO<User> implements UserDAO {
     @Override
     public boolean update(User user) {
         return updateDelete(UserQuery.UPDATE_BY_ID, preparedStatement -> {
-            preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getFirstName());
-            preparedStatement.setString(4, user.getLastName());
-            preparedStatement.setString(5, user.getUserRole().toString());
-            preparedStatement.setInt(6, user.getContacts().getId());
-            preparedStatement.setInt(7, user.getId());
+            preparedStatement.setString(1, user.getUserRole().toString());
+            preparedStatement.setString(2, user.getUsername());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(4, user.getFirstName());
+            preparedStatement.setString(5, user.getLastName());
+            preparedStatement.setString(6, user.getEmail());
+            preparedStatement.setString(7, user.getPhone());
+            preparedStatement.setInt(8, user.getId());
         });
     }
 
     @Override
-    public boolean delete(int id) {
-        return updateDelete(UserQuery.DELETE_BY_ID, preparedStatement -> preparedStatement.setInt(1, id));
+    public boolean delete(int userId) {
+        return updateDelete(UserQuery.DELETE_BY_ID, preparedStatement -> preparedStatement.setInt(1, userId));
     }
 }

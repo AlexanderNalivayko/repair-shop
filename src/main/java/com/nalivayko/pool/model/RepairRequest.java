@@ -1,6 +1,6 @@
 package com.nalivayko.pool.model;
 
-import com.nalivayko.pool.model.enums.RepairStatus;
+import com.nalivayko.pool.model.enums.RepairRequestStatus;
 
 import java.util.Date;
 
@@ -8,20 +8,20 @@ public class RepairRequest {
     private Integer id;
     private User user;
     private Item item;
-    private RepairStatus repairStatus;
-    private Date creationDate;
+    private Review review;
+    private RepairRequestStatus repairRequestStatus;
+    private Date creationTime;
     private String description;
-    private Long cost;
 
-    public RepairRequest(Integer id, User user, Item item, RepairStatus repairStatus, Date creationDate,
-                         String description, Long cost) {
+    public RepairRequest(Integer id, User user, Item item, Review review, RepairRequestStatus repairRequestStatus,
+                         Date creationTime, String description) {
         this.id = id;
         this.user = user;
         this.item = item;
-        this.repairStatus = repairStatus;
-        this.creationDate = creationDate;
+        this.review = review;
+        this.repairRequestStatus = repairRequestStatus;
+        this.creationTime = creationTime;
         this.description = description;
-        this.cost = cost;
     }
 
     public Integer getId() {
@@ -48,20 +48,28 @@ public class RepairRequest {
         this.item = item;
     }
 
-    public RepairStatus getRepairStatus() {
-        return repairStatus;
+    public Review getReview() {
+        return review;
     }
 
-    public void setRepairStatus(RepairStatus repairStatus) {
-        this.repairStatus = repairStatus;
+    public void setReview(Review review) {
+        this.review = review;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public RepairRequestStatus getRepairRequestStatus() {
+        return repairRequestStatus;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setRepairRequestStatus(RepairRequestStatus repairRequestStatus) {
+        this.repairRequestStatus = repairRequestStatus;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
     }
 
     public String getDescription() {
@@ -70,13 +78,5 @@ public class RepairRequest {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Long getCost() {
-        return cost;
-    }
-
-    public void setCost(Long cost) {
-        this.cost = cost;
     }
 }

@@ -1,8 +1,7 @@
 package com.nalivayko.pool.model.enums;
 
-public enum RepairStatus {
+public enum RepairRequestStatus {
     NEW,
-    APPROVED,
-    DECLINED,
+    REVIEWED,
     DONE
 }

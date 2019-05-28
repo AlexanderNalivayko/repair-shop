@@ -1,23 +1,23 @@
 package com.nalivayko.pool.model;
 
 public class Item {
-    private int id;
+    private Integer id;
     private String productType;
     private String brand;
     private String name;
 
-    public Item(int id, String productType, String brand, String name) {
+    public Item(Integer id, String productType, String brand, String name) {
         this.id = id;
         this.productType = productType;
         this.brand = brand;
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

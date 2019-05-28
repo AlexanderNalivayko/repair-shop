@@ -23,22 +23,21 @@
 
 <jsp:include page="header.jsp"></jsp:include>
 
-<div class="container-fluid my-5">
-    <div class="row justify-content-md-center">
+<div class="container-fluid">
+    <div class="row justify-content-md-center my-5">
         <div class="col-md-10">
             <h2 class="text-muted">
                 <fmt:message key="about.text"/>
             </h2>
         </div>
     </div>
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-md-center bg-success pt-2">
         <div class="col-md-10">
-            <hr>
-            <h3 class="text-muted">
+            <h3 class="text-white">
                 <fmt:message key="about.feedback"/>
             </h3>
             <c:forEach var="feedbackMsg" items="${requestScope.feedback}">
-                <div class="card my-1">
+                <div class="card my-2 shadow">
                     <div class="card-body">
                         <p class="text-muted">
                             <fmt:message key="about.user"/>
@@ -49,25 +48,30 @@
                     </div>
                 </div>
             </c:forEach>
-            <hr>
-            <form action="${pageContext.request.contextPath}site/about_page/leave_feedback" method="post"
-                  class="form-signup">
-                <p class="text-muted">
-                    <fmt:message key="about.leave.feedback"/>
-                </p>
-                <c:if test="${sessionScope.user == null}">
-                    <p class="text-danger">
-                        <fmt:message key="about.msg.registration"/>
-                    </p>
-                </c:if>
-                <textarea name="feedback_msg" class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
-                <button class="btn btn-success float-right"
-                        type="submit" ${sessionScope.user == null ? "disabled" : ""}>
-                    <fmt:message key="about.send"/>
-                </button>
-            </form>
             <br/>
         </div>
+    </div>
+</div>
+
+
+<div class="row justify-content-md-center mb-5 pt-4">
+    <div class="col-md-10">
+        <form action="${pageContext.request.contextPath}/site/about_page/leave_feedback" method="post"
+              class="form-signup">
+            <p class="text-muted">
+                <fmt:message key="about.leave.feedback"/>
+            </p>
+            <c:if test="${sessionScope.user == null}">
+                <p class="text-danger">
+                    <fmt:message key="about.msg.registration"/>
+                </p>
+            </c:if>
+            <textarea name="feedback_msg" class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
+            <button class="btn btn-success float-right"
+                    type="submit" ${sessionScope.user == null ? "disabled" : ""}>
+                <fmt:message key="about.send"/>
+            </button>
+        </form>
     </div>
 </div>
 

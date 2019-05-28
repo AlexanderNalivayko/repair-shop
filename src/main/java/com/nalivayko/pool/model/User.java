@@ -4,22 +4,24 @@ import com.nalivayko.pool.model.enums.UserRole;
 
 public class User {
     private Integer id;
+    private UserRole userRole;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
-    private UserRole userRole;
-    private Contacts contacts;
+    private String email;
+    private String phone;
 
-    public User(Integer id, String username, String password, String firstName, String lastName,
-                UserRole userRole, Contacts contacts) {
+    public User(Integer id, UserRole userRole, String username, String password, String firstName,
+                String lastName, String email, String phone) {
         this.id = id;
+        this.userRole = userRole;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userRole = userRole;
-        this.contacts = contacts;
+        this.email = email;
+        this.phone = phone;
     }
 
     public Integer getId() {
@@ -28,6 +30,14 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     public String getUsername() {
@@ -62,19 +72,19 @@ public class User {
         this.lastName = lastName;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Contacts getContacts() {
-        return contacts;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setContacts(Contacts contacts) {
-        this.contacts = contacts;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
