@@ -11,15 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Login implements Command {
-
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
     private static final String WRONG_INPUT = "wrong_input";
 
-    private UserService userService;
+    private static final String USER = "user";
 
-    public Login(UserService userService) {
+    private UserService userService;
+    private Command openHomePage;
+    private Command openLoginPage;
+
+    public Login(UserService userService, Command openHomePage, Command openLoginPage) {
         this.userService = userService;
+        this.openHomePage = openHomePage;
+        this.openLoginPage = openLoginPage;
     }
 
     @Override
@@ -29,10 +34,10 @@ public class Login implements Command {
         User user = userService.validate(login, pass);
         if (user == null) {
             request.setAttribute(WRONG_INPUT, true);
-            request.getRequestDispatcher(PagesPath.LOGIN).forward(request, response);
+            openLoginPage.execute(request, response);
         } else {
-            request.getSession().setAttribute("user", user);
-            request.getRequestDispatcher(PagesPath.HOME).forward(request, response);
+            request.getSession().setAttribute(USER, user);
+            openHomePage.execute(request, response);
         }
     }
 }

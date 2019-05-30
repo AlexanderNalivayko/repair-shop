@@ -3,11 +3,11 @@ package com.nalivayko.pool.controller;
 import com.nalivayko.pool.controller.commands.Command;
 import com.nalivayko.pool.controller.commands.about.LeaveFeedback;
 import com.nalivayko.pool.controller.commands.about.OpenAboutPage;
+import com.nalivayko.pool.controller.commands.repair.OpenRepairPage;
 import com.nalivayko.pool.controller.commands.site.OpenHomePage;
-import com.nalivayko.pool.controller.commands.user.Login;
-import com.nalivayko.pool.controller.commands.user.Logout;
-import com.nalivayko.pool.controller.commands.user.OpenLoginPage;
+import com.nalivayko.pool.controller.commands.user.*;
 import com.nalivayko.pool.services.FeedbackService;
+import com.nalivayko.pool.services.RepairRequestService;
 import com.nalivayko.pool.services.UserService;
 import com.nalivayko.pool.util.PagesPath;
 import com.nalivayko.pool.util.UrlRequests;
@@ -22,17 +22,28 @@ import java.util.Map;
 public class CommandManager {
     private Map<String, Command> commands = new HashMap<>();
 
-    public CommandManager(UserService userService, FeedbackService feedbackService) {
-        final OpenHomePage openHomePage = new OpenHomePage();
+    public CommandManager(UserService userService, FeedbackService feedbackService,
+                          RepairRequestService repairRequestService) {
+
+        OpenHomePage openHomePage = new OpenHomePage();
+        OpenAboutPage openAboutPage = new OpenAboutPage(feedbackService);
+        OpenLoginPage openLoginPage = new OpenLoginPage();
+
         commands.put("", openHomePage);
         commands.put(UrlRequests.HOME_PAGE, openHomePage);
 
-        commands.put(UrlRequests.ABOUT_PAGE, new OpenAboutPage(feedbackService));
-        commands.put(UrlRequests.ABOUT_PAGE_FEEDBACK, new LeaveFeedback(feedbackService));
+        commands.put(UrlRequests.ABOUT_PAGE, openAboutPage);
+        commands.put(UrlRequests.ABOUT_PAGE_FEEDBACK, new LeaveFeedback(feedbackService, openAboutPage));
 
-        commands.put(UrlRequests.LOGIN_PAGE, new OpenLoginPage());
-        commands.put(UrlRequests.LOGIN_PAGE_LOGIN, new Login(userService));
+        commands.put(UrlRequests.LOGIN_PAGE, openLoginPage);
+        commands.put(UrlRequests.LOGIN, new Login(userService, openHomePage, openLoginPage));
+        commands.put(UrlRequests.SIGN_UP_PAGE, new OpenSignUpPage());
+        commands.put(UrlRequests.SIGN_UP, new SignUp(userService, openHomePage));
         commands.put(UrlRequests.LOGOUT, new Logout());
+
+        commands.put(UrlRequests.REPAIR_PAGE, new OpenRepairPage(repairRequestService, openLoginPage));
+
+        commands.put(UrlRequests.VALIDATE_USERNAME, new ValidateUsername(userService));
     }
 
     /**

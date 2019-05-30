@@ -10,17 +10,24 @@ public class RepairRequest {
     private Item item;
     private Review review;
     private RepairRequestStatus repairRequestStatus;
-    private Date creationTime;
+    private String creationTime;
     private String description;
 
     public RepairRequest(Integer id, User user, Item item, Review review, RepairRequestStatus repairRequestStatus,
-                         Date creationTime, String description) {
+                         String creationTime, String description) {
         this.id = id;
         this.user = user;
         this.item = item;
         this.review = review;
         this.repairRequestStatus = repairRequestStatus;
         this.creationTime = creationTime;
+        this.description = description;
+    }
+
+    public RepairRequest(User user, Item item, RepairRequestStatus repairRequestStatus, String description) {
+        this.user = user;
+        this.item = item;
+        this.repairRequestStatus = repairRequestStatus;
         this.description = description;
     }
 
@@ -64,11 +71,11 @@ public class RepairRequest {
         this.repairRequestStatus = repairRequestStatus;
     }
 
-    public Date getCreationTime() {
+    public String getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Date creationTime) {
+    public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
     }
 

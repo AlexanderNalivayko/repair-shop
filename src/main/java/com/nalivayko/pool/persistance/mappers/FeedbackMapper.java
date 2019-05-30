@@ -2,6 +2,7 @@ package com.nalivayko.pool.persistance.mappers;
 
 import com.nalivayko.pool.model.Feedback;
 import com.nalivayko.pool.persistance.dao.sql.query.FeedbackQuery;
+import com.nalivayko.pool.util.FormattingUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +17,6 @@ public class FeedbackMapper implements Mapper<Feedback> {
         return new Feedback(resultSet.getInt(FeedbackQuery.ID),
                 new UserMapper().getEntity(resultSet),
                 resultSet.getString(FeedbackQuery.TEXT),
-                resultSet.getDate(FeedbackQuery.CREATION_TIME));
+                FormattingUtil.dateToString(resultSet.getTimestamp(FeedbackQuery.CREATION_TIME)));
     }
 }

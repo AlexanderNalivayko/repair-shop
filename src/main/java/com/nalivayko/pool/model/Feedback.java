@@ -6,9 +6,9 @@ public class Feedback {
     private int id;
     private User user;
     private String text;
-    private Date creationTime;
+    private String creationTime;
 
-    public Feedback(int id, User user, String text, Date creationTime) {
+    public Feedback(int id, User user, String text, String creationTime) {
         this.id = id;
         this.user = user;
         this.text = text;
@@ -44,11 +44,11 @@ public class Feedback {
         this.text = text;
     }
 
-    public Date getCreationTime() {
+    public String getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Date creationTime) {
+    public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
     }
 }

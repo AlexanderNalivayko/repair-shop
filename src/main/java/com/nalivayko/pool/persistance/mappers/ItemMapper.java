@@ -14,8 +14,8 @@ public class ItemMapper implements Mapper<Item> {
             return null;
         }
         return new Item(resultSet.getInt(ItemQuery.ID),
-                resultSet.getString(ItemQuery.PRODUCT_TYPE),
+                resultSet.getString(ItemQuery.ITEM_TYPE),
                 resultSet.getString(ItemQuery.BRAND),
-                resultSet.getString(ItemQuery.PRODUCT_NAME));
+                resultSet.getString(ItemQuery.ITEM_NAME));
     }
 }

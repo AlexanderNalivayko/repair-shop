@@ -11,5 +11,5 @@ public interface TransactionManager {
 
     void startTransaction();
 
-    void endTransaction() throws SQLException;
+    void endTransaction();
 }

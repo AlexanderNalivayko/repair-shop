@@ -15,7 +15,7 @@ public class UserSqlDAO extends AbstractSqlDAO<User> implements UserDAO {
     }
 
     @Override
-    public int create(User user, int contactsId) {
+    public int create(User user) {
         return create(UserQuery.INSERT, preparedStatement -> {
             preparedStatement.setString(1, user.getUserRole().toString());
             preparedStatement.setString(2, user.getUsername());

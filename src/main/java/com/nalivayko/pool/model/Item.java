@@ -13,6 +13,12 @@ public class Item {
         this.name = name;
     }
 
+    public Item(String productType, String brand, String name) {
+        this.productType = productType;
+        this.brand = brand;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

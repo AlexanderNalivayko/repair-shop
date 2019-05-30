@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:setBundle basename="lang"/>
+<fmt:setBundle basename="${sessionScope.bundle}"/>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -52,7 +52,7 @@
                                 <fmt:message key="action.login"/>
                             </a>
                         </c:if>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/site/signup_page">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/site/sign_up_page">
                             <fmt:message key="action.signup"/>
                         </a>
                         <c:if test="${sessionScope.user != null}">

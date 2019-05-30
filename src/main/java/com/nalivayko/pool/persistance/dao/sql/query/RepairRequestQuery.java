@@ -22,7 +22,9 @@ public class RepairRequestQuery {
             + ") "
             + " VALUES (?, ?, ?, ?, ?)";
 
-    public static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME
+    private static final String ORDER_BY = " ORDER BY UNIX_TIMESTAMP(" + CREATION_TIME + ") DESC";
+
+    private static final String GENERAL_SELECT_ALL = "SELECT * FROM " + TABLE_NAME
             + " INNER JOIN " + UserQuery.TABLE_NAME
             + " ON "
             + UserQuery.TABLE_NAME + "." + UserQuery.ID
@@ -39,13 +41,18 @@ public class RepairRequestQuery {
             + " = "
             + TABLE_NAME + "." + REVIEW_ID;
 
-    public static final String SELECT_BY_USER_ID = SELECT_ALL
-            + " WHERE "
-            + USER_ID + " = ?";
+    public static final String SELECT_ALL = GENERAL_SELECT_ALL
+            + ORDER_BY;
 
-    public static final String SELECT_BY_STATUS = SELECT_ALL
+    public static final String SELECT_BY_USER_ID = GENERAL_SELECT_ALL
             + " WHERE "
-            + STATUS + " LIKE ?";
+            + USER_ID + " = ?"
+            + ORDER_BY;
+
+    public static final String SELECT_BY_STATUS = GENERAL_SELECT_ALL
+            + " WHERE "
+            + STATUS + " LIKE ?"
+            + ORDER_BY;
 
     public static final String UPDATE_BY_ID = "UPDATE " + TABLE_NAME
             + " SET "

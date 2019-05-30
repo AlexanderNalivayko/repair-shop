@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:setBundle basename="lang"/>
+<fmt:setBundle basename="${sessionScope.bundle}"/>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +15,7 @@
 <html>
 <head>
     <title>
-        fix-shop
+        <fmt:message key="about.title"/>
     </title>
 </head>
 
@@ -40,8 +40,8 @@
                 <div class="card my-2 shadow">
                     <div class="card-body">
                         <p class="text-muted">
-                            <fmt:message key="about.user"/>
-                                ${feedbackMsg.user.username}
+                                ${feedbackMsg.user.username} |
+                                ${feedbackMsg.creationTime}
                         </p>
                         <hr>
                         <p class="text-muted">${feedbackMsg.text}</p>
@@ -53,25 +53,26 @@
     </div>
 </div>
 
-
-<div class="row justify-content-md-center mb-5 pt-4">
-    <div class="col-md-10">
-        <form action="${pageContext.request.contextPath}/site/about_page/leave_feedback" method="post"
-              class="form-signup">
-            <p class="text-muted">
-                <fmt:message key="about.leave.feedback"/>
-            </p>
-            <c:if test="${sessionScope.user == null}">
-                <p class="text-danger">
-                    <fmt:message key="about.msg.registration"/>
+<div class="container-fluid">
+    <div class="row justify-content-md-center mb-5 pt-4">
+        <div class="col-md-10">
+            <form action="${pageContext.request.contextPath}/site/about_page/leave_feedback" method="post"
+                  class="form-signup">
+                <p class="text-muted">
+                    <fmt:message key="about.leave.feedback"/>
                 </p>
-            </c:if>
-            <textarea name="feedback_msg" class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
-            <button class="btn btn-success float-right"
-                    type="submit" ${sessionScope.user == null ? "disabled" : ""}>
-                <fmt:message key="about.send"/>
-            </button>
-        </form>
+                <c:if test="${sessionScope.user == null}">
+                    <p class="text-danger">
+                        <fmt:message key="about.msg.registration"/>
+                    </p>
+                </c:if>
+                <textarea name="feedback_msg" class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
+                <button class="btn btn-success float-right"
+                        type="submit" ${sessionScope.user == null ? "disabled" : ""}>
+                    <fmt:message key="about.send"/>
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 

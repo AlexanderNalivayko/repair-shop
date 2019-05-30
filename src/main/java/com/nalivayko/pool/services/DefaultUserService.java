@@ -12,9 +12,12 @@ public class DefaultUserService implements UserService {
         this.userDAO = userDAO;
     }
 
+    //todo encrypting
     @Override
-    public void create(String username, String firstName, String lastName, UserRole userRole, String email, String password) {
-
+    public void create(String username, String pass,
+                       String firstName, String lastName, String email, String phone) {
+        User user = new User(UserRole.CUSTOMER, username, pass, firstName, lastName, email, phone);
+        userDAO.create(user);
     }
 
     //todo encrypting
@@ -25,5 +28,10 @@ public class DefaultUserService implements UserService {
             return null;
         }
         return user;
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userDAO.findByUsername(username);
     }
 }

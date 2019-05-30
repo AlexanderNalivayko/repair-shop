@@ -24,6 +24,16 @@ public class User {
         this.phone = phone;
     }
 
+    public User(UserRole userRole, String username, String password, String firstName, String lastName, String email, String phone) {
+        this.userRole = userRole;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+    }
+
     public Integer getId() {
         return id;
     }

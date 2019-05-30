@@ -38,7 +38,6 @@ public class UserAccessFilter implements Filter {
                 if (requestPath.contains(restrictedUrl)) {
                     // send to login page if trying to access pages that permitted only for registered users
                     response.sendRedirect(contextPath + PagesPath.LOGIN);
-                    return;
                 }
             }
         } else {
@@ -51,7 +50,6 @@ public class UserAccessFilter implements Filter {
             }
             if (!userPermittedToPerformRequest(user, requestPath)) {
                 response.sendRedirect(contextPath + PagesPath.ERROR_403);
-                return;
             }
         }
         filterChain.doFilter(servletRequest, servletResponse);

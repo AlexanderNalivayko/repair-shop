@@ -1,14 +1,14 @@
 package com.nalivayko.pool.services;
 
 import com.nalivayko.pool.model.User;
-import com.nalivayko.pool.model.enums.UserRole;
 
 public interface UserService {
 
-    public void create(String username, String firstName, String lastName,
-                       UserRole userRole, String email, String password);
+    public void create(String username, String pass, String firstName, String lastName,
+                       String email, String phone);
 
     public User validate(String username, String pass);
 
+    public User getUserByUsername(String username);
 
 }

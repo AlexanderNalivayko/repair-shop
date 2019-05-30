@@ -16,9 +16,11 @@ public class LeaveFeedback implements Command {
     private static final String USER = "user";
 
     private FeedbackService feedbackService;
+    private Command openAboutPage;
 
-    public LeaveFeedback(FeedbackService feedbackService) {
+    public LeaveFeedback(FeedbackService feedbackService, Command openAboutPage) {
         this.feedbackService = feedbackService;
+        this.openAboutPage = openAboutPage;
     }
 
     @Override
@@ -29,7 +31,7 @@ public class LeaveFeedback implements Command {
             request.getRequestDispatcher(PagesPath.ERROR_403).forward(request, response);
         } else {
             feedbackService.create(user, feedbackText);
-            new OpenAboutPage(feedbackService).execute(request, response);
+            openAboutPage.execute(request, response);
         }
     }
 }

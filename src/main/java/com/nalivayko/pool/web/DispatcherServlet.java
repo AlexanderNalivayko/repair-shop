@@ -4,15 +4,16 @@ import com.nalivayko.pool.controller.CommandManager;
 import com.nalivayko.pool.persistance.DefaultTransactionManager;
 import com.nalivayko.pool.persistance.TransactionManager;
 import com.nalivayko.pool.persistance.dao.FeedbackDAO;
+import com.nalivayko.pool.persistance.dao.ItemDAO;
+import com.nalivayko.pool.persistance.dao.RepairRequestDAO;
 import com.nalivayko.pool.persistance.dao.UserDAO;
 import com.nalivayko.pool.persistance.dao.sql.FeedbackSqlDAO;
+import com.nalivayko.pool.persistance.dao.sql.ItemSqlDAO;
+import com.nalivayko.pool.persistance.dao.sql.RepairRequestSqlDAO;
 import com.nalivayko.pool.persistance.dao.sql.UserSqlDAO;
 import com.nalivayko.pool.persistance.dbcp.ConnectionManager;
 import com.nalivayko.pool.persistance.dbcp.MySqlConnectionManager;
-import com.nalivayko.pool.services.DefaultFeedbackService;
-import com.nalivayko.pool.services.DefaultUserService;
-import com.nalivayko.pool.services.FeedbackService;
-import com.nalivayko.pool.services.UserService;
+import com.nalivayko.pool.services.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +37,12 @@ public class DispatcherServlet extends HttpServlet {
         FeedbackDAO feedbackDAO = new FeedbackSqlDAO(transactionManager);
         FeedbackService feedbackService = new DefaultFeedbackService(transactionManager, feedbackDAO);
 
-        commandManager = new CommandManager(userService, feedbackService); //todo provide parameters
+        RepairRequestDAO repairRequestDAO = new RepairRequestSqlDAO(transactionManager);
+        ItemDAO itemDAO = new ItemSqlDAO(transactionManager);
+        RepairRequestService repairRequestService = new DefaultRepairRequestService(repairRequestDAO, itemDAO,
+                transactionManager);
+
+        commandManager = new CommandManager(userService, feedbackService, repairRequestService);
     }
 
     @Override

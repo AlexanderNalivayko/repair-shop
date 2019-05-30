@@ -18,12 +18,19 @@ public class DefaultTransactionManager implements TransactionManager {
         this.connectionManager = connectionManager;
     }
 
+    /**
+     * can be used in dao to get same connection that was used to start transaction
+     * @return thread-local connection
+     */
     @Override
     public Connection getConnection() {
         createConnection();
         return threadConnection.get();
     }
 
+    /**
+     * should be called after dao operation that was made without transaction
+     */
     @Override
     public void closeConnection() {
         try {
@@ -37,6 +44,10 @@ public class DefaultTransactionManager implements TransactionManager {
         }
     }
 
+    /**
+     * crate connection (so u don't need to call getConnection() before this method)
+     * and starts transaction that should be ended by calling endTransaction() method
+     */
     @Override
     public void startTransaction() {
         Connection connection = getConnection();
@@ -50,6 +61,11 @@ public class DefaultTransactionManager implements TransactionManager {
         }
     }
 
+    /**
+     * If all executions runs without exceptions - commit all changes that was made after
+     * calling startTransaction(), otherwise - roll back all changes to the point
+     * right before you call startTransaction().
+     */
     @Override
     public void endTransaction() {
         Connection connection = getConnection();
@@ -81,6 +97,9 @@ public class DefaultTransactionManager implements TransactionManager {
         closeConnection();
     }
 
+    /**
+     * create connection and right it to thread-local if such is not exist
+     */
     private void createConnection() {
         if (threadConnection.get() == null) {
             threadConnection.set(connectionManager.getConnection());

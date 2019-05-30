@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:setBundle basename="lang"/>
+<fmt:setBundle basename="${sessionScope.bundle}"/>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,11 +24,16 @@
 <div class="logreg-forms">
     <form class="form-signin shadow" method="post" action="${pageContext.request.contextPath}/site/login_page/login">
         <h1 class="h3 mb-3 font-weight-normal">
-            <fmt:message key="login.msg"/>
+            <fmt:message key="login.title"/>
         </h1>
         <c:if test="${wrong_input == true}">
             <p class="text-warning">
                 <fmt:message key="login.msg.wrong_input"/>
+            </p>
+        </c:if>
+        <c:if test="${need_login == true}">
+            <p class="text-warning">
+                <fmt:message key="login.msg.need_login"/>
             </p>
         </c:if>
         <input type="text" name="login" class="form-control" placeholder="username" required="" autofocus="">
@@ -51,9 +56,9 @@
         <p>
             <fmt:message key="login.question"/>
         </p>
-        <button class="btn btn-primary btn-block" type="button" id="btn-signup">
+        <a href="${pageContext.request.contextPath}/site/sign_up_page" class="btn btn-primary btn-block">
             <fmt:message key="login.btn.signup"/>
-        </button>
+        </a>
     </form>
 </div>
 </body>
