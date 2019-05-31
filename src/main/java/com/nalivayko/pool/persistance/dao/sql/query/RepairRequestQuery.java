@@ -16,26 +16,25 @@ public class RepairRequestQuery {
             + " ("
             + USER_ID + ", "
             + ITEM_ID + ", "
-            + REVIEW_ID + ", "
             + STATUS + ", "
             + DESCRIPTION
             + ") "
-            + " VALUES (?, ?, ?, ?, ?)";
+            + " VALUES (?, ?, ?, ?)";
 
     private static final String ORDER_BY = " ORDER BY UNIX_TIMESTAMP(" + CREATION_TIME + ") DESC";
 
     private static final String GENERAL_SELECT_ALL = "SELECT * FROM " + TABLE_NAME
-            + " INNER JOIN " + UserQuery.TABLE_NAME
+            + " LEFT JOIN " + UserQuery.TABLE_NAME
             + " ON "
             + UserQuery.TABLE_NAME + "." + UserQuery.ID
             + " = "
             + TABLE_NAME + "." + USER_ID
-            + " INNER JOIN " + ItemQuery.TABLE_NAME
+            + " LEFT JOIN " + ItemQuery.TABLE_NAME
             + " ON "
             + ItemQuery.TABLE_NAME + "." + ItemQuery.ID
             + " = "
             + TABLE_NAME + "." + ITEM_ID
-            + " INNER JOIN " + ReviewQuery.TABLE_NAME
+            + " LEFT JOIN " + ReviewQuery.TABLE_NAME
             + " ON "
             + ReviewQuery.TABLE_NAME + "." + ReviewQuery.ID
             + " = "
@@ -54,6 +53,13 @@ public class RepairRequestQuery {
             + STATUS + " LIKE ?"
             + ORDER_BY;
 
+    public static final String SELECT_BY_REVIEW_AND_REQUEST_STATUS = GENERAL_SELECT_ALL
+            + " WHERE "
+            + ReviewQuery.REVIEW_STATUS + " LIKE ? "
+            + " AND "
+            + STATUS + " LIKE ?"
+            + ORDER_BY;
+
     public static final String UPDATE_BY_ID = "UPDATE " + TABLE_NAME
             + " SET "
             + USER_ID + " = ?, "
@@ -61,6 +67,18 @@ public class RepairRequestQuery {
             + REVIEW_ID + " = ?, "
             + STATUS + " = ?, "
             + DESCRIPTION + " = ?"
+            + " WHERE "
+            + ID + " = ?";
+
+    public static final String UPDATE_REVIEW = "UPDATE " + TABLE_NAME
+            + " SET "
+            + REVIEW_ID + " = ? "
+            + " WHERE "
+            + ID + " = ?";
+
+    public static final String UPDATE_STATUS = "UPDATE " + TABLE_NAME
+            + " SET "
+            + STATUS + " = ? "
             + " WHERE "
             + ID + " = ?";
 

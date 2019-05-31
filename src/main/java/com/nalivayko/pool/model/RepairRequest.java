@@ -2,8 +2,6 @@ package com.nalivayko.pool.model;
 
 import com.nalivayko.pool.model.enums.RepairRequestStatus;
 
-import java.util.Date;
-
 public class RepairRequest {
     private Integer id;
     private User user;

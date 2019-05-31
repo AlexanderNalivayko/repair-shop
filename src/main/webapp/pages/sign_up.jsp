@@ -69,16 +69,16 @@
                     </label>
                     <input type="tel" maxlength="20" name="phone" id="phone" class="form-control px-2" autofocus="">
 
-                    <div class="container my-4">
+                    <div class="my-4">
                         <div class="row">
-                            <div class="col-sm pl-0 pr-1">
-                                <a href="${pageContext.request.contextPath}/site/home_page"
+                            <div class="col-sm-6">
+                            <a href="${pageContext.request.contextPath}/site/home_page"
                                    class="btn btn-danger btn-block">
                                     <fmt:message key="sign_up.btn.home"/>
                                 </a>
                             </div>
-                            <div class="col-sm pr-0 pl-1">
-                                <button class="btn btn-success btn-block" type="submit">
+                            <div class="col-sm-6">
+                            <button class="btn btn-success btn-block" type="submit">
                                     <fmt:message key="sign_up.btn.create"/>
                                 </button>
                             </div>

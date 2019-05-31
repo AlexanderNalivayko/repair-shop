@@ -15,8 +15,9 @@ public class ReviewMapper implements Mapper<Review> {
             return null;
         }
         return new Review(resultSet.getInt(ReviewQuery.ID),
-                ReviewStatus.valueOf(resultSet.getString(ReviewQuery.REVIEW_STATUS)),
+                resultSet.getString(ReviewQuery.REVIEW_STATUS) == null ?
+                        null : ReviewStatus.valueOf(resultSet.getString(ReviewQuery.REVIEW_STATUS)),
                 resultSet.getDate(ReviewQuery.REVIEW_TIME),
-                resultSet.getLong(ReviewQuery.COST));
+                resultSet.getInt(ReviewQuery.COST));
     }
 }

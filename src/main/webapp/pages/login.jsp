@@ -38,18 +38,16 @@
         </c:if>
         <input type="text" name="login" class="form-control" placeholder="username" required="" autofocus="">
         <input type="password" name="password" class="form-control" placeholder="password" required="">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm pl-0 pr-1">
-                    <a href="${pageContext.request.contextPath}/site/home_page" class="btn btn-danger btn-block">
-                        <fmt:message key="login.btn.home"/>
-                    </a>
-                </div>
-                <div class="col-sm pr-0 pl-1">
-                    <button class="btn btn-success btn-block" type="submit">
-                        <fmt:message key="login.btn.signin"/>
-                    </button>
-                </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <a href="${pageContext.request.contextPath}/site/home_page" class="btn btn-danger btn-block">
+                    <fmt:message key="login.btn.home"/>
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <button class="btn btn-success btn-block" type="submit">
+                    <fmt:message key="login.btn.signin"/>
+                </button>
             </div>
         </div>
         <hr>

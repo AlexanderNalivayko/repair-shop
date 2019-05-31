@@ -9,7 +9,7 @@ public class ItemQuery {
     public static final String BRAND = "brand";
     public static final String ITEM_NAME = "item_name";
 
-    public static final String INSERT = "INSERT INTO TABLE " + TABLE_NAME
+    public static final String INSERT = "INSERT INTO " + TABLE_NAME
             + " ("
             + ITEM_TYPE + ", "
             + BRAND + ", "

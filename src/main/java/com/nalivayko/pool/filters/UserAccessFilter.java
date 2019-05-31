@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class UserAccessFilter implements Filter {
-    private static final String[] restrictedForRegistered = {UrlRequests.LOGIN_PAGE};
     private static final String[] restrictedForUnregistered = {UrlRequests.MANAGER_PAGE,
             UrlRequests.MASTER_PAGE,
             UrlRequests.CUSTOMER};
@@ -36,27 +35,20 @@ public class UserAccessFilter implements Filter {
         if (user == null) {
             for (String restrictedUrl : restrictedForUnregistered) {
                 if (requestPath.contains(restrictedUrl)) {
-                    // send to login page if trying to access pages that permitted only for registered users
                     response.sendRedirect(contextPath + PagesPath.LOGIN);
-                }
-            }
-        } else {
-            for (String restrictedUrl : restrictedForRegistered) {
-                if (requestPath.contains(restrictedUrl)) {
-                    // send to 403 page if trying to access pages that permitted only for unregistered
-                    response.sendRedirect(contextPath + PagesPath.ERROR_403);
                     return;
                 }
             }
+        } else {
             if (!userPermittedToPerformRequest(user, requestPath)) {
-                response.sendRedirect(contextPath + PagesPath.ERROR_403);
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return;
             }
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
     /**
-     *
      * @param user - current session user
      * @param url  - request url
      * @return true - if user permitted to perform request represented by url

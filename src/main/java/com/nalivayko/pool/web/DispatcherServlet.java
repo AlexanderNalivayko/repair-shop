@@ -3,14 +3,8 @@ package com.nalivayko.pool.web;
 import com.nalivayko.pool.controller.CommandManager;
 import com.nalivayko.pool.persistance.DefaultTransactionManager;
 import com.nalivayko.pool.persistance.TransactionManager;
-import com.nalivayko.pool.persistance.dao.FeedbackDAO;
-import com.nalivayko.pool.persistance.dao.ItemDAO;
-import com.nalivayko.pool.persistance.dao.RepairRequestDAO;
-import com.nalivayko.pool.persistance.dao.UserDAO;
-import com.nalivayko.pool.persistance.dao.sql.FeedbackSqlDAO;
-import com.nalivayko.pool.persistance.dao.sql.ItemSqlDAO;
-import com.nalivayko.pool.persistance.dao.sql.RepairRequestSqlDAO;
-import com.nalivayko.pool.persistance.dao.sql.UserSqlDAO;
+import com.nalivayko.pool.persistance.dao.*;
+import com.nalivayko.pool.persistance.dao.sql.*;
 import com.nalivayko.pool.persistance.dbcp.ConnectionManager;
 import com.nalivayko.pool.persistance.dbcp.MySqlConnectionManager;
 import com.nalivayko.pool.services.*;
@@ -38,9 +32,10 @@ public class DispatcherServlet extends HttpServlet {
         FeedbackService feedbackService = new DefaultFeedbackService(transactionManager, feedbackDAO);
 
         RepairRequestDAO repairRequestDAO = new RepairRequestSqlDAO(transactionManager);
+        ReviewDAO reviewDAO = new ReviewSqlDAO(transactionManager);
         ItemDAO itemDAO = new ItemSqlDAO(transactionManager);
-        RepairRequestService repairRequestService = new DefaultRepairRequestService(repairRequestDAO, itemDAO,
-                transactionManager);
+        RepairRequestService repairRequestService = new DefaultRepairRequestService(reviewDAO, repairRequestDAO,
+                itemDAO, transactionManager);
 
         commandManager = new CommandManager(userService, feedbackService, repairRequestService);
     }

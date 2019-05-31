@@ -2,6 +2,7 @@ package com.nalivayko.pool.persistance.dao.sql;
 
 import com.nalivayko.pool.model.RepairRequest;
 import com.nalivayko.pool.model.enums.RepairRequestStatus;
+import com.nalivayko.pool.model.enums.ReviewStatus;
 import com.nalivayko.pool.persistance.TransactionManager;
 import com.nalivayko.pool.persistance.dao.RepairRequestDAO;
 import com.nalivayko.pool.persistance.dao.sql.query.RepairRequestQuery;
@@ -20,9 +21,8 @@ public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implement
         return create(RepairRequestQuery.INSERT, preparedStatement -> {
             preparedStatement.setInt(1, repairRequest.getUser().getId());
             preparedStatement.setInt(2, repairRequest.getItem().getId());
-            preparedStatement.setInt(3, repairRequest.getReview().getId());
-            preparedStatement.setString(4, repairRequest.getRepairRequestStatus().toString());
-            preparedStatement.setString(5, repairRequest.getDescription());
+            preparedStatement.setString(3, repairRequest.getRepairRequestStatus().toString());
+            preparedStatement.setString(4, repairRequest.getDescription());
         });
     }
 
@@ -33,14 +33,39 @@ public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implement
     }
 
     @Override
-    public List<RepairRequest> findByStatus(RepairRequestStatus status) {
+    public List<RepairRequest> findByRepairRequestStatus(RepairRequestStatus status) {
         return findAll(RepairRequestQuery.SELECT_BY_STATUS, preparedStatement ->
                 preparedStatement.setString(1, status.toString()), new RepairRequestMapper());
     }
 
     @Override
+    public List<RepairRequest> findByReviewAndRequestStatus(ReviewStatus reviewStatus,
+                                                            RepairRequestStatus repairRequestStatus) {
+        return findAll(RepairRequestQuery.SELECT_BY_REVIEW_AND_REQUEST_STATUS, preparedStatement -> {
+            preparedStatement.setString(1, reviewStatus.toString());
+            preparedStatement.setString(2, repairRequestStatus.toString());
+        }, new RepairRequestMapper());
+    }
+
+    @Override
     public List<RepairRequest> findAll() {
         return findAll(RepairRequestQuery.SELECT_ALL, new RepairRequestMapper());
+    }
+
+    @Override
+    public boolean updateReviewId(int RepairRequestId, int ReviewId) {
+        return updateDelete(RepairRequestQuery.UPDATE_REVIEW, preparedStatement -> {
+            preparedStatement.setInt(1, ReviewId);
+            preparedStatement.setInt(2, RepairRequestId);
+        });
+    }
+
+    @Override
+    public boolean updateStatus(int RepairRequestId, RepairRequestStatus repairRequestStatus) {
+        return updateDelete(RepairRequestQuery.UPDATE_STATUS, preparedStatement -> {
+            preparedStatement.setString(1, repairRequestStatus.toString());
+            preparedStatement.setInt(2, RepairRequestId);
+        });
     }
 
     @Override

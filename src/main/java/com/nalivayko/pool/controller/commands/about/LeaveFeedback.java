@@ -28,7 +28,7 @@ public class LeaveFeedback implements Command {
         String feedbackText = request.getParameter(FEEDBACK_MSG);
         User user = (User) request.getSession().getAttribute(USER);
         if (user == null) {
-            request.getRequestDispatcher(PagesPath.ERROR_403).forward(request, response);
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
         } else {
             feedbackService.create(user, feedbackText);
             openAboutPage.execute(request, response);

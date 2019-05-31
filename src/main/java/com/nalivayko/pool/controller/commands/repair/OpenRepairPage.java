@@ -28,11 +28,11 @@ public class OpenRepairPage implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute(USER) == null) {
+        User user = (User) request.getSession().getAttribute(USER);
+        if (user == null) {
             request.setAttribute(NEED_LOGIN, true);
             openLoginPage.execute(request, response);
         } else {
-            User user = (User) request.getSession().getAttribute(USER);
             List<RepairRequest> repairRequests = repairRequestService.getRepairRequestsByUserId(user.getId());
             request.setAttribute(REPAIR_REQUEST, repairRequests);
             request.getRequestDispatcher(PagesPath.REPAIR).forward(request, response);

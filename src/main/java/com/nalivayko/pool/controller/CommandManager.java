@@ -3,13 +3,17 @@ package com.nalivayko.pool.controller;
 import com.nalivayko.pool.controller.commands.Command;
 import com.nalivayko.pool.controller.commands.about.LeaveFeedback;
 import com.nalivayko.pool.controller.commands.about.OpenAboutPage;
+import com.nalivayko.pool.controller.commands.manager.OpenManagerPage;
+import com.nalivayko.pool.controller.commands.manager.ReviewRepairRequest;
+import com.nalivayko.pool.controller.commands.master.OpenMasterPage;
+import com.nalivayko.pool.controller.commands.master.PerformRepairRequest;
+import com.nalivayko.pool.controller.commands.repair.CreateRepairRequest;
 import com.nalivayko.pool.controller.commands.repair.OpenRepairPage;
 import com.nalivayko.pool.controller.commands.site.OpenHomePage;
 import com.nalivayko.pool.controller.commands.user.*;
 import com.nalivayko.pool.services.FeedbackService;
 import com.nalivayko.pool.services.RepairRequestService;
 import com.nalivayko.pool.services.UserService;
-import com.nalivayko.pool.util.PagesPath;
 import com.nalivayko.pool.util.UrlRequests;
 
 import javax.servlet.ServletException;
@@ -28,6 +32,9 @@ public class CommandManager {
         OpenHomePage openHomePage = new OpenHomePage();
         OpenAboutPage openAboutPage = new OpenAboutPage(feedbackService);
         OpenLoginPage openLoginPage = new OpenLoginPage();
+        OpenRepairPage openRepairPage = new OpenRepairPage(repairRequestService, openLoginPage);
+        OpenManagerPage openManagerPage = new OpenManagerPage(repairRequestService);
+        OpenMasterPage openMasterPage = new OpenMasterPage(repairRequestService);
 
         commands.put("", openHomePage);
         commands.put(UrlRequests.HOME_PAGE, openHomePage);
@@ -41,7 +48,14 @@ public class CommandManager {
         commands.put(UrlRequests.SIGN_UP, new SignUp(userService, openHomePage));
         commands.put(UrlRequests.LOGOUT, new Logout());
 
-        commands.put(UrlRequests.REPAIR_PAGE, new OpenRepairPage(repairRequestService, openLoginPage));
+        commands.put(UrlRequests.REPAIR_PAGE, openRepairPage);
+        commands.put(UrlRequests.REPAIR_PAGE_CREATE, new CreateRepairRequest(repairRequestService, openRepairPage));
+
+        commands.put(UrlRequests.MANAGER_PAGE, openManagerPage);
+        commands.put(UrlRequests.MANAGER_PAGE_REVIEW, new ReviewRepairRequest(openManagerPage, repairRequestService));
+
+        commands.put(UrlRequests.MASTER_PAGE, openMasterPage);
+        commands.put(UrlRequests.MASTER_PAGE_PERFORM, new PerformRepairRequest(repairRequestService, openMasterPage));
 
         commands.put(UrlRequests.VALIDATE_USERNAME, new ValidateUsername(userService));
     }
@@ -56,7 +70,7 @@ public class CommandManager {
         String uri = request.getRequestURI().replace(UrlRequests.SITE, "");
         Command command = commands.get(uri);
         if (command == null) {
-            response.sendRedirect(PagesPath.ERROR_404);
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
         } else {
             command.execute(request, response);
         }

@@ -15,7 +15,7 @@ public class ReviewSqlDAO extends AbstractSqlDAO<Review> implements ReviewDAO {
     public int create(Review review) {
         return create(ReviewQuery.INSERT, preparedStatement -> {
             preparedStatement.setString(1, review.getStatus().toString());
-            preparedStatement.setLong(2, review.getCost());
+            preparedStatement.setObject(2, review.getCost());
         });
     }
 

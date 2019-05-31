@@ -9,7 +9,7 @@
 <h2 class="text-muted">
     <fmt:message key="repair.new_request"/>
 </h2>
-    <form action="${pageContext.request.contextPath}/site/sign_up_page/sign_up" class="form-signup" method="post">
+    <form action="${pageContext.request.contextPath}/site/repair_page/create" class="form-signup" method="post">
         <label for="prod-type" class="mb-0 text-muted font-weight-bolder">
             <fmt:message key="repair.item_type"/>
         </label>

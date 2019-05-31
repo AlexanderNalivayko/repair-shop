@@ -16,7 +16,7 @@
 <html>
 <head>
     <title>
-        fix-shop
+        <fmt:message key="site.name"/>
     </title>
 </head>
 

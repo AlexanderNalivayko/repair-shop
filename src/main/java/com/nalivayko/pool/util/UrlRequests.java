@@ -21,11 +21,14 @@ public class UrlRequests {
     public static final String ABOUT_PAGE_FEEDBACK = ABOUT_PAGE + "/leave_feedback";
 
     public static final String REPAIR_PAGE = "/repair_page";
+    public static final String REPAIR_PAGE_CREATE = REPAIR_PAGE + "/create";
 
 
-    public  static final String MANAGER_PAGE = "/manager";
+    public static final String MANAGER_PAGE = "/manager";
+    public static final String MANAGER_PAGE_REVIEW = MANAGER_PAGE + "/updateReview";
 
     public static final String MASTER_PAGE = "/master";
+    public static final String MASTER_PAGE_PERFORM = MASTER_PAGE + "/perform";
 
     public static final String CUSTOMER = "/customer";
 }

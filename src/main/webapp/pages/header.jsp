@@ -13,7 +13,7 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-color rounded-20">
         <a class="navbar-brand font-weight-bolder" href="${pageContext.request.contextPath}/site/home_page">
-            <fmt:message key="header.name"/>
+            <fmt:message key="site.name"/>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,6 +65,22 @@
                         </c:if>
                     </div>
                 </li>
+                <c:if test="${sessionScope.user.userRole eq 'MANAGER'}">
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bolder"
+                           href="${pageContext.request.contextPath}/site/manager">
+                            <fmt:message key="header.manager"/>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.user.userRole eq 'MASTER'}">
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bolder"
+                           href="${pageContext.request.contextPath}/site/master">
+                            <fmt:message key="header.master"/>
+                        </a>
+                    </li>
+                </c:if>
             </ul>
             <ul class=" nav navbar-nav ml-auto">
                 <li class="nav-item">

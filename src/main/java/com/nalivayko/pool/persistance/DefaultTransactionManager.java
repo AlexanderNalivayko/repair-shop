@@ -20,6 +20,7 @@ public class DefaultTransactionManager implements TransactionManager {
 
     /**
      * can be used in dao to get same connection that was used to start transaction
+     *
      * @return thread-local connection
      */
     @Override
@@ -93,8 +94,9 @@ public class DefaultTransactionManager implements TransactionManager {
             connection.setAutoCommit(true);
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
-        closeConnection();
     }
 
     /**

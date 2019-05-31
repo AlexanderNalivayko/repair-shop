@@ -8,12 +8,17 @@ public class Review {
     private Integer id;
     private ReviewStatus status;
     private Date time;
-    private Long cost;
+    private Integer cost;
 
-    public Review(Integer id, ReviewStatus status, Date time, Long cost) {
+    public Review(Integer id, ReviewStatus status, Date time, Integer cost) {
         this.id = id;
         this.status = status;
         this.time = time;
+        this.cost = cost;
+    }
+
+    public Review(ReviewStatus status, Integer cost) {
+        this.status = status;
         this.cost = cost;
     }
 
@@ -41,11 +46,11 @@ public class Review {
         this.time = time;
     }
 
-    public Long getCost() {
+    public Integer getCost() {
         return cost;
     }
 
-    public void setCost(Long cost) {
+    public void setCost(Integer cost) {
         this.cost = cost;
     }
 }

@@ -12,6 +12,16 @@
 <c:forEach var="request" items="${requestScope.repairRequests}">
     <div class="card my-2 shadow">
         <div class="card-body">
+            <c:if test="${request.review.status != null}">
+                <p class="text-muted">
+                    <fmt:message key="repair.review.status"/>:
+                        ${request.review.status}
+                </p>
+                <p class="text-muted">
+                    <fmt:message key="repair.price"/>:
+                        ${request.review.cost}
+                </p>
+            </c:if>
             <p class="text-muted">
                 <fmt:message key="repair.status"/>:
                     ${request.repairRequestStatus}
@@ -36,7 +46,6 @@
                 <fmt:message key="repair.description"/>:
                     ${request.description}
             </p>
-            <p class="text-muted">${feedbackMsg.text}</p>
         </div>
     </div>
 </c:forEach>
