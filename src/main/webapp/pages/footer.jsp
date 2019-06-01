@@ -1,4 +1,4 @@
-<footer class="page-footer font-small bg-color py-3" >
+<footer class="page-footer font-small bg-color py-3 mt-auto">
     <div class="footer-copyright text-center text-light font-weight-bolder">
         2019. Alexander Nalivayko
     </div>

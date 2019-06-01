@@ -33,9 +33,9 @@ public class DefaultRepairRequestService implements RepairRequestService {
      * @return all RepairRequests that was created by user with userId
      */
     @Override
-    public List<RepairRequest> getRepairRequestsByUserId(int userId) {
+    public List<RepairRequest> getRepairRequestsByUserId(int userId, int limit, int offset) {
         transactionManager.getConnection();
-        List<RepairRequest> repairRequests = repairRequestDAO.findByUserId(userId);
+        List<RepairRequest> repairRequests = repairRequestDAO.findByUserId(userId, limit, offset);
         //todo what if findById will throw an exception ?
         transactionManager.closeConnection();
         return repairRequests;
@@ -43,7 +43,7 @@ public class DefaultRepairRequestService implements RepairRequestService {
     }
 
     /**
-     * Create RepairRequest and write it to db
+     * Create RepairRequest and save it
      *
      * @param user        - user that create repair request
      * @param itemType    - type of repair request item
@@ -63,8 +63,9 @@ public class DefaultRepairRequestService implements RepairRequestService {
     }
 
     /**
-     * @param repairRequestStatus
-     * @return List of repair requests where status is repairRequestStatus
+     * Find and return list of repair request where status equal {@code repairRequestStatus}
+     * @param repairRequestStatus - status which will be used for searching
+     * @return List of repair requests
      */
     @Override
     public List<RepairRequest> getAllWithStatus(RepairRequestStatus repairRequestStatus) {
@@ -100,5 +101,10 @@ public class DefaultRepairRequestService implements RepairRequestService {
         transactionManager.getConnection();
         repairRequestDAO.updateStatus(repairRequestId, repairRequestStatus);
         transactionManager.closeConnection();
+    }
+
+    @Override
+    public int countNumberOfRequestsForUser(int userId) {
+        return repairRequestDAO.countForUser(userId);
     }
 }

@@ -8,7 +8,9 @@ public interface FeedbackDAO {
 
     public int create(Feedback feedback);
 
-    public List<Feedback> findAll();
+    public List<Feedback> findAll(int limit, int offset);
 
     public boolean delete(int id);
+
+    public int count();
 }

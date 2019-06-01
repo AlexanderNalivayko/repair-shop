@@ -27,9 +27,12 @@ public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implement
     }
 
     @Override
-    public List<RepairRequest> findByUserId(int userId) {
-        return findAll(RepairRequestQuery.SELECT_BY_USER_ID, preparedStatement ->
-                preparedStatement.setInt(1, userId), new RepairRequestMapper());
+    public List<RepairRequest> findByUserId(int userId, int limit, int offset) {
+        return findAll(RepairRequestQuery.SELECT_BY_USER_ID_WITH_LIMIT, preparedStatement -> {
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, limit);
+            preparedStatement.setInt(3, offset);
+        }, new RepairRequestMapper());
     }
 
     @Override
@@ -53,8 +56,14 @@ public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implement
     }
 
     @Override
+    public int countForUser(int userId) {
+        return count(RepairRequestQuery.COUNT_FOR_USER, preparedStatement ->
+                preparedStatement.setInt(1, userId));
+    }
+
+    @Override
     public boolean updateReviewId(int RepairRequestId, int ReviewId) {
-        return updateDelete(RepairRequestQuery.UPDATE_REVIEW, preparedStatement -> {
+        return updateOrDelete(RepairRequestQuery.UPDATE_REVIEW, preparedStatement -> {
             preparedStatement.setInt(1, ReviewId);
             preparedStatement.setInt(2, RepairRequestId);
         });
@@ -62,7 +71,7 @@ public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implement
 
     @Override
     public boolean updateStatus(int RepairRequestId, RepairRequestStatus repairRequestStatus) {
-        return updateDelete(RepairRequestQuery.UPDATE_STATUS, preparedStatement -> {
+        return updateOrDelete(RepairRequestQuery.UPDATE_STATUS, preparedStatement -> {
             preparedStatement.setString(1, repairRequestStatus.toString());
             preparedStatement.setInt(2, RepairRequestId);
         });
@@ -70,7 +79,7 @@ public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implement
 
     @Override
     public boolean update(RepairRequest repairRequest) {
-        return updateDelete(RepairRequestQuery.UPDATE_BY_ID, preparedStatement -> {
+        return updateOrDelete(RepairRequestQuery.UPDATE_BY_ID, preparedStatement -> {
             preparedStatement.setInt(1, repairRequest.getUser().getId());
             preparedStatement.setInt(2, repairRequest.getItem().getId());
             preparedStatement.setInt(3, repairRequest.getReview().getId());
@@ -82,7 +91,7 @@ public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implement
 
     @Override
     public boolean delete(int id) {
-        return updateDelete(RepairRequestQuery.DELETE_BY_ID, preparedStatement ->
+        return updateOrDelete(RepairRequestQuery.DELETE_BY_ID, preparedStatement ->
                 preparedStatement.setInt(1, id));
     }
 }

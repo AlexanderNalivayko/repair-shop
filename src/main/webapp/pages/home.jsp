@@ -20,9 +20,24 @@
     </title>
 </head>
 
-<body>
+<body class="h-100">
+
 <jsp:include page="header.jsp"></jsp:include>
 
+<div class="jumbotron mb-0 bg-white text-muted">
+    <h1 class="display-4"><fmt:message key="site.name"/>!</h1>
+    <p class="lead"><fmt:message key="home.welcome"/></p>
+    <hr class="my-4">
+    <p><fmt:message key="home.welcome.hint"/></p>
+    <p class="lead">
+        <a class="btn btn-success btn-lg" href="${pageContext.request.contextPath}/site/sign_up_page"
+           role="button"><fmt:message key="action.signup"/></a>
+        <a class="btn btn-success btn-lg" href="${pageContext.request.contextPath}/site/about_page"
+           role="button"><fmt:message key="header.about"/></a>
+    </p>
+</div>
+
 <jsp:include page="footer.jsp"></jsp:include>
+
 </body>
 </html>

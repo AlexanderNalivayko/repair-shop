@@ -21,7 +21,7 @@
 
 <body>
 
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"/>
 
 <div class="container-fluid">
     <div class="row justify-content-md-center my-5">
@@ -49,13 +49,16 @@
                 </div>
             </c:forEach>
             <br/>
+            <div class="row justify-content-sm-center">
+                <jsp:include page="pagination.jsp"/>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="container-fluid">
     <div class="row justify-content-md-center mb-5 pt-4">
-        <div class="col-md-10">
+        <div class="col-md-10 mb-5">
             <form action="${pageContext.request.contextPath}/site/about_page/leave_feedback" method="post"
                   class="form-signup">
                 <p class="text-muted">
@@ -76,7 +79,7 @@
     </div>
 </div>
 
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"/>
 
 </body>
 </html>

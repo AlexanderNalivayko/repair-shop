@@ -16,6 +16,7 @@ public class ReviewRepairRequest implements Command {
     private static final String APPROVE = "approve";
     private static final String PRICE = "price";
     private static final String REPAIR_ID = "repairId";
+    private static final Integer FRACTIONAL = 100;
 
     private Command openManagerPage;
     private RepairRequestService repairRequestService;
@@ -34,7 +35,7 @@ public class ReviewRepairRequest implements Command {
         if (price == null || price.isEmpty()) {
             repairRequestPrice = null;
         } else {
-            repairRequestPrice = Integer.parseInt(price);
+            repairRequestPrice = Integer.parseInt(price) * FRACTIONAL;
         }
 
         if (request.getParameter(BUTTON_NAME).equals(DECLINE)) {

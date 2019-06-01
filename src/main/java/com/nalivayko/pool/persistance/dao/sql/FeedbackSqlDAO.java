@@ -23,13 +23,21 @@ public class FeedbackSqlDAO extends AbstractSqlDAO<Feedback> implements Feedback
     }
 
     @Override
-    public List<Feedback> findAll() {
-        return findAll(FeedbackQuery.SELECT_ALL, new FeedbackMapper());
+    public List<Feedback> findAll(int limit, int offset) {
+        return findAll(FeedbackQuery.SELECT_ALL_WITH_LIMIT, preparedStatement -> {
+            preparedStatement.setInt(1, limit);
+            preparedStatement.setInt(2, offset);
+        }, new FeedbackMapper());
     }
 
     @Override
     public boolean delete(int id) {
-        return updateDelete(FeedbackQuery.DELETE_BY_ID, preparedStatement ->
+        return updateOrDelete(FeedbackQuery.DELETE_BY_ID, preparedStatement ->
                 preparedStatement.setInt(1, id));
+    }
+
+    @Override
+    public int count() {
+        return count(FeedbackQuery.COUNT);
     }
 }

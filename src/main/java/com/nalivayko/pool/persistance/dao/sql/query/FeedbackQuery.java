@@ -16,6 +16,8 @@ public class FeedbackQuery {
             + ") "
             + " VALUES (?, ?)";
 
+    public static final String COUNT = "SELECT COUNT(*) FROM " + TABLE_NAME;
+
     public static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME
             + " INNER JOIN " + UserQuery.TABLE_NAME
             + " ON "
@@ -23,6 +25,8 @@ public class FeedbackQuery {
             + " = "
             + TABLE_NAME + "." + USER_ID
             + " ORDER BY " + TABLE_NAME + "." + ID + " DESC";
+
+    public static final String SELECT_ALL_WITH_LIMIT = SELECT_ALL + " LIMIT ? OFFSET ?";
 
     public static final String DELETE_BY_ID = "DELETE FROM TABLE " + TABLE_NAME
             + "WHERE "

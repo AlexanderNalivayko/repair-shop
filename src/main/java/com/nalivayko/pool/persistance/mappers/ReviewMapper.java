@@ -9,6 +9,8 @@ import java.sql.SQLException;
 
 public class ReviewMapper implements Mapper<Review> {
 
+    private static final Integer FRACTIONAL = 100;
+
     @Override
     public Review getEntity(ResultSet resultSet) throws SQLException {
         if (resultSet == null) {
@@ -18,6 +20,6 @@ public class ReviewMapper implements Mapper<Review> {
                 resultSet.getString(ReviewQuery.REVIEW_STATUS) == null ?
                         null : ReviewStatus.valueOf(resultSet.getString(ReviewQuery.REVIEW_STATUS)),
                 resultSet.getDate(ReviewQuery.REVIEW_TIME),
-                resultSet.getInt(ReviewQuery.COST));
+                resultSet.getInt(ReviewQuery.COST)/FRACTIONAL);
     }
 }

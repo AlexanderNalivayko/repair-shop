@@ -21,7 +21,7 @@ public class ReviewSqlDAO extends AbstractSqlDAO<Review> implements ReviewDAO {
 
     @Override
     public boolean update(Review review) {
-        return updateDelete(ReviewQuery.UPDATE_BY_ID, preparedStatement -> {
+        return updateOrDelete(ReviewQuery.UPDATE_BY_ID, preparedStatement -> {
             preparedStatement.setString(1, review.getStatus().toString());
             preparedStatement.setLong(2, review.getCost());
         });

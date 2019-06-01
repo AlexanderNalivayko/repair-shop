@@ -17,9 +17,9 @@ public class DefaultFeedbackService implements FeedbackService {
     }
 
     @Override
-    public List<Feedback> getAll() {
+    public List<Feedback> getAll(int limit, int offset) {
         transactionManager.getConnection();
-        List<Feedback> feedbacks = feedbackDAO.findAll();
+        List<Feedback> feedbacks = feedbackDAO.findAll(limit, offset);
         transactionManager.closeConnection();
         return feedbacks;
     }
@@ -34,5 +34,13 @@ public class DefaultFeedbackService implements FeedbackService {
         transactionManager.getConnection();
         feedbackDAO.create(new Feedback(user, text));
         transactionManager.closeConnection();
+    }
+
+    @Override
+    public int getRecordsCount() {
+        transactionManager.getConnection();
+        int numberOfRecords = feedbackDAO.count();
+        transactionManager.closeConnection();
+        return numberOfRecords;
     }
 }

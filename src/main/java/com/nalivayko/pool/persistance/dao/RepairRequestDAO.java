@@ -10,7 +10,7 @@ public interface RepairRequestDAO {
 
     public int create(RepairRequest repairRequest);
 
-    public List<RepairRequest> findByUserId(int UserId);
+    public List<RepairRequest> findByUserId(int UserId, int limit, int offset);
 
     public List<RepairRequest> findByRepairRequestStatus(RepairRequestStatus status);
 
@@ -18,6 +18,8 @@ public interface RepairRequestDAO {
                                                             RepairRequestStatus repairRequestStatus);
 
     public List<RepairRequest> findAll();
+
+    public int countForUser(int userId);
 
     public boolean updateReviewId(int RepairRequestId, int ReviewId);
 

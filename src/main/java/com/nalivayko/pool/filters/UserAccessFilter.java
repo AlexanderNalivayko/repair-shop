@@ -14,7 +14,8 @@ import java.io.IOException;
 public class UserAccessFilter implements Filter {
     private static final String[] restrictedForUnregistered = {UrlRequests.MANAGER_PAGE,
             UrlRequests.MASTER_PAGE,
-            UrlRequests.CUSTOMER};
+            UrlRequests.CUSTOMER,
+            UrlRequests.REPAIR_PAGE};
 
     private String contextPath;
 
@@ -35,7 +36,7 @@ public class UserAccessFilter implements Filter {
         if (user == null) {
             for (String restrictedUrl : restrictedForUnregistered) {
                 if (requestPath.contains(restrictedUrl)) {
-                    response.sendRedirect(contextPath + PagesPath.LOGIN);
+                    response.sendRedirect(contextPath + PagesPath.LOGIN);//todo fix
                     return;
                 }
             }

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
@@ -39,12 +39,15 @@
         </div>
         <div class="col-7">
             <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                <div class="tab-pane fade ${tab eq "new_request" ? "show active" : ""}" id="v-pills-home" role="tabpanel"
                      aria-labelledby="v-pills-home-tab">
                     <jsp:include page="new-request.jsp"/>
                 </div>
-                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                <div class="tab-pane fade ${tab eq "my_requests" ? "show active" : ""}" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                     <jsp:include page="my-requests.jsp"/>
+                    <div class="row justify-content-sm-center">
+                        <jsp:include page="../pagination.jsp"/>
+                    </div>
                 </div>
             </div>
         </div>

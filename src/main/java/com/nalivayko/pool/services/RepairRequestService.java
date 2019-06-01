@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RepairRequestService {
 
-    public List<RepairRequest> getRepairRequestsByUserId(int userId);
+    public List<RepairRequest> getRepairRequestsByUserId(int userId, int limit, int offset);
 
     public void createRepairRequest(User user, String itemType, String itemBrand, String itemName, String description);
 
@@ -22,5 +22,5 @@ public interface RepairRequestService {
 
     public void updateStatus(int repairRequestId, RepairRequestStatus repairRequestStatus);
 
-
+    public int countNumberOfRequestsForUser(int UserId);
 }

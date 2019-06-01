@@ -41,6 +41,56 @@ public abstract class AbstractSqlDAO<T> {
         }
     }
 
+
+    /**
+     * Take sqlQuery and return first row, first cell result. Normally it should return countForUser of rows
+     * in database if query looks like SELECT COUNT(*) FROM TABLE_NAME
+     * @param sqlQuery - countForUser sql query
+     * @return countForUser or rows in table (if sqlQuery - is right)
+     */
+    protected int count(String sqlQuery){
+        Connection connection = transactionManager.getConnection();
+        try (ResultSet resultSet =
+                     connection.createStatement().executeQuery(sqlQuery)) {
+            return resultSet.next() ? resultSet.getInt(1) : 0;
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            throw new InternalAppException(e.getMessage());
+        }
+    }
+
+    /**
+     * pretty mach the same as {@link #count} but has PreparedStatementConsumer
+     * which means that u can pass sql query with parameters and set them.
+     * @param sqlQuery - COUNT query with parameters
+     * @param preparedStatementConsumer - specific preparedStatementConsumer that sets parameters of query
+     * @return count of rows
+     */
+    protected int count(String sqlQuery, PreparedStatementConsumer preparedStatementConsumer){
+        Connection connection = transactionManager.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+            preparedStatementConsumer.prepare(preparedStatement);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1);
+                } else {
+                    return 0;
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            throw new InternalAppException(e);
+        }
+    }
+
+    /**
+     * Get record from db that matches to input parameters and map it to specific object with mapper
+     * sql parameter - should be SELECT sql query
+     * @param sql - SELECT query
+     * @param preparedStatementConsumer - specific preparedStatementConsumer that sets parameters of query
+     * @param mapper - to map data from result set to specific object
+     * @return - object (type depends from mapper)
+     */
     protected T find(String sql, PreparedStatementConsumer preparedStatementConsumer, Mapper<T> mapper) {
         Connection connection = transactionManager.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -89,7 +139,7 @@ public abstract class AbstractSqlDAO<T> {
         return list;
     }
 
-    protected boolean updateDelete(String sql, PreparedStatementConsumer preparedStatementConsumer) {
+    protected boolean updateOrDelete(String sql, PreparedStatementConsumer preparedStatementConsumer) {
         Connection connection = transactionManager.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatementConsumer.prepare(preparedStatement);

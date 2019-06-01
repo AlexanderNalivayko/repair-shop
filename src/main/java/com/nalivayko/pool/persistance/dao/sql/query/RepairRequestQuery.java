@@ -43,10 +43,11 @@ public class RepairRequestQuery {
     public static final String SELECT_ALL = GENERAL_SELECT_ALL
             + ORDER_BY;
 
-    public static final String SELECT_BY_USER_ID = GENERAL_SELECT_ALL
+    public static final String SELECT_BY_USER_ID_WITH_LIMIT = GENERAL_SELECT_ALL
             + " WHERE "
             + USER_ID + " = ?"
-            + ORDER_BY;
+            + ORDER_BY
+            + " LIMIT ? OFFSET ?";
 
     public static final String SELECT_BY_STATUS = GENERAL_SELECT_ALL
             + " WHERE "
@@ -59,6 +60,9 @@ public class RepairRequestQuery {
             + " AND "
             + STATUS + " LIKE ?"
             + ORDER_BY;
+
+    public static final String COUNT_FOR_USER = "SELECT COUNT(*) FROM " + TABLE_NAME
+            + " WHERE " + USER_ID + " = ?";
 
     public static final String UPDATE_BY_ID = "UPDATE " + TABLE_NAME
             + " SET "

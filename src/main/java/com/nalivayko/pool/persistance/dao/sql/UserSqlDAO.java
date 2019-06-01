@@ -40,7 +40,7 @@ public class UserSqlDAO extends AbstractSqlDAO<User> implements UserDAO {
 
     @Override
     public boolean update(User user) {
-        return updateDelete(UserQuery.UPDATE_BY_ID, preparedStatement -> {
+        return updateOrDelete(UserQuery.UPDATE_BY_ID, preparedStatement -> {
             preparedStatement.setString(1, user.getUserRole().toString());
             preparedStatement.setString(2, user.getUsername());
             preparedStatement.setString(3, user.getPassword());
@@ -54,6 +54,6 @@ public class UserSqlDAO extends AbstractSqlDAO<User> implements UserDAO {
 
     @Override
     public boolean delete(int userId) {
-        return updateDelete(UserQuery.DELETE_BY_ID, preparedStatement -> preparedStatement.setInt(1, userId));
+        return updateOrDelete(UserQuery.DELETE_BY_ID, preparedStatement -> preparedStatement.setInt(1, userId));
     }
 }

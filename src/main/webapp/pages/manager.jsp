@@ -29,6 +29,11 @@
             <h2 class="text-muted">
                 <fmt:message key="manager.new_requests"/>
             </h2>
+            <c:if test="${fn:length(requestScope.repairRequests) lt 1}">
+                <p class="text-muted">
+                    <fmt:message key="repair.no_requests"/>
+                </p>
+            </c:if>
             <c:forEach var="request" items="${requestScope.repairRequests}">
                 <div class="card my-2 shadow">
                     <div class="card-body">
@@ -56,7 +61,7 @@
                             <fmt:message key="repair.description"/>:
                                 ${request.description}
                         </p>
-                        <form action="${pageContext.request.contextPath}/site/manager/review" method="post">
+                        <form action="${pageContext.request.contextPath}/site/manager/updateReview" method="post">
                             <input type="hidden" name="repairId" value="${request.id}">
                             <div class="row align-items-center">
                                 <div class="col-sm-2">

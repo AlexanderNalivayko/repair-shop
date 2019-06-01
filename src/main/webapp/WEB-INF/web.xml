@@ -6,6 +6,13 @@
 
     <display-name>fix-shop</display-name>
 
+    <jsp-config>
+        <taglib>
+            <taglib-uri>https://nalivayko.com/jsp/tlds/fix-shop-tags</taglib-uri>
+            <taglib-location>/WEB-INF/statecolor.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
     <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>com.nalivayko.pool.filters.EncodingFilter</filter-class>

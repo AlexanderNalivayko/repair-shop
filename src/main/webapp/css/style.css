@@ -5,7 +5,7 @@ html {
 
 body {
     background-color: white !important;
-    margin-bottom: 100px !important;
+    /*margin-bottom: 100px !important;*/
 }
 
 .dropdown-menu .dropdown-item:hover {
