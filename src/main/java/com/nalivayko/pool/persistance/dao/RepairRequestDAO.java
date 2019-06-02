@@ -12,14 +12,16 @@ public interface RepairRequestDAO {
 
     public List<RepairRequest> findByUserId(int UserId, int limit, int offset);
 
-    public List<RepairRequest> findByRepairRequestStatus(RepairRequestStatus status);
+    public List<RepairRequest> findByRepairRequestStatus(RepairRequestStatus status, int limit, int offset);
 
     public List<RepairRequest> findByReviewAndRequestStatus(ReviewStatus reviewStatus,
                                                             RepairRequestStatus repairRequestStatus);
 
     public List<RepairRequest> findAll();
 
-    public int countForUser(int userId);
+    public int countWithUser(int userId);
+
+    public int countWithStatus(RepairRequestStatus status);
 
     public boolean updateReviewId(int RepairRequestId, int ReviewId);
 

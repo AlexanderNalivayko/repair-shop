@@ -5,7 +5,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="${sessionScope.bundle}"/>
 
-<div class="card shadow p-4">
+<div class="card shadow p-4 mb-4">
 <h2 class="text-muted">
     <fmt:message key="repair.new_request"/>
 </h2>

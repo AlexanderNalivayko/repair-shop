@@ -43,10 +43,10 @@ public abstract class AbstractSqlDAO<T> {
 
 
     /**
-     * Take sqlQuery and return first row, first cell result. Normally it should return countForUser of rows
+     * Take sqlQuery and return first row, first cell result. Normally it should return countWithUser of rows
      * in database if query looks like SELECT COUNT(*) FROM TABLE_NAME
-     * @param sqlQuery - countForUser sql query
-     * @return countForUser or rows in table (if sqlQuery - is right)
+     * @param sqlQuery - countWithUser sql query
+     * @return countWithUser or rows in table (if sqlQuery - is right)
      */
     protected int count(String sqlQuery){
         Connection connection = transactionManager.getConnection();

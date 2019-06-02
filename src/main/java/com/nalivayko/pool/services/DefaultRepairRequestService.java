@@ -64,13 +64,15 @@ public class DefaultRepairRequestService implements RepairRequestService {
 
     /**
      * Find and return list of repair request where status equal {@code repairRequestStatus}
+     *
      * @param repairRequestStatus - status which will be used for searching
      * @return List of repair requests
      */
     @Override
-    public List<RepairRequest> getAllWithStatus(RepairRequestStatus repairRequestStatus) {
+    public List<RepairRequest> getAllWithStatus(RepairRequestStatus repairRequestStatus, int limit, int offset) {
         transactionManager.getConnection();
-        List<RepairRequest> repairRequests = repairRequestDAO.findByRepairRequestStatus(repairRequestStatus);
+        List<RepairRequest> repairRequests =
+                repairRequestDAO.findByRepairRequestStatus(repairRequestStatus, limit, offset);
         //todo what if findById will throw an exception ?
         transactionManager.closeConnection();
         return repairRequests;
@@ -104,7 +106,18 @@ public class DefaultRepairRequestService implements RepairRequestService {
     }
 
     @Override
-    public int countNumberOfRequestsForUser(int userId) {
-        return repairRequestDAO.countForUser(userId);
+    public int countRequestsWithUserId(int userId) {
+        transactionManager.getConnection();
+        int count = repairRequestDAO.countWithUser(userId);
+        transactionManager.closeConnection();
+        return count;
+    }
+
+    @Override
+    public int countRequestsWithStatus(RepairRequestStatus status) {
+        transactionManager.getConnection();
+        int count = repairRequestDAO.countWithStatus(status);
+        transactionManager.closeConnection();
+        return count;
     }
 }

@@ -26,7 +26,9 @@ public class DefaultFeedbackService implements FeedbackService {
 
     @Override
     public void delete(int id) {
-
+        transactionManager.getConnection();
+        feedbackDAO.delete(id);
+        transactionManager.closeConnection();
     }
 
     @Override

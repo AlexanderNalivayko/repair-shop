@@ -21,11 +21,10 @@
 </head>
 
 <body>
-<jsp:include page="header.jsp"></jsp:include>
-
+<jsp:include page="header.jsp"/>
 <div class="container-fluid">
     <div class="row justify-content-md-center my-5">
-        <div class="col-md-8">
+        <div class="col-md-5 mb-5">
             <h2 class="text-muted">
                 <fmt:message key="manager.new_requests"/>
             </h2>
@@ -69,7 +68,7 @@
                                         <fmt:message key="repair.price"/> :
                                     </label>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-10">
                                     <input type="number" name="price" id="price" class="form-control">
                                 </div>
                             </div>
@@ -91,11 +90,12 @@
                     </div>
                 </div>
             </c:forEach>
+            <div class="row justify-content-sm-center">
+                <jsp:include page="pagination.jsp"/>
+            </div>
         </div>
     </div>
 </div>
-
-
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

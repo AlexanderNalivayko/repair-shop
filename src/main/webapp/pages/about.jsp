@@ -36,18 +36,32 @@
             <h3 class="text-white">
                 <fmt:message key="about.feedback"/>
             </h3>
-            <c:forEach var="feedbackMsg" items="${requestScope.feedback}">
-                <div class="card my-2 shadow">
-                    <div class="card-body">
-                        <p class="text-muted">
-                                ${feedbackMsg.user.username} |
-                                ${feedbackMsg.creationTime}
-                        </p>
-                        <hr>
-                        <p class="text-muted">${feedbackMsg.text}</p>
+            <form action="${pageContext.request.contextPath}/site/manager/delete_feedback" method="post">
+                <c:forEach var="feedbackMsg" items="${requestScope.feedback}">
+                    <div class="card my-2 shadow">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <p class="text-muted">
+                                            ${feedbackMsg.user.username} |
+                                            ${feedbackMsg.creationTime}
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <c:if test="${sessionScope.user.userRole eq 'MANAGER'}">
+                                        <button class="btn btn-danger float-right" name="delete-btn"
+                                                value="${feedbackMsg.id}" type="submit">
+                                            <fmt:message key="about.delete"/>
+                                        </button>
+                                    </c:if>
+                                </div>
+                            </div>
+                            <hr>
+                            <p class="text-muted">${feedbackMsg.text}</p>
+                        </div>
                     </div>
-                </div>
-            </c:forEach>
+                </c:forEach>
+            </form>
             <br/>
             <div class="row justify-content-sm-center">
                 <jsp:include page="pagination.jsp"/>

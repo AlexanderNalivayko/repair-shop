@@ -36,9 +36,12 @@ public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implement
     }
 
     @Override
-    public List<RepairRequest> findByRepairRequestStatus(RepairRequestStatus status) {
-        return findAll(RepairRequestQuery.SELECT_BY_STATUS, preparedStatement ->
-                preparedStatement.setString(1, status.toString()), new RepairRequestMapper());
+    public List<RepairRequest> findByRepairRequestStatus(RepairRequestStatus status, int limit, int offset) {
+        return findAll(RepairRequestQuery.SELECT_BY_STATUS_WITH_LIMIT, preparedStatement -> {
+            preparedStatement.setString(1, status.toString());
+            preparedStatement.setInt(2, limit);
+            preparedStatement.setInt(3, offset);
+        }, new RepairRequestMapper());
     }
 
     @Override
@@ -56,9 +59,15 @@ public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implement
     }
 
     @Override
-    public int countForUser(int userId) {
-        return count(RepairRequestQuery.COUNT_FOR_USER, preparedStatement ->
+    public int countWithUser(int userId) {
+        return count(RepairRequestQuery.COUNT_BY_USER, preparedStatement ->
                 preparedStatement.setInt(1, userId));
+    }
+
+    @Override
+    public int countWithStatus(RepairRequestStatus status) {
+        return count(RepairRequestQuery.COUNT_BY_STATUS, preparedStatement ->
+                preparedStatement.setString(1, status.toString()));
     }
 
     @Override

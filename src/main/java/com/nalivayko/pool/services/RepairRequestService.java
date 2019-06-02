@@ -13,7 +13,7 @@ public interface RepairRequestService {
 
     public void createRepairRequest(User user, String itemType, String itemBrand, String itemName, String description);
 
-    public List<RepairRequest> getAllWithStatus(RepairRequestStatus repairRequestStatus);
+    public List<RepairRequest> getAllWithStatus(RepairRequestStatus repairRequestStatus, int limit, int offset);
 
     public List<RepairRequest> getAllByReviewAndRequestStatus(ReviewStatus reviewStatus,
                                                               RepairRequestStatus repairRequestStatus);
@@ -22,5 +22,7 @@ public interface RepairRequestService {
 
     public void updateStatus(int repairRequestId, RepairRequestStatus repairRequestStatus);
 
-    public int countNumberOfRequestsForUser(int UserId);
+    public int countRequestsWithUserId(int UserId);
+
+    public int countRequestsWithStatus(RepairRequestStatus status);
 }

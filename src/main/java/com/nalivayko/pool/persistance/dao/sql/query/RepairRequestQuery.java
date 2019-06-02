@@ -21,6 +21,8 @@ public class RepairRequestQuery {
             + ") "
             + " VALUES (?, ?, ?, ?)";
 
+    private static final String LIMIT = " LIMIT ? OFFSET ?";
+
     private static final String ORDER_BY = " ORDER BY UNIX_TIMESTAMP(" + CREATION_TIME + ") DESC";
 
     private static final String GENERAL_SELECT_ALL = "SELECT * FROM " + TABLE_NAME
@@ -47,12 +49,13 @@ public class RepairRequestQuery {
             + " WHERE "
             + USER_ID + " = ?"
             + ORDER_BY
-            + " LIMIT ? OFFSET ?";
+            + LIMIT;
 
-    public static final String SELECT_BY_STATUS = GENERAL_SELECT_ALL
+    public static final String SELECT_BY_STATUS_WITH_LIMIT = GENERAL_SELECT_ALL
             + " WHERE "
             + STATUS + " LIKE ?"
-            + ORDER_BY;
+            + ORDER_BY
+            + LIMIT;
 
     public static final String SELECT_BY_REVIEW_AND_REQUEST_STATUS = GENERAL_SELECT_ALL
             + " WHERE "
@@ -61,8 +64,13 @@ public class RepairRequestQuery {
             + STATUS + " LIKE ?"
             + ORDER_BY;
 
-    public static final String COUNT_FOR_USER = "SELECT COUNT(*) FROM " + TABLE_NAME
+    private static final String COUNT = "SELECT COUNT(*) FROM " + TABLE_NAME;
+
+    public static final String COUNT_BY_USER = COUNT
             + " WHERE " + USER_ID + " = ?";
+
+    public static final String COUNT_BY_STATUS = COUNT
+            + " WHERE " + STATUS + " = ?";
 
     public static final String UPDATE_BY_ID = "UPDATE " + TABLE_NAME
             + " SET "

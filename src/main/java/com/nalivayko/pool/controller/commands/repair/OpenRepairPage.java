@@ -1,7 +1,6 @@
 package com.nalivayko.pool.controller.commands.repair;
 
 import com.nalivayko.pool.controller.commands.Command;
-import com.nalivayko.pool.model.Feedback;
 import com.nalivayko.pool.model.RepairRequest;
 import com.nalivayko.pool.model.User;
 import com.nalivayko.pool.services.RepairRequestService;
@@ -48,7 +47,7 @@ public class OpenRepairPage implements Command {
 
         User user = (User) request.getSession().getAttribute(USER);
         List<RepairRequest> repairRequests = repairRequestService.getRepairRequestsByUserId(user.getId(), RECORDS_PER_PAGE, (currentPage - 1) * RECORDS_PER_PAGE);
-        int recordsCount = repairRequestService.countNumberOfRequestsForUser(user.getId());
+        int recordsCount = repairRequestService.countRequestsWithUserId(user.getId());
         int numberOfPages = (int) Math.ceil(recordsCount * 1.0 / RECORDS_PER_PAGE);
         request.setAttribute(NUMBER_OF_PAGES, numberOfPages);
         request.setAttribute(CURRENT_PAGE, currentPage);

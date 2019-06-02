@@ -28,8 +28,8 @@ public class FeedbackQuery {
 
     public static final String SELECT_ALL_WITH_LIMIT = SELECT_ALL + " LIMIT ? OFFSET ?";
 
-    public static final String DELETE_BY_ID = "DELETE FROM TABLE " + TABLE_NAME
-            + "WHERE "
+    public static final String DELETE_BY_ID = "DELETE FROM " + TABLE_NAME
+            + " WHERE "
             + ID + " = ?";
 
     private FeedbackQuery() {

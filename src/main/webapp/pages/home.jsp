@@ -24,7 +24,7 @@
 
 <jsp:include page="header.jsp"></jsp:include>
 
-<div class="jumbotron mb-0 bg-white text-muted">
+<div class="jumbotron mb-0 bg-white text-muted text-center">
     <h1 class="display-4"><fmt:message key="site.name"/>!</h1>
     <p class="lead"><fmt:message key="home.welcome"/></p>
     <hr class="my-4">

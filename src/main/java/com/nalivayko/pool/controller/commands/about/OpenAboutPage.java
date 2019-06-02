@@ -16,7 +16,6 @@ public class OpenAboutPage implements Command {
     private static final String FEEDBACK = "feedback";
     private static final String NUMBER_OF_PAGES = "numberOfPages";
     private static final String CURRENT_PAGE = "currentPage";
-
     private static final int RECORDS_PER_PAGE = 10;
 
     private FeedbackService feedbackService;

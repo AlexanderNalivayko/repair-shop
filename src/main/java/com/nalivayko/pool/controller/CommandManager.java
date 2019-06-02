@@ -5,6 +5,7 @@ import com.nalivayko.pool.controller.commands.about.LeaveFeedback;
 import com.nalivayko.pool.controller.commands.about.OpenAboutPage;
 import com.nalivayko.pool.controller.commands.manager.OpenManagerPage;
 import com.nalivayko.pool.controller.commands.manager.ReviewRepairRequest;
+import com.nalivayko.pool.controller.commands.manager.DeleteFeedback;
 import com.nalivayko.pool.controller.commands.master.OpenMasterPage;
 import com.nalivayko.pool.controller.commands.master.PerformRepairRequest;
 import com.nalivayko.pool.controller.commands.repair.CreateRepairRequest;
@@ -56,6 +57,7 @@ public class CommandManager {
 
         commands.put(UrlRequests.MASTER_PAGE, openMasterPage);
         commands.put(UrlRequests.MASTER_PAGE_PERFORM, new PerformRepairRequest(repairRequestService, openMasterPage));
+        commands.put(UrlRequests.MASTER_DELETE_FEEDBACK, new DeleteFeedback(feedbackService, openAboutPage));
 
         commands.put(UrlRequests.VALIDATE_USERNAME, new ValidateUsername(userService));
     }

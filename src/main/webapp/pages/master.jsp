@@ -26,7 +26,7 @@
 
 <div class="container-fluid">
     <div class="row justify-content-md-center my-5">
-        <div class="col-md-8">
+        <div class="col-md-5 mb-5">
             <h2 class="text-muted">
                 <fmt:message key="master.requests"/>:
             </h2>
@@ -73,7 +73,7 @@
                         <form action="${pageContext.request.contextPath}/site/master/perform" method="post">
                             <input type="hidden" name="repairId" value="${request.id}">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <button class="btn btn-danger btn-block" name="btn" type="submit">
                                         <fmt:message key="master.perform"/>
                                     </button>
