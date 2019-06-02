@@ -18,10 +18,10 @@ CREATE TABLE IF NOT EXISTS users (
     UNIQUE (username)
     ) ENGINE=InnoDB CHARACTER SET=UTF8;
 INSERT INTO users (id, role, username, password, first_name, last_name, email, phone)
-VALUES (1, 'MASTER', 'admin', 'admin', 'John', 'Smith', 'admin@fix.com', '+38067-777-77-77'),
-(2, 'MANAGER', 'manager', 'manager', 'Jane', 'Richardson', 'manager@fix.com', '+38093-333-33-33'),
-(3, 'CUSTOMER', 'alex777', 'user', 'Tony', 'Black', 'user@user.com', '+38098-475-21-30'),
-(4, 'CUSTOMER', 'johny', '1234', 'John', 'Snow', 'user@user.com', '+38098-475-21-30');
+VALUES (1, 'MASTER', 'master', 'pass', 'John', 'Smith', 'admin@fix.com', '+38067-777-77-77'),
+(2, 'MANAGER', 'manager', 'pass', 'Jane', 'Richardson', 'manager@fix.com', '+38093-333-33-33'),
+(3, 'CUSTOMER', 'alex', 'pass', 'Alex', 'Black', 'alex@user.com', '+38098-475-21-30'),
+(4, 'CUSTOMER', 'johny', 'pass', 'John', 'Snow', 'user@user.com', '+38098-485-71-85');
 
 -- ------------------------------------------
 -- fixapp.items
@@ -38,7 +38,15 @@ INSERT INTO items (id, item_type, brand, item_name)
 VALUES (1, 'phone', 'Nokia', 'lumia 720'),
 (2, 'tv', 'Philips', 'HD200'),
 (3, 'car', 'ZAZ', 'Lanos'),
-(4, 'microwave', 'Samsung', 'HG100');
+(4, 'microwave', 'Samsung', 'HG100'),
+(5, 'Стиральная машина', 'индезит', 'WM1234'),
+(6, 'Посудомойка', 'Бош', 'DWM-400'),
+(7, 'Электрогриль', 'скарлет', 'O-9000'),
+(8, 'Кофеварка', 'lg', 'CM - 800'),
+(9, 'Утюг', 'philips', 'I-1234'),
+(10, 'Стул', 'икея', 'маммут'),
+(11, 'Телефон', 'siemens', 'c75'),
+(12, 'E-book', 'Amazon', 'Kindle-6');
 
 -- ------------------------------------------
 -- fixapp.contacts
@@ -80,7 +88,15 @@ INSERT INTO repair_requests (id, user_id, item_id, review_id, status, creation_t
 VALUES (1, 3, 1, 1, 'DONE', '2019-05-12 22:31:18', 'not charging'),
 (2, 3, 2, 2, 'REVIEWED', '2019-05-15 21:14:01', 'black stripes on the screen'),
 (3, 3, 3, 3, 'REVIEWED', '2019-05-22 14:15:10', 'bad breaks'),
-(4, 3, 4, null, 'NEW', '2019-05-23 08:00:54', 'spinning but not heating');
+(4, 3, 4, null, 'NEW', '2019-05-23 08:00:54', 'spinning but not heating'),
+(5, 4, 5, null, 'NEW', '2019-05-24 20:53:17', 'Не откачивает воду после стирки'),
+(6, 4, 6, null, 'NEW', '2019-05-25 19:30:45', 'Не реагирует на нажатие кнопок'),
+(7, 4, 7, null, 'NEW', '2019-05-26 09:01:03', 'Индикатор горит, но ничего не происходит'),
+(8, 4, 8, null, 'NEW', '2019-05-26 10:00:07', 'Забились фильтры воды'),
+(9, 4, 9, null, 'NEW', '2019-05-26 11:05:10', 'Не работает в режиме пара'),
+(10, 4, 10, null, 'NEW', '2019-05-26 12:40:03', 'Сломалась ножка'),
+(11, 4, 11, null, 'NEW', '2019-05-27 23:50:00', ''),
+(12, 3, 12, null, 'NEW', '2019-05-27 23:52:32', 'do not turn on');
 
 -- ------------------------------------------
 -- fixapp.feedback
@@ -97,7 +113,19 @@ CREATE TABLE IF NOT EXISTS feedback (
     ) ENGINE=InnoDB CHARACTER SET=UTF8;
 INSERT INTO feedback (id, user_id, text)
 VALUES (1, 3, 'Thank you for quick repair.'),
-(2, 4, 'Вы просто огонь! Спасибо что так качественно починили мой телефон!');
+(2, 4, 'Спасибо что так качественно починили мой телефон!'),
+(3, 3, 'Wow. Such a nice site'),
+(4, 4, 'Eah site is great'),
+(5, 3, 'Ого так много функций'),
+(6, 4, 'Ребята как вы смогли это сделать?! ЛУЧШИЙ САЙТ РЕМОНТНОЙ МАСТЕРСКОЙ ИЗ СУЩЕСТВУЮЩИХ!'),
+(7, 3, 'Thanks !'),
+(8, 4, 'Спасибо, всё супер!'),
+(9, 3, 'До ремонта у меня был айфон 5, отремонтировали - стал 10!!!'),
+(10, 4, 'Так дёшево ?!'),
+(11, 3, 'Раньше сидел в фейсбук, но надоело... Теперь тут зависаю, гораздо круче! И самое главное - качественные ремонты техники!'),
+(12, 4, 'Я 3 года ждал пока появиться такой сайт! Спасибо за починку моей микроволновки!'),
+(13, 3, 'Эти ребята могут починить всё! Моя стиралкак как новая!'),
+(14, 4, 'Very glad that I used your services');
 
 
 SET FOREIGN_KEY_CHECKS = 1;
