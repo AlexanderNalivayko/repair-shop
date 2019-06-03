@@ -5,7 +5,7 @@ public class PagesPath {
     private PagesPath() {
     }
 
-    private static final String ROOT = "/pages";
+    private static final String ROOT = "/WEB-INF/pages";
     private static final String ERROR = "/error";
 
     public static final String HOME = ROOT + "/home.jsp";

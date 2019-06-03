@@ -1,5 +1,7 @@
 package com.nalivayko.pool.filters;
 
+import com.nalivayko.pool.controller.commands.Command;
+import com.nalivayko.pool.controller.commands.user.OpenLoginPage;
 import com.nalivayko.pool.model.User;
 import com.nalivayko.pool.model.enums.UserRole;
 import com.nalivayko.pool.util.PagesPath;
@@ -18,10 +20,12 @@ public class UserAccessFilter implements Filter {
             UrlRequests.REPAIR_PAGE};
 
     private String contextPath;
+    private Command openLoginPage;
 
     @Override
     public void init(FilterConfig filterConfig) {
         contextPath = filterConfig.getServletContext().getContextPath();
+        this.openLoginPage = new OpenLoginPage();
     }
 
     @Override
@@ -36,7 +40,7 @@ public class UserAccessFilter implements Filter {
         if (user == null) {
             for (String restrictedUrl : restrictedForUnregistered) {
                 if (requestPath.contains(restrictedUrl)) {
-                    response.sendRedirect(contextPath + PagesPath.LOGIN);//todo fix
+                    openLoginPage.execute(request, response);//todo fix
                     return;
                 }
             }

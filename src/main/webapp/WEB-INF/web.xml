@@ -63,11 +63,11 @@
 
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
-        <location>/pages/error/500.jsp</location>
+        <location>/WEB-INF/pages/error/500.jsp</location>
     </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/pages/error/404.jsp</location>
+        <location>/WEB-INF/pages/error/404.jsp</location>
     </error-page>
 
 </web-app>

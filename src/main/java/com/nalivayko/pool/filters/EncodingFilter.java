@@ -3,8 +3,13 @@ package com.nalivayko.pool.filters;
 import javax.servlet.*;
 import java.io.IOException;
 
+/**
+ * {@code EncodingFilter} - sets request and response encoding to
+ * encoding which it takes from initial parameters of web.xml
+ */
 public class EncodingFilter implements Filter {
     private static final String ENCODING_TYPE = "encoding_type";
+    private static final String contentType = "text/html; charset=";
     private String encodingTypeValue;
 
     @Override
@@ -17,12 +22,11 @@ public class EncodingFilter implements Filter {
             throws IOException, ServletException {
         request.setCharacterEncoding(encodingTypeValue);
         response.setCharacterEncoding(encodingTypeValue);
-        response.setContentType("text/html; charset=" + encodingTypeValue);
+        response.setContentType(contentType + encodingTypeValue);
         filterChain.doFilter(request, response);
     }
 
     @Override
     public void destroy() {
-
     }
 }
