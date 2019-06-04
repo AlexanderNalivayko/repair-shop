@@ -1,10 +1,6 @@
 package com.nalivayko.pool.util;
 
 public class UrlRequests {
-
-    private UrlRequests() {
-    }
-
     public static final String SITE = "/site";
 
     public static final String HOME_PAGE = "/home_page";
@@ -31,4 +27,7 @@ public class UrlRequests {
     public static final String MASTER_PAGE_PERFORM = MASTER_PAGE + "/perform";
 
     public static final String CUSTOMER = "/customer";
+
+    private UrlRequests() {
+    }
 }

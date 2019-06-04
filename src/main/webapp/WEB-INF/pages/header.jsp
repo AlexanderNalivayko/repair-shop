@@ -32,11 +32,14 @@
                         <fmt:message key="header.about"/>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link font-weight-bolder" href="${pageContext.request.contextPath}/site/repair_page">
-                        <fmt:message key="header.repairRequest"/>
-                    </a>
-                </li>
+                <c:if test="${sessionScope.user.userRole == null || sessionScope.user.userRole eq 'CUSTOMER'}">
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-bolder"
+                               href="${pageContext.request.contextPath}/site/repair_page">
+                                <fmt:message key="header.repairRequest"/>
+                            </a>
+                        </li>
+                </c:if>
                 <li class="nav-item dropdown font-weight-bolder">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">

@@ -65,7 +65,7 @@
                             <div class="row align-items-center">
                                 <div class="col-sm-2">
                                     <label for="price" class="control-label text-muted">
-                                        <fmt:message key="repair.price"/> :
+                                        <fmt:message key="repair.price"/>:
                                     </label>
                                 </div>
                                 <div class="col-sm-10">

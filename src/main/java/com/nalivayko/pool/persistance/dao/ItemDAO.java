@@ -4,7 +4,7 @@ import com.nalivayko.pool.model.Item;
 
 public interface ItemDAO {
 
-    public int create(Item item);
+    int create(Item item);
 
-    public boolean update(Item item);
+    boolean update(Item item);
 }

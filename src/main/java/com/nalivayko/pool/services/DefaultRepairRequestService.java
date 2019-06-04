@@ -13,8 +13,10 @@ import com.nalivayko.pool.persistance.dao.ReviewDAO;
 
 import java.util.List;
 
+/**
+ * Provides methods to work with RepairRequests (create, find, delete ...)
+ */
 public class DefaultRepairRequestService implements RepairRequestService {
-
     private ReviewDAO reviewDAO;
     private RepairRequestDAO repairRequestDAO;
     private ItemDAO itemDAO;
@@ -35,11 +37,11 @@ public class DefaultRepairRequestService implements RepairRequestService {
     @Override
     public List<RepairRequest> getAllByUserId(int userId, int limit, int offset) {
         transactionManager.getConnection();
-        List<RepairRequest> repairRequests = repairRequestDAO.findByUserId(userId, limit, offset);
-        //todo what if findById will throw an exception ?
-        transactionManager.closeConnection();
-        return repairRequests;
-
+        try {
+            return repairRequestDAO.findByUserId(userId, limit, offset);
+        } finally {
+            transactionManager.closeConnection();
+        }
     }
 
     /**
@@ -53,13 +55,16 @@ public class DefaultRepairRequestService implements RepairRequestService {
      */
     @Override
     public void createRepairRequest(User user, String itemType, String itemBrand, String itemName, String description) {
-        transactionManager.startTransaction();
-        Item item = new Item(itemType, itemBrand, itemName);
-        int itemId = itemDAO.create(item);
-        item.setId(itemId);
-        RepairRequest repairRequest = new RepairRequest(user, item, RepairRequestStatus.NEW, description);
-        repairRequestDAO.create(repairRequest);
-        transactionManager.endTransaction();
+        try {
+            transactionManager.startTransaction();
+            Item item = new Item(itemType, itemBrand, itemName);
+            int itemId = itemDAO.create(item);
+            item.setId(itemId);
+            RepairRequest repairRequest = new RepairRequest(user, item, RepairRequestStatus.NEW, description);
+            repairRequestDAO.create(repairRequest);
+        } finally {
+            transactionManager.endTransaction();
+        }
     }
 
     /**
@@ -70,63 +75,104 @@ public class DefaultRepairRequestService implements RepairRequestService {
      */
     @Override
     public List<RepairRequest> getAllWithStatus(RepairRequestStatus repairRequestStatus, int limit, int offset) {
-        transactionManager.getConnection();
-        List<RepairRequest> repairRequests =
-                repairRequestDAO.findByRepairRequestStatus(repairRequestStatus, limit, offset);
-        //todo what if findById will throw an exception ?
-        transactionManager.closeConnection();
-        return repairRequests;
+        try {
+            transactionManager.getConnection();
+            return repairRequestDAO.findByRepairRequestStatus(repairRequestStatus, limit, offset);
+        } finally {
+            transactionManager.closeConnection();
+        }
     }
 
+    /**
+     * Find all repair requests with reviewStatus and repairRequestStatus
+     * as passed in parameters.
+     * @param reviewStatus all results will be with.
+     * @param repairRequestStatus all results will be with.
+     * @param limit amount of results subsequence (used for pagination)
+     * @param offset start position of result subsequence (used for pagination)
+     * @return RepairRequest
+     */
     @Override
     public List<RepairRequest> getAllByReviewAndRequestStatus(ReviewStatus reviewStatus,
                                                               RepairRequestStatus repairRequestStatus,
                                                               int limit, int offset) {
-        transactionManager.getConnection();
-        List<RepairRequest> repairRequests = repairRequestDAO.findByReviewAndRequestStatus(reviewStatus,
-                repairRequestStatus, limit, offset);
-        //todo what if findById will throw an exception ?
-        transactionManager.closeConnection();
-        return repairRequests;
+        try {
+            transactionManager.getConnection();
+            return repairRequestDAO.findByReviewAndRequestStatus(reviewStatus,
+                    repairRequestStatus, limit, offset);
+        } finally {
+            transactionManager.closeConnection();
+        }
     }
 
+    /**
+     * Update RepairRequest review status and cost
+     */
     @Override
     public void updateReview(int repairRequestId, ReviewStatus reviewStatus, Integer cost) {
-        transactionManager.startTransaction();
-        int reviewId = reviewDAO.create(new Review(reviewStatus, cost));
-        repairRequestDAO.updateReviewId(repairRequestId, reviewId);
-        repairRequestDAO.updateStatus(repairRequestId, RepairRequestStatus.REVIEWED);
-        transactionManager.endTransaction();
+        try {
+            transactionManager.startTransaction();
+            int reviewId = reviewDAO.create(new Review(reviewStatus, cost));
+            repairRequestDAO.updateReviewId(repairRequestId, reviewId);
+            repairRequestDAO.updateStatus(repairRequestId, RepairRequestStatus.REVIEWED);
+        } finally {
+            transactionManager.endTransaction();
+        }
     }
 
+    /**
+     * Update RepairRequests status
+     */
     @Override
     public void updateStatus(int repairRequestId, RepairRequestStatus repairRequestStatus) {
-        transactionManager.getConnection();
-        repairRequestDAO.updateStatus(repairRequestId, repairRequestStatus);
-        transactionManager.closeConnection();
+        try {
+            transactionManager.getConnection();
+            repairRequestDAO.updateStatus(repairRequestId, repairRequestStatus);
+        } finally {
+            transactionManager.closeConnection();
+        }
     }
 
+    /**
+     * Count number of RepairRequest with userId
+     * @return number of RepairRequests
+     */
     @Override
     public int countRequestsWithUserId(int userId) {
-        transactionManager.getConnection();
-        int count = repairRequestDAO.countWithUser(userId);
-        transactionManager.closeConnection();
-        return count;
+        try {
+            transactionManager.getConnection();
+            return repairRequestDAO.countWithUser(userId);
+        } finally {
+            transactionManager.closeConnection();
+
+        }
     }
 
+    /**
+     * Count number of RepairRequest with status
+     * @return number of RepairRequests
+     */
     @Override
     public int countRequestsWithStatus(RepairRequestStatus status) {
-        transactionManager.getConnection();
-        int count = repairRequestDAO.countWithStatus(status);
-        transactionManager.closeConnection();
-        return count;
+        try {
+            transactionManager.getConnection();
+            return repairRequestDAO.countWithStatus(status);
+        } finally {
+            transactionManager.closeConnection();
+        }
     }
 
+    /**
+     * Count number of RepairRequest with reviewStatus and repairRequestStatus
+     * @return number of RepairRequests
+     */
     @Override
     public int countRequestsWithStatus(ReviewStatus reviewStatus, RepairRequestStatus repairRequestStatus) {
-        transactionManager.getConnection();
-        int count = repairRequestDAO.countWithStatus(reviewStatus, repairRequestStatus);
-        transactionManager.closeConnection();
-        return count;
+        try {
+            transactionManager.getConnection();
+            return repairRequestDAO.countWithStatus(reviewStatus, repairRequestStatus);
+        } finally {
+            transactionManager.closeConnection();
+        }
     }
 }

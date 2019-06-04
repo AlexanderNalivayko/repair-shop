@@ -10,6 +10,9 @@ import com.nalivayko.pool.persistance.mappers.RepairRequestMapper;
 
 import java.util.List;
 
+/**
+ * @see com.nalivayko.pool.persistance.dao.sql.AbstractSqlDAO
+ */
 public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implements RepairRequestDAO {
 
     public RepairRequestSqlDAO(TransactionManager transactionManager) {
@@ -54,11 +57,6 @@ public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implement
             preparedStatement.setInt(3, limit);
             preparedStatement.setInt(4, offset);
         }, new RepairRequestMapper());
-    }
-
-    @Override
-    public List<RepairRequest> findAll() {
-        return findAll(RepairRequestQuery.SELECT_ALL, new RepairRequestMapper());
     }
 
     @Override

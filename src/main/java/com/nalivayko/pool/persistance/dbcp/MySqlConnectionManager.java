@@ -55,8 +55,6 @@ public class MySqlConnectionManager implements ConnectionManager {
 
     /**
      * Initialise dbcp
-     * @return
-     * @throws Exception
      */
     private BasicDataSource setupDriver() throws Exception {
         BasicDataSource dbcp = new BasicDataSource();

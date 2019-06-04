@@ -9,11 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * @see Command
+ */
 public class ValidateUsername  implements Command {
+    private static final String LOGIN = "login";
+    private static final String FREE = "free";
+    private static final String TAKEN = "taken";
 
     private UserService userService;
 
-    //todo refactor
     public ValidateUsername(UserService userService) {
         this.userService = userService;
     }
@@ -21,10 +26,10 @@ public class ValidateUsername  implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        if (userService.getUserByUsername(request.getParameter("login")) == null) {
-            out.print("<span style=\"color:green;\">Username available</span>");
+        if (userService.getUserByUsername(request.getParameter(LOGIN)) == null) {
+            out.print(FREE);
         } else {
-            out.print("<span style=\"color:red;\">Username unavailable</span>");
+            out.print(TAKEN);
         }
     }
 }

@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @see Command
+ */
 public class Logout implements Command {
-
     private static final String USER = "user";
 
     @Override

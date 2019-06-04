@@ -7,6 +7,9 @@ import com.nalivayko.pool.services.RepairRequestService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * @see com.nalivayko.pool.controller.commands.pagination.Pagination
+ */
 public class UserRepairPagination extends Pagination<RepairRequestService> {
     private static final String USER = "user";
 

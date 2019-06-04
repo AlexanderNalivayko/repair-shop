@@ -21,12 +21,11 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     public void init() {
-
         ConnectionManager connectionManager = new MySqlConnectionManager();
         TransactionManager transactionManager = new DefaultTransactionManager(connectionManager);
 
         UserDAO userDAO = new UserSqlDAO(transactionManager);
-        UserService userService = new DefaultUserService(userDAO);
+        UserService userService = new DefaultUserService(userDAO, transactionManager);
 
         FeedbackDAO feedbackDAO = new FeedbackSqlDAO(transactionManager);
         FeedbackService feedbackService = new DefaultFeedbackService(transactionManager, feedbackDAO);

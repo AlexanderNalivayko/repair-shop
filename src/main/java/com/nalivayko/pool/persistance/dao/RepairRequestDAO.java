@@ -18,8 +18,6 @@ public interface RepairRequestDAO {
                                                      RepairRequestStatus repairRequestStatus,
                                                      int limit, int offset);
 
-    List<RepairRequest> findAll();
-
     int countWithUser(int userId);
 
     int countWithStatus(RepairRequestStatus status);

@@ -3,13 +3,15 @@ package com.nalivayko.pool.controller.commands.user;
 import com.nalivayko.pool.controller.commands.Command;
 import com.nalivayko.pool.model.User;
 import com.nalivayko.pool.services.UserService;
-import com.nalivayko.pool.util.PagesPath;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @see Command
+ */
 public class Login implements Command {
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";

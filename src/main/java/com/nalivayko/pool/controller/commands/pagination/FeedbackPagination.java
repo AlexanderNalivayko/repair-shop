@@ -6,6 +6,9 @@ import com.nalivayko.pool.services.FeedbackService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * @see com.nalivayko.pool.controller.commands.pagination.Pagination
+ */
 public class FeedbackPagination extends Pagination<FeedbackService> {
     private int recordsPerPage;
 

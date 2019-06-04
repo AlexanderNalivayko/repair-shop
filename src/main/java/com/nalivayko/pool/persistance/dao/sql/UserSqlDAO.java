@@ -8,6 +8,9 @@ import com.nalivayko.pool.persistance.mappers.UserMapper;
 
 import java.util.List;
 
+/**
+ * @see com.nalivayko.pool.persistance.dao.sql.AbstractSqlDAO
+ */
 public class UserSqlDAO extends AbstractSqlDAO<User> implements UserDAO {
 
     public UserSqlDAO(TransactionManager transactionManager) {

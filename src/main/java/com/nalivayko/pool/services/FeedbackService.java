@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface FeedbackService {
 
-    public List<Feedback> getAll(int limit, int offset);
+    List<Feedback> getAll(int limit, int offset);
 
-    public void delete(int id);
+    void delete(int id);
 
-    public void create(User user, String text);
+    void create(User user, String text);
 
     int getRecordsCount();
 }

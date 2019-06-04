@@ -7,6 +7,9 @@ import com.nalivayko.pool.persistance.dao.FeedbackDAO;
 
 import java.util.List;
 
+/**
+ * Provides methods to work with Feedback (create, find, delete ...)
+ */
 public class DefaultFeedbackService implements FeedbackService {
     private FeedbackDAO feedbackDAO;
     private TransactionManager transactionManager;
@@ -18,31 +21,41 @@ public class DefaultFeedbackService implements FeedbackService {
 
     @Override
     public List<Feedback> getAll(int limit, int offset) {
-        transactionManager.getConnection();
-        List<Feedback> feedbacks = feedbackDAO.findAll(limit, offset);
-        transactionManager.closeConnection();
-        return feedbacks;
+        try {
+            transactionManager.getConnection();
+            return feedbackDAO.findAll(limit, offset);
+        } finally {
+            transactionManager.closeConnection();
+        }
     }
 
     @Override
     public void delete(int id) {
-        transactionManager.getConnection();
-        feedbackDAO.delete(id);
-        transactionManager.closeConnection();
+        try {
+            transactionManager.getConnection();
+            feedbackDAO.delete(id);
+        } finally {
+            transactionManager.closeConnection();
+        }
     }
 
     @Override
     public void create(User user, String text) {
-        transactionManager.getConnection();
-        feedbackDAO.create(new Feedback(user, text));
-        transactionManager.closeConnection();
+        try {
+            transactionManager.getConnection();
+            feedbackDAO.create(new Feedback(user, text));
+        } finally {
+            transactionManager.closeConnection();
+        }
     }
 
     @Override
     public int getRecordsCount() {
-        transactionManager.getConnection();
-        int numberOfRecords = feedbackDAO.count();
-        transactionManager.closeConnection();
-        return numberOfRecords;
+        try {
+            transactionManager.getConnection();
+            return feedbackDAO.count();
+        } finally {
+            transactionManager.closeConnection();
+        }
     }
 }

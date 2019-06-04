@@ -8,6 +8,9 @@ import com.nalivayko.pool.persistance.mappers.FeedbackMapper;
 
 import java.util.List;
 
+/**
+ * @see com.nalivayko.pool.persistance.dao.sql.AbstractSqlDAO
+ */
 public class FeedbackSqlDAO extends AbstractSqlDAO<Feedback> implements FeedbackDAO {
 
     public FeedbackSqlDAO(TransactionManager transactionManager) {

@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Interface for processing specific request
+ * Classes that implement this interface shoul provide processing of specific request
  * Implementations should process data and/or perform forward to some resource
  */
 public interface Command {

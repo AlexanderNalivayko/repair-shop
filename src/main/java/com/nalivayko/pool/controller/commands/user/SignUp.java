@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @see Command
+ */
 public class SignUp implements Command {
     private static final String LOGIN = "login";
     private static final String PASS = "pass";

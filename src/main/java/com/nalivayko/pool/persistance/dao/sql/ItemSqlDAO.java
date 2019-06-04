@@ -5,6 +5,9 @@ import com.nalivayko.pool.persistance.TransactionManager;
 import com.nalivayko.pool.persistance.dao.ItemDAO;
 import com.nalivayko.pool.persistance.dao.sql.query.ItemQuery;
 
+/**
+ * @see com.nalivayko.pool.persistance.dao.sql.AbstractSqlDAO
+ */
 public class ItemSqlDAO extends AbstractSqlDAO<Item> implements ItemDAO {
 
     public ItemSqlDAO(TransactionManager transactionManager) {

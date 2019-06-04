@@ -68,9 +68,6 @@ public class RepairRequestQuery {
             + JOIN_ITEM
             + JOIN_REVIEW;
 
-    public static final String SELECT_ALL = GENERAL_SELECT_ALL
-            + ORDER_BY;
-
     public static final String SELECT_BY_USER_ID_WITH_LIMIT = GENERAL_SELECT_ALL
             + " WHERE "
             + USER_ID + " = ?"

@@ -2,10 +2,12 @@ package com.nalivayko.pool.web.tags;
 
 import com.nalivayko.pool.model.enums.ReviewStatus;
 
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
+/**
+ * Tag that changes color of ReviewStatus
+ */
 public class StateColorTag extends SimpleTagSupport {
 
     private static final String SUCCESS_TEXT_COLOR_CLASS = "text-success";
@@ -18,7 +20,7 @@ public class StateColorTag extends SimpleTagSupport {
     }
 
     @Override
-    public void doTag() throws JspException, IOException {
+    public void doTag() throws IOException {
         String color;
         switch (ReviewStatus.valueOf(status)) {
             case ACCEPTED: {

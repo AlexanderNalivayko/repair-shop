@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * {@code UserAccessFilter} - checks if there is user in session and if user role
  * allowing to perform such request
- *
+ * <p>
  * Redirect to login page - if null user trying to perform specific requests
  * Redirect to 403 if user not allowed to perform such request.
  */
@@ -24,6 +24,10 @@ public class UserAccessFilter implements Filter {
             UrlRequests.MASTER_PAGE,
             UrlRequests.CUSTOMER,
             UrlRequests.REPAIR_PAGE};
+
+    private static final String[] RESTRICTED_FOR_CUSTOMER = {UrlRequests.LOGIN_PAGE};
+    private static final String[] RESTRICTED_FOR_MANAGER = {UrlRequests.REPAIR_PAGE};
+    private static final String[] RESTRICTED_FOR_MASTER = {UrlRequests.REPAIR_PAGE};
 
     private Command openLoginPage;
 
@@ -58,6 +62,10 @@ public class UserAccessFilter implements Filter {
     }
 
     /**
+     * Cheeks if url contains specific-user path and returns true if user
+     * corresponding to this path.
+     * If url doesn't contains specific-user path it checks if current path is
+     * restricted for this type of user
      * @param user - current session user
      * @param url  - request url
      * @return true - if user permitted to perform request represented by url
@@ -69,10 +77,28 @@ public class UserAccessFilter implements Filter {
         } else if (url.contains(UrlRequests.MANAGER_PAGE)) {
             return userRole == UserRole.MANAGER;
         } else if (url.contains(UrlRequests.CUSTOMER)) {
-            return userRole == UserRole.MANAGER;
-        } else {
-            return true;
+            return userRole == UserRole.CUSTOMER;
         }
+        if (user.getUserRole() == UserRole.MASTER) {
+            for (String restricted : RESTRICTED_FOR_MASTER) {
+                if (url.contains(restricted)) {
+                    return false;
+                }
+            }
+        } else if (user.getUserRole() == UserRole.MANAGER) {
+            for (String restricted : RESTRICTED_FOR_MANAGER) {
+                if (url.contains(restricted)) {
+                    return false;
+                }
+            }
+        } else if (user.getUserRole() == UserRole.CUSTOMER) {
+            for (String restricted : RESTRICTED_FOR_CUSTOMER) {
+                if (url.contains(restricted)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override

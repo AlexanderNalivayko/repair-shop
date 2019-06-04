@@ -19,10 +19,9 @@
     <title>
         <fmt:message key="sign_up.title"/>
     </title>
-    <script
-            src="${pageContext.request.contextPath}/js/jquery-3.4.1.js">
+    <script src="${pageContext.request.contextPath}/js/jquery-3.4.1.js"></script>
+    <script src="${pageContext.request.contextPath}/js/script.js"></script>
 
-    </script>
 </head>
 
 <body class="bg-color">
@@ -36,7 +35,12 @@
                     <label for="login" class="mb-0 text-muted">
                         <fmt:message key="sign_up.username"/>
                     </label>
-                    <div id="msg"></div>
+                    <div id="free" class="text-success">
+                        <fmt:message key="sign_up.free"/>
+                    </div>
+                    <div id="taken" class="text-danger">
+                        <fmt:message key="sign_up.taken"/>
+                    </div>
                     <input type="text" name="login" id="login" class="form-control px-2" required autofocus="">
 
                     <label for="pass" class="mb-0 text-muted">
@@ -89,73 +93,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    var password = document.getElementById("pass"),
-        confirm_password = document.getElementById("confirm_pass");
-
-    var passId = "pass";
-    var passConfirmId = "confirm_pass";
-    var successClass = 'border-success';
-    var dangerClass = 'border-danger';
-
-    function validatePassword() {
-        if (password.value !== confirm_password.value) {
-            confirm_password.setCustomValidity("Passwords Don't Match");
-            document.getElementById(passConfirmId).classList.remove(successClass);
-            document.getElementById(passId).classList.remove(successClass);
-            document.getElementById(passConfirmId).classList.add(dangerClass);
-            document.getElementById(passId).classList.add(dangerClass);
-        } else {
-            confirm_password.setCustomValidity('');
-            document.getElementById(passConfirmId).classList.remove(dangerClass);
-            document.getElementById(passId).classList.remove(dangerClass);
-            document.getElementById(passConfirmId).classList.add(successClass);
-            document.getElementById(passId).classList.add(successClass);
-        }
-    }
-
-    confirm_password.onblur = validatePassword;
-
-    var invalidClassName = 'invalid';
-    var inputs = document.querySelectorAll('input, select, textarea');
-    inputs.forEach(function (input) {
-        input.addEventListener('invalid', function () {
-            input.classList.add(invalidClassName)
-        })
-        input.addEventListener('input', function () {
-            if (input.validity.valid) {
-                input.classList.remove(invalidClassName)
-            }
-        })
-    })
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#login").on("blur", function (e) {
-            $('#msg').hide();
-            if ($('#login').val() == null || $('#login').val() === "") {
-            } else {
-                $.ajax({
-                    type: "POST",
-                    url: "http://localhost:8080/site/validate_username",
-                    data: $('#signupform').serialize(),
-                    dataType: "html",
-                    cache: false,
-                    success: function (msg) {
-                        $('#msg').show();
-                        $("#msg").html(msg);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        $('#msg').show();
-                        $("#msg").html(textStatus + " " + errorThrown);
-                    }
-                });
-            }
-        });
-    });
-</script>
 
 </body>
 </html>

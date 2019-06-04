@@ -5,6 +5,9 @@ import com.nalivayko.pool.persistance.TransactionManager;
 import com.nalivayko.pool.persistance.dao.ReviewDAO;
 import com.nalivayko.pool.persistance.dao.sql.query.ReviewQuery;
 
+/**
+ * @see com.nalivayko.pool.persistance.dao.sql.AbstractSqlDAO
+ */
 public class ReviewSqlDAO extends AbstractSqlDAO<Review> implements ReviewDAO {
 
     public ReviewSqlDAO(TransactionManager transactionManager) {
