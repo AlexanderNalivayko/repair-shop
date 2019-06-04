@@ -28,12 +28,12 @@
             <h2 class="text-muted">
                 <fmt:message key="manager.new_requests"/>
             </h2>
-            <c:if test="${fn:length(requestScope.repairRequests) lt 1}">
+            <c:if test="${fn:length(requestScope.records) lt 1}">
                 <p class="text-muted">
                     <fmt:message key="repair.no_requests"/>
                 </p>
             </c:if>
-            <c:forEach var="request" items="${requestScope.repairRequests}">
+            <c:forEach var="request" items="${requestScope.records}">
                 <div class="card my-2 shadow">
                     <div class="card-body">
                         <p class="text-muted">
@@ -46,7 +46,7 @@
                         </p>
                         <p class="text-muted">
                             <fmt:message key="repair.item_type"/>:
-                                ${request.item.productType}
+                                ${request.item.itemType}
                         </p>
                         <p class="text-muted">
                             <fmt:message key="repair.brand"/>:

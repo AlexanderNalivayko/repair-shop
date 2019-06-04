@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @see Command
+ */
 public class CreateRepairRequest implements Command {
-
     private static final String USER = "user";
-
     private RepairRequestService repairRequestService;
     private Command openRepairRequests;
 

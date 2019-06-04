@@ -16,7 +16,7 @@ public class RepairRequestMapper implements Mapper<RepairRequest> {
             return null;
         }
         return new RepairRequest(resultSet.getInt(RepairRequestQuery.ID),
-                new UserMapper().getEntity(resultSet),
+                new SecureUserMapper().getEntity(resultSet),
                 new ItemMapper().getEntity(resultSet),
                 new ReviewMapper().getEntity(resultSet),
                 RepairRequestStatus.valueOf(resultSet.getString(RepairRequestQuery.STATUS)),

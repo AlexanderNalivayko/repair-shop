@@ -15,7 +15,7 @@ public class FeedbackMapper implements Mapper<Feedback> {
             return null;
         }
         return new Feedback(resultSet.getInt(FeedbackQuery.ID),
-                new UserMapper().getEntity(resultSet),
+                new SecureUserMapper().getEntity(resultSet),
                 resultSet.getString(FeedbackQuery.TEXT),
                 FormattingUtil.dateToString(resultSet.getTimestamp(FeedbackQuery.CREATION_TIME)));
     }

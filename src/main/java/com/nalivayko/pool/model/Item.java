@@ -2,19 +2,19 @@ package com.nalivayko.pool.model;
 
 public class Item {
     private Integer id;
-    private String productType;
+    private String itemType;
     private String brand;
     private String name;
 
-    public Item(Integer id, String productType, String brand, String name) {
+    public Item(Integer id, String itemType, String brand, String name) {
         this.id = id;
-        this.productType = productType;
+        this.itemType = itemType;
         this.brand = brand;
         this.name = name;
     }
 
-    public Item(String productType, String brand, String name) {
-        this.productType = productType;
+    public Item(String itemType, String brand, String name) {
+        this.itemType = itemType;
         this.brand = brand;
         this.name = name;
     }
@@ -27,12 +27,12 @@ public class Item {
         this.id = id;
     }
 
-    public String getProductType() {
-        return productType;
+    public String getItemType() {
+        return itemType;
     }
 
-    public void setProductType(String productType) {
-        this.productType = productType;
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
     }
 
     public String getBrand() {

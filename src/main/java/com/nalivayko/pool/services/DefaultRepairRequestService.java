@@ -33,7 +33,7 @@ public class DefaultRepairRequestService implements RepairRequestService {
      * @return all RepairRequests that was created by user with userId
      */
     @Override
-    public List<RepairRequest> getRepairRequestsByUserId(int userId, int limit, int offset) {
+    public List<RepairRequest> getAllByUserId(int userId, int limit, int offset) {
         transactionManager.getConnection();
         List<RepairRequest> repairRequests = repairRequestDAO.findByUserId(userId, limit, offset);
         //todo what if findById will throw an exception ?
@@ -80,10 +80,11 @@ public class DefaultRepairRequestService implements RepairRequestService {
 
     @Override
     public List<RepairRequest> getAllByReviewAndRequestStatus(ReviewStatus reviewStatus,
-                                                              RepairRequestStatus repairRequestStatus) {
+                                                              RepairRequestStatus repairRequestStatus,
+                                                              int limit, int offset) {
         transactionManager.getConnection();
         List<RepairRequest> repairRequests = repairRequestDAO.findByReviewAndRequestStatus(reviewStatus,
-                repairRequestStatus);
+                repairRequestStatus, limit, offset);
         //todo what if findById will throw an exception ?
         transactionManager.closeConnection();
         return repairRequests;
@@ -117,6 +118,14 @@ public class DefaultRepairRequestService implements RepairRequestService {
     public int countRequestsWithStatus(RepairRequestStatus status) {
         transactionManager.getConnection();
         int count = repairRequestDAO.countWithStatus(status);
+        transactionManager.closeConnection();
+        return count;
+    }
+
+    @Override
+    public int countRequestsWithStatus(ReviewStatus reviewStatus, RepairRequestStatus repairRequestStatus) {
+        transactionManager.getConnection();
+        int count = repairRequestDAO.countWithStatus(reviewStatus, repairRequestStatus);
         transactionManager.closeConnection();
         return count;
     }

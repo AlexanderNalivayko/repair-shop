@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @see Command
+ */
 public class PerformRepairRequest implements Command {
-
     private static final String REPAIR_REQUEST_ID = "repairId";
     private static final String USER = "user";
 
@@ -28,7 +30,6 @@ public class PerformRepairRequest implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String repairId = request.getParameter(REPAIR_REQUEST_ID);
         User user = (User) request.getSession().getAttribute(USER);
-
         if (repairId == null || repairId.isEmpty() || user == null || user.getUserRole() != UserRole.MASTER) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
         } else {

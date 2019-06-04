@@ -6,9 +6,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * This filter changes locale (if parameter locale is not null) and set it to session attribute
- * Also if session locale attribute is null and parameter locale is null - it takes default locale
- * from initial parameters of web.xml
+ * {@code InternationalisationFilter} - changes locale (if parameter locale is not null) and
+ * set it to session attribute. Also if session locale attribute is null and parameter locale
+ * is null - it takes default locale from initial parameters of web.xml
  */
 public class InternationalisationFilter implements Filter {
     private static final String LOCALE = "locale";

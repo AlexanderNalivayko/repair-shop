@@ -8,26 +8,29 @@ import java.util.List;
 
 public interface RepairRequestDAO {
 
-    public int create(RepairRequest repairRequest);
+    int create(RepairRequest repairRequest);
 
-    public List<RepairRequest> findByUserId(int UserId, int limit, int offset);
+    List<RepairRequest> findByUserId(int UserId, int limit, int offset);
 
-    public List<RepairRequest> findByRepairRequestStatus(RepairRequestStatus status, int limit, int offset);
+    List<RepairRequest> findByRepairRequestStatus(RepairRequestStatus status, int limit, int offset);
 
-    public List<RepairRequest> findByReviewAndRequestStatus(ReviewStatus reviewStatus,
-                                                            RepairRequestStatus repairRequestStatus);
+    List<RepairRequest> findByReviewAndRequestStatus(ReviewStatus reviewStatus,
+                                                     RepairRequestStatus repairRequestStatus,
+                                                     int limit, int offset);
 
-    public List<RepairRequest> findAll();
+    List<RepairRequest> findAll();
 
-    public int countWithUser(int userId);
+    int countWithUser(int userId);
 
-    public int countWithStatus(RepairRequestStatus status);
+    int countWithStatus(RepairRequestStatus status);
 
-    public boolean updateReviewId(int RepairRequestId, int ReviewId);
+    int countWithStatus(ReviewStatus reviewStatus, RepairRequestStatus repairRequestStatus);
 
-    public boolean updateStatus(int RepairRequestId, RepairRequestStatus repairRequestStatus);
+    boolean updateReviewId(int RepairRequestId, int ReviewId);
 
-    public boolean update(RepairRequest repairRequest);
+    boolean updateStatus(int RepairRequestId, RepairRequestStatus repairRequestStatus);
 
-    public boolean delete(int id);
+    boolean update(RepairRequest repairRequest);
+
+    boolean delete(int id);
 }

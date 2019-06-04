@@ -8,9 +8,10 @@ import com.nalivayko.pool.controller.commands.manager.ReviewRepairRequest;
 import com.nalivayko.pool.controller.commands.manager.DeleteFeedback;
 import com.nalivayko.pool.controller.commands.master.OpenMasterPage;
 import com.nalivayko.pool.controller.commands.master.PerformRepairRequest;
+import com.nalivayko.pool.controller.commands.pagination.*;
 import com.nalivayko.pool.controller.commands.repair.CreateRepairRequest;
 import com.nalivayko.pool.controller.commands.repair.OpenRepairPage;
-import com.nalivayko.pool.controller.commands.site.OpenHomePage;
+import com.nalivayko.pool.controller.commands.OpenHomePage;
 import com.nalivayko.pool.controller.commands.user.*;
 import com.nalivayko.pool.services.FeedbackService;
 import com.nalivayko.pool.services.RepairRequestService;
@@ -25,17 +26,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandManager {
+    private static final int FEEDBACK_PER_PAGE = 10;
+    private static final int REPAIRS_PER_PAGE = 5;
+
     private Map<String, Command> commands = new HashMap<>();
+
 
     public CommandManager(UserService userService, FeedbackService feedbackService,
                           RepairRequestService repairRequestService) {
 
+        Pagination<FeedbackService> feedbackPagination = new FeedbackPagination(FEEDBACK_PER_PAGE);
+        Pagination<RepairRequestService> newRepairPagination = new NewRepairPagination(REPAIRS_PER_PAGE);
+        Pagination<RepairRequestService> userRepairPagination = new UserRepairPagination(REPAIRS_PER_PAGE);
+        Pagination<RepairRequestService> acceptedRepairsPagination = new AcceptedRepairPagination(REPAIRS_PER_PAGE);
+
         OpenHomePage openHomePage = new OpenHomePage();
-        OpenAboutPage openAboutPage = new OpenAboutPage(feedbackService);
+        OpenAboutPage openAboutPage = new OpenAboutPage(feedbackService, feedbackPagination);
         OpenLoginPage openLoginPage = new OpenLoginPage();
-        OpenRepairPage openRepairPage = new OpenRepairPage(repairRequestService, openLoginPage);
-        OpenManagerPage openManagerPage = new OpenManagerPage(repairRequestService);
-        OpenMasterPage openMasterPage = new OpenMasterPage(repairRequestService);
+        OpenRepairPage openRepairPage = new OpenRepairPage(repairRequestService, userRepairPagination);
+        OpenManagerPage openManagerPage = new OpenManagerPage(repairRequestService, newRepairPagination);
+        OpenMasterPage openMasterPage = new OpenMasterPage(repairRequestService, acceptedRepairsPagination);
 
         commands.put("", openHomePage);
         commands.put(UrlRequests.HOME_PAGE, openHomePage);

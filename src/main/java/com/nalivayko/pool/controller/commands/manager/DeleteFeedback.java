@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @see Command
+ */
 public class DeleteFeedback implements Command {
-
+    private static final  String DELETE_BTN = "delete-btn";
     private FeedbackService feedbackService;
     private Command openAboutPage;
 
@@ -20,7 +23,7 @@ public class DeleteFeedback implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int deleteId = Integer.parseInt(request.getParameter("delete-btn"));
+        int deleteId = Integer.parseInt(request.getParameter(DELETE_BTN));
         feedbackService.delete(deleteId);
         openAboutPage.execute(request, response);
     }

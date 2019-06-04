@@ -4,7 +4,6 @@ import com.nalivayko.pool.controller.commands.Command;
 import com.nalivayko.pool.controller.commands.user.OpenLoginPage;
 import com.nalivayko.pool.model.User;
 import com.nalivayko.pool.model.enums.UserRole;
-import com.nalivayko.pool.util.PagesPath;
 import com.nalivayko.pool.util.UrlRequests;
 
 import javax.servlet.*;
@@ -13,18 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * {@code UserAccessFilter} - checks if there is user in session and if user role
+ * allowing to perform such request
+ *
+ * Redirect to login page - if null user trying to perform specific requests
+ * Redirect to 403 if user not allowed to perform such request.
+ */
 public class UserAccessFilter implements Filter {
     private static final String[] restrictedForUnregistered = {UrlRequests.MANAGER_PAGE,
             UrlRequests.MASTER_PAGE,
             UrlRequests.CUSTOMER,
             UrlRequests.REPAIR_PAGE};
 
-    private String contextPath;
     private Command openLoginPage;
 
     @Override
     public void init(FilterConfig filterConfig) {
-        contextPath = filterConfig.getServletContext().getContextPath();
         this.openLoginPage = new OpenLoginPage();
     }
 
@@ -40,13 +44,13 @@ public class UserAccessFilter implements Filter {
         if (user == null) {
             for (String restrictedUrl : restrictedForUnregistered) {
                 if (requestPath.contains(restrictedUrl)) {
-                    openLoginPage.execute(request, response);//todo fix
+                    openLoginPage.execute(request, response);
                     return;
                 }
             }
         } else {
             if (!userPermittedToPerformRequest(user, requestPath)) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                response.sendError(HttpServletResponse.SC_FORBIDDEN);
                 return;
             }
         }

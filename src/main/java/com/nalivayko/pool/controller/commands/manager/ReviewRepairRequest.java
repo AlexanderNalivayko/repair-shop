@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @see Command
+ */
 public class ReviewRepairRequest implements Command {
-
     private static final String BUTTON_NAME = "btn";
     private static final String DECLINE = "decline";
     private static final String APPROVE = "approve";

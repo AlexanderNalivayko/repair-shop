@@ -9,20 +9,23 @@ import java.util.List;
 
 public interface RepairRequestService {
 
-    public List<RepairRequest> getRepairRequestsByUserId(int userId, int limit, int offset);
+    void createRepairRequest(User user, String itemType, String itemBrand, String itemName, String description);
 
-    public void createRepairRequest(User user, String itemType, String itemBrand, String itemName, String description);
+    List<RepairRequest> getAllByUserId(int userId, int limit, int offset);
 
-    public List<RepairRequest> getAllWithStatus(RepairRequestStatus repairRequestStatus, int limit, int offset);
+    List<RepairRequest> getAllWithStatus(RepairRequestStatus repairRequestStatus, int limit, int offset);
 
-    public List<RepairRequest> getAllByReviewAndRequestStatus(ReviewStatus reviewStatus,
-                                                              RepairRequestStatus repairRequestStatus);
+    List<RepairRequest> getAllByReviewAndRequestStatus(ReviewStatus reviewStatus,
+                                                       RepairRequestStatus repairRequestStatus, int limit, int offset);
 
-    public void updateReview(int repairRequestId, ReviewStatus reviewStatus, Integer cost);
+    void updateReview(int repairRequestId, ReviewStatus reviewStatus, Integer cost);
 
-    public void updateStatus(int repairRequestId, RepairRequestStatus repairRequestStatus);
+    void updateStatus(int repairRequestId, RepairRequestStatus repairRequestStatus);
 
-    public int countRequestsWithUserId(int UserId);
+    int countRequestsWithUserId(int UserId);
 
-    public int countRequestsWithStatus(RepairRequestStatus status);
+    int countRequestsWithStatus(RepairRequestStatus status);
+
+    int countRequestsWithStatus(ReviewStatus reviewStatus,
+                                RepairRequestStatus repairRequestStatus);
 }

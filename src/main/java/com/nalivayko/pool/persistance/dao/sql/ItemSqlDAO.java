@@ -14,7 +14,7 @@ public class ItemSqlDAO extends AbstractSqlDAO<Item> implements ItemDAO {
     @Override
     public int create(Item item) {
         return create(ItemQuery.INSERT, preparedStatement -> {
-            preparedStatement.setString(1, item.getProductType());
+            preparedStatement.setString(1, item.getItemType());
             preparedStatement.setString(2, item.getBrand());
             preparedStatement.setString(3, item.getName());
         });
@@ -23,7 +23,7 @@ public class ItemSqlDAO extends AbstractSqlDAO<Item> implements ItemDAO {
     @Override
     public boolean update(Item item) {
         return updateOrDelete(ItemQuery.UPDATE, preparedStatement -> {
-            preparedStatement.setString(1, item.getProductType());
+            preparedStatement.setString(1, item.getItemType());
             preparedStatement.setString(2, item.getBrand());
             preparedStatement.setString(3, item.getName());
             preparedStatement.setInt(4, item.getId());

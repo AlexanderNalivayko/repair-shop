@@ -13,18 +13,16 @@ public class FormattingUtil {
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FormattingUtil.class);
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
+    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
-     * Convert Date into string using pattern yyyy-MM-dd HH:mm:ss
+     * Convert Date to string using pattern yyyy-MM-dd HH:mm:ss
      * @param date date you want to convert
      * @return string representation of date
      */
     public static String dateToString(Date date) {
-        return sdf.format(date);
+        return SIMPLE_DATE_FORMAT.format(date);
     }
-
 
     /**
      * Convert string representation of date into Date object
@@ -33,7 +31,7 @@ public class FormattingUtil {
      */
     public static Date stringToDate(String strDate) {
         try {
-            return sdf.parse(strDate);
+            return SIMPLE_DATE_FORMAT.parse(strDate);
         } catch (ParseException e) {
             LOGGER.error(e.getMessage());
         }

@@ -37,7 +37,7 @@
                 <fmt:message key="about.feedback"/>
             </h3>
             <form action="${pageContext.request.contextPath}/site/manager/delete_feedback" method="post">
-                <c:forEach var="feedbackMsg" items="${requestScope.feedback}">
+                <c:forEach var="feedbackMsg" items="${requestScope.records}">
                     <div class="card my-2 shadow">
                         <div class="card-body">
                             <div class="row">
