@@ -27,7 +27,7 @@ public class StateColorTag extends SimpleTagSupport {
                 color = SUCCESS_TEXT_COLOR_CLASS;
                 break;
             }
-            case DECLINED: {
+            case REJECTED: {
                 color = DANGER_TEXT_COLOR_CLASS;
                 break;
             }

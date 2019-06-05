@@ -6,5 +6,4 @@ public interface ReviewDAO {
 
     int create(Review review);
 
-    boolean update(Review review);
 }

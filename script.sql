@@ -57,12 +57,13 @@ CREATE TABLE IF NOT EXISTS reviews (
     review_status VARCHAR(20),
     review_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     cost BIGINT DEFAULT NULL,
+    reject_reason VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY (id)
     ) ENGINE=InnoDB CHARACTER SET=UTF8;
-INSERT INTO reviews (id, review_status, cost)
-VALUES (1, 'ACCEPTED', 10000),
-(2, 'ACCEPTED', 40000),
-(3, 'DECLINED', null);
+INSERT INTO reviews (id, review_status, cost, reject_reason)
+VALUES (1, 'ACCEPTED', 10000, null),
+(2, 'ACCEPTED', 40000, null),
+(3, 'REJECTED', null, 'We don''t fix cars');
 
 -- ------------------------------------------
 -- fixapp.repair_requests

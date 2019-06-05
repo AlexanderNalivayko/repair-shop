@@ -60,7 +60,9 @@
                             <fmt:message key="repair.description"/>:
                                 ${request.description}
                         </p>
-                        <form action="${pageContext.request.contextPath}/site/manager/updateReview" method="post">
+
+                            <%--accept--%>
+                        <form action="${pageContext.request.contextPath}/site/manager/accept" method="post">
                             <input type="hidden" name="repairId" value="${request.id}">
                             <div class="row align-items-center">
                                 <div class="col-sm-2">
@@ -69,24 +71,40 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="number" name="price" id="price" class="form-control">
+                                    <input type="number" name="price" id="price" class="form-control" required>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <button class="btn btn-danger btn-block" name="btn" type="submit" value="decline">
-                                        <fmt:message key="manager.btn.decline"/>
-                                    </button>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <button class="btn btn-success btn-block" name="btn" type="submit" value="approve">
-                                        <fmt:message key="manager.btn.approve"/>
-                                    </button>
-                                </div>
+                            <div class="col-sm-12 p-0">
+                                <button class="btn btn-success btn-block" type="submit">
+                                    <fmt:message key="manager.btn.approve"/>
+                                </button>
                             </div>
                         </form>
+
+                            <%--reject--%>
+                        <form action="${pageContext.request.contextPath}/site/manager/reject" method="post">
+                            <input type="hidden" name="repairId" value="${request.id}">
+                            <div class="row align-items-center">
+                                <div class="col-sm-3">
+                                    <label for="reason" class="control-label text-muted">
+                                        <fmt:message key="repair.reject-reason"/>:
+                                    </label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <textarea name="reason" id="reason" class="form-control" rows="2" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 p-0">
+                                <button class="btn btn-danger btn-block" type="submit">
+                                    <fmt:message key="manager.btn.reject"/>
+                                </button>
+                            </div>
+                        </form>
+                            <%--<div class="col-sm-6">--%>
+                            <%--<button class="btn btn-danger btn-block" name="btn" type="submit" value="decline">--%>
+                            <%--<fmt:message key="manager.btn.decline"/>--%>
+                            <%--</button>--%>
+                            <%--</div>--%>
                     </div>
                 </div>
             </c:forEach>

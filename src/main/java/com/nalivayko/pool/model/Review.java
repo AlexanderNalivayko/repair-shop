@@ -9,6 +9,7 @@ public class Review {
     private ReviewStatus status;
     private Date time;
     private Integer cost;
+    private String rejectReason;
 
     public Review(Integer id, ReviewStatus status, Date time, Integer cost) {
         this.id = id;
@@ -20,6 +21,19 @@ public class Review {
     public Review(ReviewStatus status, Integer cost) {
         this.status = status;
         this.cost = cost;
+    }
+
+    public Review(ReviewStatus status, String rejectReason) {
+        this.status = status;
+        this.rejectReason = rejectReason;
+    }
+
+    public String getRejectReason() {
+        return rejectReason;
+    }
+
+    public void setRejectReason(String rejectReason) {
+        this.rejectReason = rejectReason;
     }
 
     public Integer getId() {

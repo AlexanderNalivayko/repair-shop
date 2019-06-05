@@ -20,7 +20,8 @@ public class UrlRequests {
     public static final String REPAIR_PAGE_CREATE = REPAIR_PAGE + "/create";
 
     public static final String MANAGER_PAGE = "/manager";
-    public static final String MANAGER_PAGE_REVIEW = MANAGER_PAGE + "/updateReview";
+    public static final String MANAGER_PAGE_ACCEPT = MANAGER_PAGE + "/accept";
+    public static final String MANAGER_PAGE_REJECT = MANAGER_PAGE + "/reject";
     public static final String MASTER_DELETE_FEEDBACK = MANAGER_PAGE + "/delete_feedback";
 
     public static final String MASTER_PAGE = "/master";

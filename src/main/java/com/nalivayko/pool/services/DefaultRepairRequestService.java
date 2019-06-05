@@ -17,6 +17,7 @@ import java.util.List;
  * Provides methods to work with RepairRequests (create, find, delete ...)
  */
 public class DefaultRepairRequestService implements RepairRequestService {
+    private static final int FRACTIONAL = 100;
     private ReviewDAO reviewDAO;
     private RepairRequestDAO repairRequestDAO;
     private ItemDAO itemDAO;
@@ -106,13 +107,32 @@ public class DefaultRepairRequestService implements RepairRequestService {
     }
 
     /**
-     * Update RepairRequest review status and cost
+     * Create ACCEPTED review and add it's id to repairRequest
+     * @param repairRequestId of repairRequest you want to review
+     * @param cost of repairRequest
      */
     @Override
-    public void updateReview(int repairRequestId, ReviewStatus reviewStatus, Integer cost) {
+    public void acceptRepairRequest(int repairRequestId, Integer cost) {
         try {
             transactionManager.startTransaction();
-            int reviewId = reviewDAO.create(new Review(reviewStatus, cost));
+            int reviewId = reviewDAO.create(new Review(ReviewStatus.ACCEPTED, cost * FRACTIONAL));
+            repairRequestDAO.updateReviewId(repairRequestId, reviewId);
+            repairRequestDAO.updateStatus(repairRequestId, RepairRequestStatus.REVIEWED);
+        } finally {
+            transactionManager.endTransaction();
+        }
+    }
+
+    /**
+     * Create REJECTED review and add it's id to repairRequest
+     * @param repairRequestId of repairRequest you want to review
+     * @param reason reason why repairRequest is REJECTED
+     */
+    @Override
+    public void rejectRepairRequest(int repairRequestId, String reason) {
+        try {
+            transactionManager.startTransaction();
+            int reviewId = reviewDAO.create(new Review(ReviewStatus.REJECTED, reason));
             repairRequestDAO.updateReviewId(repairRequestId, reviewId);
             repairRequestDAO.updateStatus(repairRequestId, RepairRequestStatus.REVIEWED);
         } finally {

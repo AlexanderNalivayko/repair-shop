@@ -18,7 +18,9 @@ public interface RepairRequestService {
     List<RepairRequest> getAllByReviewAndRequestStatus(ReviewStatus reviewStatus,
                                                        RepairRequestStatus repairRequestStatus, int limit, int offset);
 
-    void updateReview(int repairRequestId, ReviewStatus reviewStatus, Integer cost);
+    void acceptRepairRequest(int repairRequestId, Integer cost);
+
+    void rejectRepairRequest(int repairRequestId, String reason);
 
     void updateStatus(int repairRequestId, RepairRequestStatus repairRequestStatus);
 

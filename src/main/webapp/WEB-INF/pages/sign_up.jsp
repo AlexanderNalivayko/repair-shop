@@ -7,7 +7,6 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="${sessionScope.bundle}"/>
 
-
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
@@ -19,9 +18,8 @@
     <title>
         <fmt:message key="sign_up.title"/>
     </title>
-    <script src="${pageContext.request.contextPath}/js/jquery-3.4.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/script.js"></script>
-
 </head>
 
 <body class="bg-color">

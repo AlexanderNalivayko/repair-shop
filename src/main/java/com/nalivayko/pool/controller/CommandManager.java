@@ -4,8 +4,9 @@ import com.nalivayko.pool.controller.commands.Command;
 import com.nalivayko.pool.controller.commands.about.LeaveFeedback;
 import com.nalivayko.pool.controller.commands.about.OpenAboutPage;
 import com.nalivayko.pool.controller.commands.manager.OpenManagerPage;
-import com.nalivayko.pool.controller.commands.manager.ReviewRepairRequest;
+import com.nalivayko.pool.controller.commands.manager.AcceptRepairRequest;
 import com.nalivayko.pool.controller.commands.manager.DeleteFeedback;
+import com.nalivayko.pool.controller.commands.manager.RejectRepairRequest;
 import com.nalivayko.pool.controller.commands.master.OpenMasterPage;
 import com.nalivayko.pool.controller.commands.master.PerformRepairRequest;
 import com.nalivayko.pool.controller.commands.pagination.*;
@@ -63,7 +64,8 @@ public class CommandManager {
         commands.put(UrlRequests.REPAIR_PAGE_CREATE, new CreateRepairRequest(repairRequestService, openRepairPage));
 
         commands.put(UrlRequests.MANAGER_PAGE, openManagerPage);
-        commands.put(UrlRequests.MANAGER_PAGE_REVIEW, new ReviewRepairRequest(openManagerPage, repairRequestService));
+        commands.put(UrlRequests.MANAGER_PAGE_ACCEPT, new AcceptRepairRequest(openManagerPage, repairRequestService));
+        commands.put(UrlRequests.MANAGER_PAGE_REJECT, new RejectRepairRequest(openManagerPage, repairRequestService));
 
         commands.put(UrlRequests.MASTER_PAGE, openMasterPage);
         commands.put(UrlRequests.MASTER_PAGE_PERFORM, new PerformRepairRequest(repairRequestService, openMasterPage));
