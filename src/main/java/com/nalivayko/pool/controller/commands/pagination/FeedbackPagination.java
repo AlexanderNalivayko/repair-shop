@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @see com.nalivayko.pool.controller.commands.pagination.Pagination
+ * @see AbstractPagination
  */
-public class FeedbackPagination extends Pagination<FeedbackService> {
+public class FeedbackPagination extends AbstractPagination<FeedbackService> {
     private int recordsPerPage;
 
     public FeedbackPagination(int recordsPerPage) {
@@ -20,6 +20,6 @@ public class FeedbackPagination extends Pagination<FeedbackService> {
     public void paginate(HttpServletRequest request, FeedbackService service) {
         int currentPage = getCurrentPage(request);
         List<Feedback> list = service.getAll(recordsPerPage, (currentPage - 1) * recordsPerPage);
-        setPaginationAttributes(request, list, service.getRecordsCount(), recordsPerPage, currentPage);
+        setPaginationAttributes(request, list, service.countAll(), recordsPerPage, currentPage);
     }
 }

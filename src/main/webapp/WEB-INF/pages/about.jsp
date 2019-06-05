@@ -75,15 +75,15 @@
         <div class="col-md-10 mb-5">
             <form action="${pageContext.request.contextPath}/site/about_page/leave_feedback" method="post"
                   class="form-signup">
-                <p class="text-muted">
+                <label for="feedback_msg" class="text-muted">
                     <fmt:message key="about.leave.feedback"/>
-                </p>
+                </label>
                 <c:if test="${sessionScope.user == null}">
                     <p class="text-danger">
                         <fmt:message key="about.msg.registration"/>
                     </p>
                 </c:if>
-                <textarea name="feedback_msg" class="form-control" id="exampleFormControlTextarea5" rows="3"></textarea>
+                <textarea name="feedback_msg" class="form-control" id="feedback_msg" rows="3" required></textarea>
                 <button class="btn btn-success float-right"
                         type="submit" ${sessionScope.user == null ? "disabled" : ""}>
                     <fmt:message key="about.send"/>

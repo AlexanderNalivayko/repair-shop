@@ -27,10 +27,10 @@ public class LeaveFeedback implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String feedbackText = request.getParameter(FEEDBACK_MSG);
-        User user = (User) request.getSession().getAttribute(USER);
-        if (user == null) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        if (feedbackText == null || feedbackText.isEmpty()) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
         } else {
+            User user = (User) request.getSession().getAttribute(USER);
             feedbackService.create(user, feedbackText);
             openAboutPage.execute(request, response);
         }

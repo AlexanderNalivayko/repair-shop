@@ -1,7 +1,7 @@
 package com.nalivayko.pool.controller.commands.about;
 
 import com.nalivayko.pool.controller.commands.Command;
-import com.nalivayko.pool.controller.commands.pagination.Pagination;
+import com.nalivayko.pool.controller.commands.pagination.AbstractPagination;
 import com.nalivayko.pool.services.FeedbackService;
 import com.nalivayko.pool.util.PagesPath;
 
@@ -15,9 +15,9 @@ import java.io.IOException;
  */
 public class OpenAboutPage implements Command {
     private FeedbackService feedbackService;
-    private Pagination<FeedbackService> pagination;
+    private AbstractPagination<FeedbackService> pagination;
 
-    public OpenAboutPage(FeedbackService feedbackService, Pagination<FeedbackService> pagination) {
+    public OpenAboutPage(FeedbackService feedbackService, AbstractPagination<FeedbackService> pagination) {
         this.feedbackService = feedbackService;
         this.pagination = pagination;
     }

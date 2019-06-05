@@ -19,17 +19,21 @@ public class RejectRepairRequest implements Command {
     private Command openManagerPage;
     private RepairRequestService repairRequestService;
 
-    public RejectRepairRequest(Command openManagerPage, RepairRequestService repairRequestService) {
-        this.openManagerPage = openManagerPage;
+    public RejectRepairRequest(RepairRequestService repairRequestService, Command openManagerPage) {
         this.repairRequestService = repairRequestService;
+        this.openManagerPage = openManagerPage;
     }
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int repairId = Integer.parseInt(request.getParameter(REPAIR_ID));
+        String stringRepairId = request.getParameter(REPAIR_ID);
         String reason = request.getParameter(REASON);
-        repairRequestService.rejectRepairRequest(repairId, reason);
-        openManagerPage.execute(request, response);
+        if (stringRepairId == null || stringRepairId.isEmpty() || reason == null || reason.isEmpty()) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+        } else {
+            repairRequestService.rejectRepairRequest(Integer.parseInt(stringRepairId), reason);
+            openManagerPage.execute(request, response);
+        }
     }
 }
 

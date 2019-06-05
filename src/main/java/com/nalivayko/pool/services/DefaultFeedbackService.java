@@ -50,7 +50,7 @@ public class DefaultFeedbackService implements FeedbackService {
     }
 
     @Override
-    public int getRecordsCount() {
+    public int countAll() {
         try {
             transactionManager.getConnection();
             return feedbackDAO.count();

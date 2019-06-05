@@ -1,7 +1,7 @@
 package com.nalivayko.pool.controller.commands.manager;
 
 import com.nalivayko.pool.controller.commands.Command;
-import com.nalivayko.pool.controller.commands.pagination.Pagination;
+import com.nalivayko.pool.controller.commands.pagination.AbstractPagination;
 import com.nalivayko.pool.services.RepairRequestService;
 import com.nalivayko.pool.util.PagesPath;
 
@@ -15,9 +15,9 @@ import java.io.IOException;
  */
 public class OpenManagerPage implements Command {
     private RepairRequestService repairRequestService;
-    private Pagination<RepairRequestService> pagination;
+    private AbstractPagination<RepairRequestService> pagination;
 
-    public OpenManagerPage(RepairRequestService repairRequestService, Pagination<RepairRequestService> pagination) {
+    public OpenManagerPage(RepairRequestService repairRequestService, AbstractPagination<RepairRequestService> pagination) {
         this.repairRequestService = repairRequestService;
         this.pagination = pagination;
     }

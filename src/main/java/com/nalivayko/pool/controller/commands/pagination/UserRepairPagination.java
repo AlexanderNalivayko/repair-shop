@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @see com.nalivayko.pool.controller.commands.pagination.Pagination
+ * @see AbstractPagination
  */
-public class UserRepairPagination extends Pagination<RepairRequestService> {
+public class UserRepairPagination extends AbstractPagination<RepairRequestService> {
     private static final String USER = "user";
 
     private int recordsPerPage;
@@ -26,7 +26,7 @@ public class UserRepairPagination extends Pagination<RepairRequestService> {
         List<RepairRequest> repairRequests = service.getAllByUserId(user.getId(),
                 recordsPerPage,
                 (currentPage - 1) * recordsPerPage);
-        int recordsCount = service.countRequestsWithUserId(user.getId());
+        int recordsCount = service.countByUserId(user.getId());
         setPaginationAttributes(request, repairRequests, recordsCount, recordsPerPage, currentPage);
     }
 }

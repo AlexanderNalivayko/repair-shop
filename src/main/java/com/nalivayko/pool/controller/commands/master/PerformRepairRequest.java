@@ -1,9 +1,7 @@
 package com.nalivayko.pool.controller.commands.master;
 
 import com.nalivayko.pool.controller.commands.Command;
-import com.nalivayko.pool.model.User;
 import com.nalivayko.pool.model.enums.RepairRequestStatus;
-import com.nalivayko.pool.model.enums.UserRole;
 import com.nalivayko.pool.services.RepairRequestService;
 
 import javax.servlet.ServletException;
@@ -16,7 +14,6 @@ import java.io.IOException;
  */
 public class PerformRepairRequest implements Command {
     private static final String REPAIR_REQUEST_ID = "repairId";
-    private static final String USER = "user";
 
     private RepairRequestService repairRequestService;
     private Command openMasterPage;
@@ -29,12 +26,10 @@ public class PerformRepairRequest implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String repairId = request.getParameter(REPAIR_REQUEST_ID);
-        User user = (User) request.getSession().getAttribute(USER);
-        if (repairId == null || repairId.isEmpty() || user == null || user.getUserRole() != UserRole.MASTER) {
+        if (repairId == null || repairId.isEmpty()) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
         } else {
-            int id = Integer.parseInt(repairId);
-            repairRequestService.updateStatus(id, RepairRequestStatus.DONE);
+            repairRequestService.performRepairRequest(Integer.parseInt(repairId));
             openMasterPage.execute(request, response);
         }
     }

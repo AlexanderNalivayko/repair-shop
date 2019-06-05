@@ -9,18 +9,18 @@ import java.util.List;
 /**
  * @see AbstractPagination
  */
-public class NewRepairPagination extends AbstractPagination<RepairRequestService> {
+public class AcceptedRepairsPagination extends AbstractPagination<RepairRequestService> {
     private int recordsPerPage;
 
-    public NewRepairPagination(int recordsPerPage) {
+    public AcceptedRepairsPagination(int recordsPerPage) {
         this.recordsPerPage = recordsPerPage;
     }
 
     @Override
     public void paginate(HttpServletRequest request, RepairRequestService service) {
         int currentPage = getCurrentPage(request);
-        List<RepairRequest> repairRequests = service.getAllNew(recordsPerPage, (currentPage - 1) * recordsPerPage);
-        int recordsCount = service.countNew();
+        List<RepairRequest> repairRequests = service.getAllAccepted(recordsPerPage, (currentPage - 1) * recordsPerPage);
+        int recordsCount = service.countAccepted();
         setPaginationAttributes(request, repairRequests, recordsCount, recordsPerPage, currentPage);
     }
 }

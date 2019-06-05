@@ -1,6 +1,5 @@
 package com.nalivayko.pool.controller.commands;
 
-import com.nalivayko.pool.controller.commands.Command;
 import com.nalivayko.pool.util.PagesPath;
 import com.nalivayko.pool.util.UrlRequests;
 

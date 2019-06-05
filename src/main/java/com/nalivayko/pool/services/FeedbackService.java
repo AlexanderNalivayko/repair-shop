@@ -13,5 +13,8 @@ public interface FeedbackService {
 
     void create(User user, String text);
 
-    int getRecordsCount();
+    /**
+     * @return count of all records in storage
+     */
+    int countAll();
 }

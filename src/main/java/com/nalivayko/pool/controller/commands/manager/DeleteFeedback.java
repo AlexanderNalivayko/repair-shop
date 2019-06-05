@@ -12,7 +12,7 @@ import java.io.IOException;
  * @see Command
  */
 public class DeleteFeedback implements Command {
-    private static final  String DELETE_BTN = "delete-btn";
+    private static final String DELETE_BTN = "delete-btn";
     private FeedbackService feedbackService;
     private Command openAboutPage;
 

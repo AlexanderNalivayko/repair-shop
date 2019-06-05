@@ -69,16 +69,15 @@ public class DefaultRepairRequestService implements RepairRequestService {
     }
 
     /**
-     * Find and return list of repair request where status equal {@code repairRequestStatus}
+     * Find and return list of repair request where status is NEW
      *
-     * @param repairRequestStatus - status which will be used for searching
      * @return List of repair requests
      */
     @Override
-    public List<RepairRequest> getAllWithStatus(RepairRequestStatus repairRequestStatus, int limit, int offset) {
+    public List<RepairRequest> getAllNew(int limit, int offset) {
         try {
             transactionManager.getConnection();
-            return repairRequestDAO.findByRepairRequestStatus(repairRequestStatus, limit, offset);
+            return repairRequestDAO.findByRepairRequestStatus(RepairRequestStatus.NEW, limit, offset);
         } finally {
             transactionManager.closeConnection();
         }
@@ -87,20 +86,17 @@ public class DefaultRepairRequestService implements RepairRequestService {
     /**
      * Find all repair requests with reviewStatus and repairRequestStatus
      * as passed in parameters.
-     * @param reviewStatus all results will be with.
-     * @param repairRequestStatus all results will be with.
-     * @param limit amount of results subsequence (used for pagination)
-     * @param offset start position of result subsequence (used for pagination)
+     *
+     * @param limit               amount of results subsequence (used for pagination)
+     * @param offset              start position of result subsequence (used for pagination)
      * @return RepairRequest
      */
     @Override
-    public List<RepairRequest> getAllByReviewAndRequestStatus(ReviewStatus reviewStatus,
-                                                              RepairRequestStatus repairRequestStatus,
-                                                              int limit, int offset) {
+    public List<RepairRequest> getAllAccepted(int limit, int offset) {
         try {
             transactionManager.getConnection();
-            return repairRequestDAO.findByReviewAndRequestStatus(reviewStatus,
-                    repairRequestStatus, limit, offset);
+            return repairRequestDAO.findByReviewAndRequestStatus(ReviewStatus.ACCEPTED,
+                    RepairRequestStatus.REVIEWED, limit, offset);
         } finally {
             transactionManager.closeConnection();
         }
@@ -108,8 +104,9 @@ public class DefaultRepairRequestService implements RepairRequestService {
 
     /**
      * Create ACCEPTED review and add it's id to repairRequest
+     *
      * @param repairRequestId of repairRequest you want to review
-     * @param cost of repairRequest
+     * @param cost            of repairRequest
      */
     @Override
     public void acceptRepairRequest(int repairRequestId, Integer cost) {
@@ -125,8 +122,9 @@ public class DefaultRepairRequestService implements RepairRequestService {
 
     /**
      * Create REJECTED review and add it's id to repairRequest
+     *
      * @param repairRequestId of repairRequest you want to review
-     * @param reason reason why repairRequest is REJECTED
+     * @param reason          reason why repairRequest is REJECTED
      */
     @Override
     public void rejectRepairRequest(int repairRequestId, String reason) {
@@ -144,10 +142,10 @@ public class DefaultRepairRequestService implements RepairRequestService {
      * Update RepairRequests status
      */
     @Override
-    public void updateStatus(int repairRequestId, RepairRequestStatus repairRequestStatus) {
+    public void performRepairRequest(int repairRequestId) {
         try {
             transactionManager.getConnection();
-            repairRequestDAO.updateStatus(repairRequestId, repairRequestStatus);
+            repairRequestDAO.updateStatus(repairRequestId, RepairRequestStatus.DONE);
         } finally {
             transactionManager.closeConnection();
         }
@@ -155,10 +153,11 @@ public class DefaultRepairRequestService implements RepairRequestService {
 
     /**
      * Count number of RepairRequest with userId
+     *
      * @return number of RepairRequests
      */
     @Override
-    public int countRequestsWithUserId(int userId) {
+    public int countByUserId(int userId) {
         try {
             transactionManager.getConnection();
             return repairRequestDAO.countWithUser(userId);
@@ -170,13 +169,14 @@ public class DefaultRepairRequestService implements RepairRequestService {
 
     /**
      * Count number of RepairRequest with status
+     *
      * @return number of RepairRequests
      */
     @Override
-    public int countRequestsWithStatus(RepairRequestStatus status) {
+    public int countNew() {
         try {
             transactionManager.getConnection();
-            return repairRequestDAO.countWithStatus(status);
+            return repairRequestDAO.countWithStatus(RepairRequestStatus.NEW);
         } finally {
             transactionManager.closeConnection();
         }
@@ -184,13 +184,14 @@ public class DefaultRepairRequestService implements RepairRequestService {
 
     /**
      * Count number of RepairRequest with reviewStatus and repairRequestStatus
+     *
      * @return number of RepairRequests
      */
     @Override
-    public int countRequestsWithStatus(ReviewStatus reviewStatus, RepairRequestStatus repairRequestStatus) {
+    public int countAccepted() {
         try {
             transactionManager.getConnection();
-            return repairRequestDAO.countWithStatus(reviewStatus, repairRequestStatus);
+            return repairRequestDAO.countWithStatus(ReviewStatus.ACCEPTED, RepairRequestStatus.REVIEWED);
         } finally {
             transactionManager.closeConnection();
         }

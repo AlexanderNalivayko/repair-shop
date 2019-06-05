@@ -100,11 +100,6 @@
                                 </button>
                             </div>
                         </form>
-                            <%--<div class="col-sm-6">--%>
-                            <%--<button class="btn btn-danger btn-block" name="btn" type="submit" value="decline">--%>
-                            <%--<fmt:message key="manager.btn.decline"/>--%>
-                            <%--</button>--%>
-                            <%--</div>--%>
                     </div>
                 </div>
             </c:forEach>
@@ -114,6 +109,8 @@
         </div>
     </div>
 </div>
+
 <jsp:include page="footer.jsp"/>
+
 </body>
 </html>

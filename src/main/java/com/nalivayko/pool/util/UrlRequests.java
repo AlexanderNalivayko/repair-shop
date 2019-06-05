@@ -14,7 +14,7 @@ public class UrlRequests {
     public static final String VALIDATE_USERNAME = "/validate_username";
 
     public static final String ABOUT_PAGE = "/about_page";
-    public static final String ABOUT_PAGE_FEEDBACK = ABOUT_PAGE + "/leave_feedback";
+    public static final String ABOUT_PAGE_LEAVE_FEEDBACK = ABOUT_PAGE + "/leave_feedback";
 
     public static final String REPAIR_PAGE = "/repair_page";
     public static final String REPAIR_PAGE_CREATE = REPAIR_PAGE + "/create";
@@ -22,7 +22,7 @@ public class UrlRequests {
     public static final String MANAGER_PAGE = "/manager";
     public static final String MANAGER_PAGE_ACCEPT = MANAGER_PAGE + "/accept";
     public static final String MANAGER_PAGE_REJECT = MANAGER_PAGE + "/reject";
-    public static final String MASTER_DELETE_FEEDBACK = MANAGER_PAGE + "/delete_feedback";
+    public static final String MANAGER_DELETE_FEEDBACK = MANAGER_PAGE + "/delete_feedback";
 
     public static final String MASTER_PAGE = "/master";
     public static final String MASTER_PAGE_PERFORM = MASTER_PAGE + "/perform";

@@ -20,14 +20,22 @@ import java.io.IOException;
  * Redirect to 403 if user not allowed to perform such request.
  */
 public class UserAccessFilter implements Filter {
-    private static final String[] restrictedForUnregistered = {UrlRequests.MANAGER_PAGE,
+    private static final String[] restrictedForUnregistered = {
+            UrlRequests.MANAGER_PAGE,
             UrlRequests.MASTER_PAGE,
             UrlRequests.CUSTOMER,
-            UrlRequests.REPAIR_PAGE};
-
-    private static final String[] RESTRICTED_FOR_CUSTOMER = {UrlRequests.LOGIN_PAGE};
-    private static final String[] RESTRICTED_FOR_MANAGER = {UrlRequests.REPAIR_PAGE};
-    private static final String[] RESTRICTED_FOR_MASTER = {UrlRequests.REPAIR_PAGE};
+            UrlRequests.REPAIR_PAGE,
+            UrlRequests.ABOUT_PAGE_LEAVE_FEEDBACK};
+    private static final String[] RESTRICTED_FOR_CUSTOMER = {
+            UrlRequests.LOGIN_PAGE,
+            UrlRequests.MASTER_PAGE,
+            UrlRequests.MANAGER_PAGE};
+    private static final String[] RESTRICTED_FOR_MANAGER = {
+            UrlRequests.REPAIR_PAGE,
+            UrlRequests.MASTER_PAGE};
+    private static final String[] RESTRICTED_FOR_MASTER = {
+            UrlRequests.REPAIR_PAGE,
+            UrlRequests.MANAGER_PAGE};
 
     private Command openLoginPage;
 
@@ -66,6 +74,7 @@ public class UserAccessFilter implements Filter {
      * corresponding to this path.
      * If url doesn't contains specific-user path it checks if current path is
      * restricted for this type of user
+     *
      * @param user - current session user
      * @param url  - request url
      * @return true - if user permitted to perform request represented by url

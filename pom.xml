@@ -16,6 +16,8 @@
         <dbcp.version>2.6.0</dbcp.version>
         <servlets.version>3.1.0</servlets.version>
         <jstl.version>1.2</jstl.version>
+        <junit.version>4.12</junit.version>
+        <assertj.version>3.12.2</assertj.version>
         <mockito.version>2.0.2-beta</mockito.version>
         <apache.version>3.9</apache.version>
         <jsp.api.version>2.2.1-b03</jsp.api.version>
@@ -52,6 +54,18 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>${jstl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>

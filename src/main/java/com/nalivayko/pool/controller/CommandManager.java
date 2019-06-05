@@ -36,10 +36,10 @@ public class CommandManager {
     public CommandManager(UserService userService, FeedbackService feedbackService,
                           RepairRequestService repairRequestService) {
 
-        Pagination<FeedbackService> feedbackPagination = new FeedbackPagination(FEEDBACK_PER_PAGE);
-        Pagination<RepairRequestService> newRepairPagination = new NewRepairPagination(REPAIRS_PER_PAGE);
-        Pagination<RepairRequestService> userRepairPagination = new UserRepairPagination(REPAIRS_PER_PAGE);
-        Pagination<RepairRequestService> acceptedRepairsPagination = new AcceptedRepairPagination(REPAIRS_PER_PAGE);
+        AbstractPagination<FeedbackService> feedbackPagination = new FeedbackPagination(FEEDBACK_PER_PAGE);
+        AbstractPagination<RepairRequestService> newRepairPagination = new NewRepairPagination(REPAIRS_PER_PAGE);
+        AbstractPagination<RepairRequestService> userRepairPagination = new UserRepairPagination(REPAIRS_PER_PAGE);
+        AbstractPagination<RepairRequestService> acceptedRepairsPagination = new AcceptedRepairsPagination(REPAIRS_PER_PAGE);
 
         OpenHomePage openHomePage = new OpenHomePage();
         OpenAboutPage openAboutPage = new OpenAboutPage(feedbackService, feedbackPagination);
@@ -52,7 +52,7 @@ public class CommandManager {
         commands.put(UrlRequests.HOME_PAGE, openHomePage);
 
         commands.put(UrlRequests.ABOUT_PAGE, openAboutPage);
-        commands.put(UrlRequests.ABOUT_PAGE_FEEDBACK, new LeaveFeedback(feedbackService, openAboutPage));
+        commands.put(UrlRequests.ABOUT_PAGE_LEAVE_FEEDBACK, new LeaveFeedback(feedbackService, openAboutPage));
 
         commands.put(UrlRequests.LOGIN_PAGE, openLoginPage);
         commands.put(UrlRequests.LOGIN, new Login(userService, openHomePage, openLoginPage));
@@ -64,12 +64,12 @@ public class CommandManager {
         commands.put(UrlRequests.REPAIR_PAGE_CREATE, new CreateRepairRequest(repairRequestService, openRepairPage));
 
         commands.put(UrlRequests.MANAGER_PAGE, openManagerPage);
-        commands.put(UrlRequests.MANAGER_PAGE_ACCEPT, new AcceptRepairRequest(openManagerPage, repairRequestService));
-        commands.put(UrlRequests.MANAGER_PAGE_REJECT, new RejectRepairRequest(openManagerPage, repairRequestService));
+        commands.put(UrlRequests.MANAGER_PAGE_ACCEPT, new AcceptRepairRequest(repairRequestService, openManagerPage));
+        commands.put(UrlRequests.MANAGER_PAGE_REJECT, new RejectRepairRequest(repairRequestService, openManagerPage));
+        commands.put(UrlRequests.MANAGER_DELETE_FEEDBACK, new DeleteFeedback(feedbackService, openAboutPage));
 
         commands.put(UrlRequests.MASTER_PAGE, openMasterPage);
         commands.put(UrlRequests.MASTER_PAGE_PERFORM, new PerformRepairRequest(repairRequestService, openMasterPage));
-        commands.put(UrlRequests.MASTER_DELETE_FEEDBACK, new DeleteFeedback(feedbackService, openAboutPage));
 
         commands.put(UrlRequests.VALIDATE_USERNAME, new ValidateUsername(userService));
     }
