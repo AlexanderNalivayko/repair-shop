@@ -1,0 +1,38 @@
+package com.nalivayko.pool.controller.commands.about;
+
+import com.nalivayko.pool.controller.commands.Command;
+import com.nalivayko.pool.model.User;
+import com.nalivayko.pool.services.FeedbackService;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * @see Command
+ */
+public class LeaveFeedback implements Command {
+    private static final String FEEDBACK_MSG = "feedback_msg";
+    private static final String USER = "user";
+
+    private FeedbackService feedbackService;
+    private Command openAboutPage;
+
+    public LeaveFeedback(FeedbackService feedbackService, Command openAboutPage) {
+        this.feedbackService = feedbackService;
+        this.openAboutPage = openAboutPage;
+    }
+
+    @Override
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String feedbackText = request.getParameter(FEEDBACK_MSG);
+        if (feedbackText == null || feedbackText.isEmpty()) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+        } else {
+            User user = (User) request.getSession().getAttribute(USER);
+            feedbackService.create(user, feedbackText);
+            openAboutPage.execute(request, response);
+        }
+    }
+}

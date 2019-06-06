@@ -10,5 +10,6 @@ target/
 *.iws
 out/
 .idea_modules/
+**/classes
 
 *.log
