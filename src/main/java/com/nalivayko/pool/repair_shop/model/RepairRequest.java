@@ -1,6 +1,6 @@
-package com.nalivayko.pool.model;
+package com.nalivayko.pool.repair_shop.model;
 
-import com.nalivayko.pool.model.enums.RepairRequestStatus;
+import com.nalivayko.pool.repair_shop.model.enums.RepairRequestStatus;
 
 public class RepairRequest {
     private Integer id;

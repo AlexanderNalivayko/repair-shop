@@ -1,7 +1,7 @@
-package com.nalivayko.pool.controller.commands.user;
+package com.nalivayko.pool.repair_shop.controller.commands.user;
 
-import com.nalivayko.pool.controller.commands.Command;
-import com.nalivayko.pool.util.PagesPath;
+import com.nalivayko.pool.repair_shop.controller.commands.Command;
+import com.nalivayko.pool.repair_shop.util.PagesPath;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

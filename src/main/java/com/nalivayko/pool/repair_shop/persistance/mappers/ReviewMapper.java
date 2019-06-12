@@ -1,8 +1,8 @@
-package com.nalivayko.pool.persistance.mappers;
+package com.nalivayko.pool.repair_shop.persistance.mappers;
 
-import com.nalivayko.pool.model.Review;
-import com.nalivayko.pool.model.enums.ReviewStatus;
-import com.nalivayko.pool.persistance.dao.sql.query.ReviewQuery;
+import com.nalivayko.pool.repair_shop.model.Review;
+import com.nalivayko.pool.repair_shop.model.enums.ReviewStatus;
+import com.nalivayko.pool.repair_shop.persistance.dao.sql.query.ReviewQuery;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

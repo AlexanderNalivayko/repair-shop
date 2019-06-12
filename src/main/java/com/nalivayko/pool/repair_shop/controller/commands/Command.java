@@ -1,4 +1,4 @@
-package com.nalivayko.pool.controller.commands;
+package com.nalivayko.pool.repair_shop.controller.commands;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

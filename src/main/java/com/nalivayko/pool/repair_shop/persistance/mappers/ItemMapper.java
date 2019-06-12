@@ -1,7 +1,7 @@
-package com.nalivayko.pool.persistance.mappers;
+package com.nalivayko.pool.repair_shop.persistance.mappers;
 
-import com.nalivayko.pool.model.Item;
-import com.nalivayko.pool.persistance.dao.sql.query.ItemQuery;
+import com.nalivayko.pool.repair_shop.model.Item;
+import com.nalivayko.pool.repair_shop.persistance.dao.sql.query.ItemQuery;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

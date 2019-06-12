@@ -1,11 +1,11 @@
-package com.nalivayko.pool.filters;
+package com.nalivayko.pool.repair_shop.filters;
 
-import com.nalivayko.pool.controller.commands.Command;
-import com.nalivayko.pool.controller.commands.user.OpenLoginPage;
-import com.nalivayko.pool.model.User;
-import com.nalivayko.pool.model.enums.UserRole;
-import com.nalivayko.pool.util.ParametersAndAttributes;
-import com.nalivayko.pool.util.UrlRequests;
+import com.nalivayko.pool.repair_shop.controller.commands.Command;
+import com.nalivayko.pool.repair_shop.controller.commands.user.OpenLoginPage;
+import com.nalivayko.pool.repair_shop.model.User;
+import com.nalivayko.pool.repair_shop.model.enums.UserRole;
+import com.nalivayko.pool.repair_shop.util.ParametersAndAttributes;
+import com.nalivayko.pool.repair_shop.util.UrlRequests;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

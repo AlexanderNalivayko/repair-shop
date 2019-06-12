@@ -1,12 +1,12 @@
-package com.nalivayko.pool.persistance.dao.sql;
+package com.nalivayko.pool.repair_shop.persistance.dao.sql;
 
-import com.nalivayko.pool.model.Review;
-import com.nalivayko.pool.persistance.TransactionManager;
-import com.nalivayko.pool.persistance.dao.ReviewDAO;
-import com.nalivayko.pool.persistance.dao.sql.query.ReviewQuery;
+import com.nalivayko.pool.repair_shop.model.Review;
+import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
+import com.nalivayko.pool.repair_shop.persistance.dao.ReviewDAO;
+import com.nalivayko.pool.repair_shop.persistance.dao.sql.query.ReviewQuery;
 
 /**
- * @see com.nalivayko.pool.persistance.dao.sql.AbstractSqlDAO
+ * @see com.nalivayko.pool.repair_shop.persistance.dao.sql.AbstractSqlDAO
  */
 public class ReviewSqlDAO extends AbstractSqlDAO<Review> implements ReviewDAO {
 

@@ -1,4 +1,4 @@
-package com.nalivayko.pool.controller.commands.user;
+package com.nalivayko.pool.repair_shop.controller.commands.user;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static com.nalivayko.pool.util.ParametersAndAttributes.USER;
+import static com.nalivayko.pool.repair_shop.util.ParametersAndAttributes.USER;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

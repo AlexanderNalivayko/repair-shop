@@ -1,8 +1,8 @@
-package com.nalivayko.pool.controller.commands.master;
+package com.nalivayko.pool.repair_shop.controller.commands.master;
 
-import com.nalivayko.pool.controller.commands.Command;
-import com.nalivayko.pool.services.RepairRequestService;
-import com.nalivayko.pool.util.ParametersAndAttributes;
+import com.nalivayko.pool.repair_shop.controller.commands.Command;
+import com.nalivayko.pool.repair_shop.services.RepairRequestService;
+import com.nalivayko.pool.repair_shop.util.ParametersAndAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

@@ -1,8 +1,8 @@
-package com.nalivayko.pool.persistance.dao;
+package com.nalivayko.pool.repair_shop.persistance.dao;
 
-import com.nalivayko.pool.model.RepairRequest;
-import com.nalivayko.pool.model.enums.RepairRequestStatus;
-import com.nalivayko.pool.model.enums.ReviewStatus;
+import com.nalivayko.pool.repair_shop.model.RepairRequest;
+import com.nalivayko.pool.repair_shop.model.enums.RepairRequestStatus;
+import com.nalivayko.pool.repair_shop.model.enums.ReviewStatus;
 
 import java.util.List;
 

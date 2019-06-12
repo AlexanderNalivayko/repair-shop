@@ -1,12 +1,12 @@
-package com.nalivayko.pool.persistance.dao.sql;
+package com.nalivayko.pool.repair_shop.persistance.dao.sql;
 
-import com.nalivayko.pool.model.Item;
-import com.nalivayko.pool.persistance.TransactionManager;
-import com.nalivayko.pool.persistance.dao.ItemDAO;
-import com.nalivayko.pool.persistance.dao.sql.query.ItemQuery;
+import com.nalivayko.pool.repair_shop.model.Item;
+import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
+import com.nalivayko.pool.repair_shop.persistance.dao.ItemDAO;
+import com.nalivayko.pool.repair_shop.persistance.dao.sql.query.ItemQuery;
 
 /**
- * @see com.nalivayko.pool.persistance.dao.sql.AbstractSqlDAO
+ * @see com.nalivayko.pool.repair_shop.persistance.dao.sql.AbstractSqlDAO
  */
 public class ItemSqlDAO extends AbstractSqlDAO<Item> implements ItemDAO {
 

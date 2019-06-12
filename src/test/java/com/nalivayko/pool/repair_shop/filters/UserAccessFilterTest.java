@@ -1,9 +1,9 @@
-package com.nalivayko.pool.filters;
+package com.nalivayko.pool.repair_shop.filters;
 
-import com.nalivayko.pool.model.User;
-import com.nalivayko.pool.model.enums.UserRole;
-import com.nalivayko.pool.util.ParametersAndAttributes;
-import com.nalivayko.pool.util.UrlRequests;
+import com.nalivayko.pool.repair_shop.model.User;
+import com.nalivayko.pool.repair_shop.model.enums.UserRole;
+import com.nalivayko.pool.repair_shop.util.ParametersAndAttributes;
+import com.nalivayko.pool.repair_shop.util.UrlRequests;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

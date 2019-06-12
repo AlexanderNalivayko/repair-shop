@@ -1,7 +1,7 @@
-package com.nalivayko.pool.controller.commands.pagination;
+package com.nalivayko.pool.repair_shop.controller.commands.pagination;
 
-import com.nalivayko.pool.model.Feedback;
-import com.nalivayko.pool.services.FeedbackService;
+import com.nalivayko.pool.repair_shop.model.Feedback;
+import com.nalivayko.pool.repair_shop.services.FeedbackService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

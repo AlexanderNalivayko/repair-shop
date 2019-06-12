@@ -1,4 +1,4 @@
-package com.nalivayko.pool.model;
+package com.nalivayko.pool.repair_shop.model;
 
 import java.util.Date;
 

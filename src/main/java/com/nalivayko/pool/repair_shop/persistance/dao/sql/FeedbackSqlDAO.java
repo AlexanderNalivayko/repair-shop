@@ -1,15 +1,15 @@
-package com.nalivayko.pool.persistance.dao.sql;
+package com.nalivayko.pool.repair_shop.persistance.dao.sql;
 
-import com.nalivayko.pool.model.Feedback;
-import com.nalivayko.pool.persistance.TransactionManager;
-import com.nalivayko.pool.persistance.dao.FeedbackDAO;
-import com.nalivayko.pool.persistance.dao.sql.query.FeedbackQuery;
-import com.nalivayko.pool.persistance.mappers.FeedbackMapper;
+import com.nalivayko.pool.repair_shop.model.Feedback;
+import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
+import com.nalivayko.pool.repair_shop.persistance.dao.FeedbackDAO;
+import com.nalivayko.pool.repair_shop.persistance.dao.sql.query.FeedbackQuery;
+import com.nalivayko.pool.repair_shop.persistance.mappers.FeedbackMapper;
 
 import java.util.List;
 
 /**
- * @see com.nalivayko.pool.persistance.dao.sql.AbstractSqlDAO
+ * @see com.nalivayko.pool.repair_shop.persistance.dao.sql.AbstractSqlDAO
  */
 public class FeedbackSqlDAO extends AbstractSqlDAO<Feedback> implements FeedbackDAO {
 

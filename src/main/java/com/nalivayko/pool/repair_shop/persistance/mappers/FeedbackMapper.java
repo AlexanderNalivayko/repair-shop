@@ -1,8 +1,8 @@
-package com.nalivayko.pool.persistance.mappers;
+package com.nalivayko.pool.repair_shop.persistance.mappers;
 
-import com.nalivayko.pool.model.Feedback;
-import com.nalivayko.pool.persistance.dao.sql.query.FeedbackQuery;
-import com.nalivayko.pool.util.FormattingUtil;
+import com.nalivayko.pool.repair_shop.model.Feedback;
+import com.nalivayko.pool.repair_shop.persistance.dao.sql.query.FeedbackQuery;
+import com.nalivayko.pool.repair_shop.util.FormattingUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

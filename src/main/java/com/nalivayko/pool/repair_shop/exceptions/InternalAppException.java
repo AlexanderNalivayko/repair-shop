@@ -1,4 +1,4 @@
-package com.nalivayko.pool.exceptions;
+package com.nalivayko.pool.repair_shop.exceptions;
 
 public class InternalAppException extends RuntimeException {
 

@@ -1,4 +1,4 @@
-package com.nalivayko.pool.persistance;
+package com.nalivayko.pool.repair_shop.persistance;
 
 import java.sql.Connection;
 import java.sql.SQLException;

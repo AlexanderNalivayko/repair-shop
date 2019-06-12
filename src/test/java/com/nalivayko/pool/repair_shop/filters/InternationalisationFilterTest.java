@@ -1,4 +1,4 @@
-package com.nalivayko.pool.filters;
+package com.nalivayko.pool.repair_shop.filters;
 
 import org.junit.Before;
 import org.junit.Test;

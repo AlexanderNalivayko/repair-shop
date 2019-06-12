@@ -1,4 +1,4 @@
-package com.nalivayko.pool.persistance.mappers;
+package com.nalivayko.pool.repair_shop.persistance.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

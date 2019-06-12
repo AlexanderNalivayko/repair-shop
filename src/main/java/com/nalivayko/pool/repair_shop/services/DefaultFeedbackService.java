@@ -1,9 +1,9 @@
-package com.nalivayko.pool.services;
+package com.nalivayko.pool.repair_shop.services;
 
-import com.nalivayko.pool.model.Feedback;
-import com.nalivayko.pool.model.User;
-import com.nalivayko.pool.persistance.TransactionManager;
-import com.nalivayko.pool.persistance.dao.FeedbackDAO;
+import com.nalivayko.pool.repair_shop.model.Feedback;
+import com.nalivayko.pool.repair_shop.model.User;
+import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
+import com.nalivayko.pool.repair_shop.persistance.dao.FeedbackDAO;
 
 import java.util.List;
 

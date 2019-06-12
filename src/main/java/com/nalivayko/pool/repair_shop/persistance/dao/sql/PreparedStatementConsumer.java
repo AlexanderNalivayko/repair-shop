@@ -1,4 +1,4 @@
-package com.nalivayko.pool.persistance.dao.sql;
+package com.nalivayko.pool.repair_shop.persistance.dao.sql;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

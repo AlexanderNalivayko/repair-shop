@@ -1,7 +1,7 @@
-package com.nalivayko.pool.persistance;
+package com.nalivayko.pool.repair_shop.persistance;
 
-import com.nalivayko.pool.exceptions.InternalAppException;
-import com.nalivayko.pool.persistance.dbcp.ConnectionManager;
+import com.nalivayko.pool.repair_shop.exceptions.InternalAppException;
+import com.nalivayko.pool.repair_shop.persistance.dbcp.ConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,6 +1,6 @@
-package com.nalivayko.pool.web.tags;
+package com.nalivayko.pool.repair_shop.web.tags;
 
-import com.nalivayko.pool.model.enums.ReviewStatus;
+import com.nalivayko.pool.repair_shop.model.enums.ReviewStatus;
 
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;

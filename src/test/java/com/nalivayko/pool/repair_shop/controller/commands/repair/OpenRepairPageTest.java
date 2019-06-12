@@ -1,8 +1,8 @@
-package com.nalivayko.pool.controller.commands.repair;
+package com.nalivayko.pool.repair_shop.controller.commands.repair;
 
-import com.nalivayko.pool.controller.commands.pagination.UserRepairPagination;
-import com.nalivayko.pool.services.RepairRequestService;
-import com.nalivayko.pool.util.PagesPath;
+import com.nalivayko.pool.repair_shop.controller.commands.pagination.UserRepairPagination;
+import com.nalivayko.pool.repair_shop.services.RepairRequestService;
+import com.nalivayko.pool.repair_shop.util.PagesPath;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

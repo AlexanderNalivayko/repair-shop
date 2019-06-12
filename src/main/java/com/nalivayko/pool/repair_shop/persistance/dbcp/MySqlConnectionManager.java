@@ -1,7 +1,7 @@
-package com.nalivayko.pool.persistance.dbcp;
+package com.nalivayko.pool.repair_shop.persistance.dbcp;
 
-import com.nalivayko.pool.exceptions.AppInitialisationException;
-import com.nalivayko.pool.exceptions.InternalAppException;
+import com.nalivayko.pool.repair_shop.exceptions.AppInitialisationException;
+import com.nalivayko.pool.repair_shop.exceptions.InternalAppException;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static com.nalivayko.pool.util.PropertiesUtil.getProperty;
+import static com.nalivayko.pool.repair_shop.util.PropertiesUtil.getProperty;
 
 /**
  * {@code MySqlConnectionManager} Manage dbcp

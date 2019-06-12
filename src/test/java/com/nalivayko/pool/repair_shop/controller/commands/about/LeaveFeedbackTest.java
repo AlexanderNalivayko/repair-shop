@@ -1,7 +1,7 @@
-package com.nalivayko.pool.controller.commands.about;
+package com.nalivayko.pool.repair_shop.controller.commands.about;
 
-import com.nalivayko.pool.model.User;
-import com.nalivayko.pool.services.FeedbackService;
+import com.nalivayko.pool.repair_shop.model.User;
+import com.nalivayko.pool.repair_shop.services.FeedbackService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

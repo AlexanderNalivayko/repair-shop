@@ -1,15 +1,15 @@
-package com.nalivayko.pool.controller.commands.repair;
+package com.nalivayko.pool.repair_shop.controller.commands.repair;
 
-import com.nalivayko.pool.controller.commands.Command;
-import com.nalivayko.pool.model.User;
-import com.nalivayko.pool.services.RepairRequestService;
+import com.nalivayko.pool.repair_shop.controller.commands.Command;
+import com.nalivayko.pool.repair_shop.model.User;
+import com.nalivayko.pool.repair_shop.services.RepairRequestService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.nalivayko.pool.util.ParametersAndAttributes.*;
+import static com.nalivayko.pool.repair_shop.util.ParametersAndAttributes.*;
 
 /**
  * @see Command

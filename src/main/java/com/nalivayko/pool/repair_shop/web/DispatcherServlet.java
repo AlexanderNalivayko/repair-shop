@@ -1,13 +1,13 @@
-package com.nalivayko.pool.web;
+package com.nalivayko.pool.repair_shop.web;
 
-import com.nalivayko.pool.controller.CommandManager;
-import com.nalivayko.pool.persistance.DefaultTransactionManager;
-import com.nalivayko.pool.persistance.TransactionManager;
-import com.nalivayko.pool.persistance.dao.*;
-import com.nalivayko.pool.persistance.dao.sql.*;
-import com.nalivayko.pool.persistance.dbcp.ConnectionManager;
-import com.nalivayko.pool.persistance.dbcp.MySqlConnectionManager;
-import com.nalivayko.pool.services.*;
+import com.nalivayko.pool.repair_shop.controller.CommandManager;
+import com.nalivayko.pool.repair_shop.persistance.DefaultTransactionManager;
+import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
+import com.nalivayko.pool.repair_shop.persistance.dao.*;
+import com.nalivayko.pool.repair_shop.persistance.dao.sql.*;
+import com.nalivayko.pool.repair_shop.persistance.dbcp.ConnectionManager;
+import com.nalivayko.pool.repair_shop.persistance.dbcp.MySqlConnectionManager;
+import com.nalivayko.pool.repair_shop.services.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

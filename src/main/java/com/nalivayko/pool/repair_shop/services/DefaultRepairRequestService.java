@@ -1,15 +1,15 @@
-package com.nalivayko.pool.services;
+package com.nalivayko.pool.repair_shop.services;
 
-import com.nalivayko.pool.model.Item;
-import com.nalivayko.pool.model.RepairRequest;
-import com.nalivayko.pool.model.Review;
-import com.nalivayko.pool.model.User;
-import com.nalivayko.pool.model.enums.RepairRequestStatus;
-import com.nalivayko.pool.model.enums.ReviewStatus;
-import com.nalivayko.pool.persistance.TransactionManager;
-import com.nalivayko.pool.persistance.dao.ItemDAO;
-import com.nalivayko.pool.persistance.dao.RepairRequestDAO;
-import com.nalivayko.pool.persistance.dao.ReviewDAO;
+import com.nalivayko.pool.repair_shop.model.Item;
+import com.nalivayko.pool.repair_shop.model.RepairRequest;
+import com.nalivayko.pool.repair_shop.model.Review;
+import com.nalivayko.pool.repair_shop.model.User;
+import com.nalivayko.pool.repair_shop.model.enums.RepairRequestStatus;
+import com.nalivayko.pool.repair_shop.model.enums.ReviewStatus;
+import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
+import com.nalivayko.pool.repair_shop.persistance.dao.ItemDAO;
+import com.nalivayko.pool.repair_shop.persistance.dao.RepairRequestDAO;
+import com.nalivayko.pool.repair_shop.persistance.dao.ReviewDAO;
 
 import java.util.List;
 

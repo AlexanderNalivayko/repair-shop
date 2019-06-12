@@ -1,6 +1,6 @@
-package com.nalivayko.pool.persistance.dao;
+package com.nalivayko.pool.repair_shop.persistance.dao;
 
-import com.nalivayko.pool.model.Item;
+import com.nalivayko.pool.repair_shop.model.Item;
 
 public interface ItemDAO {
 

@@ -1,7 +1,7 @@
-package com.nalivayko.pool.services;
+package com.nalivayko.pool.repair_shop.services;
 
-import com.nalivayko.pool.model.RepairRequest;
-import com.nalivayko.pool.model.User;
+import com.nalivayko.pool.repair_shop.model.RepairRequest;
+import com.nalivayko.pool.repair_shop.model.User;
 
 import java.util.List;
 

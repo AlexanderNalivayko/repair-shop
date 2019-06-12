@@ -1,7 +1,7 @@
-package com.nalivayko.pool.controller.commands.repair;
+package com.nalivayko.pool.repair_shop.controller.commands.repair;
 
-import com.nalivayko.pool.model.User;
-import com.nalivayko.pool.services.RepairRequestService;
+import com.nalivayko.pool.repair_shop.model.User;
+import com.nalivayko.pool.repair_shop.services.RepairRequestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import static com.nalivayko.pool.util.ParametersAndAttributes.*;
+import static com.nalivayko.pool.repair_shop.util.ParametersAndAttributes.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

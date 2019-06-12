@@ -1,8 +1,8 @@
-package com.nalivayko.pool.persistance.mappers;
+package com.nalivayko.pool.repair_shop.persistance.mappers;
 
-import com.nalivayko.pool.model.User;
-import com.nalivayko.pool.model.enums.UserRole;
-import com.nalivayko.pool.persistance.dao.sql.query.UserQuery;
+import com.nalivayko.pool.repair_shop.model.User;
+import com.nalivayko.pool.repair_shop.model.enums.UserRole;
+import com.nalivayko.pool.repair_shop.persistance.dao.sql.query.UserQuery;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

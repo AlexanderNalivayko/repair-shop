@@ -1,15 +1,15 @@
-package com.nalivayko.pool.persistance.dao.sql;
+package com.nalivayko.pool.repair_shop.persistance.dao.sql;
 
-import com.nalivayko.pool.model.User;
-import com.nalivayko.pool.persistance.TransactionManager;
-import com.nalivayko.pool.persistance.dao.UserDAO;
-import com.nalivayko.pool.persistance.dao.sql.query.UserQuery;
-import com.nalivayko.pool.persistance.mappers.UserMapper;
+import com.nalivayko.pool.repair_shop.model.User;
+import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
+import com.nalivayko.pool.repair_shop.persistance.dao.UserDAO;
+import com.nalivayko.pool.repair_shop.persistance.dao.sql.query.UserQuery;
+import com.nalivayko.pool.repair_shop.persistance.mappers.UserMapper;
 
 import java.util.List;
 
 /**
- * @see com.nalivayko.pool.persistance.dao.sql.AbstractSqlDAO
+ * @see com.nalivayko.pool.repair_shop.persistance.dao.sql.AbstractSqlDAO
  */
 public class UserSqlDAO extends AbstractSqlDAO<User> implements UserDAO {
 

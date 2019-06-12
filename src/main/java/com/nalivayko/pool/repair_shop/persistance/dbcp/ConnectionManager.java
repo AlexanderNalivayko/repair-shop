@@ -1,4 +1,4 @@
-package com.nalivayko.pool.persistance.dbcp;
+package com.nalivayko.pool.repair_shop.persistance.dbcp;
 
 import java.sql.Connection;
 

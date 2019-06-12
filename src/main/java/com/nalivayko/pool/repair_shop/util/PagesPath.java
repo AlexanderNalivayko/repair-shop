@@ -1,4 +1,4 @@
-package com.nalivayko.pool.util;
+package com.nalivayko.pool.repair_shop.util;
 
 public class PagesPath {
 

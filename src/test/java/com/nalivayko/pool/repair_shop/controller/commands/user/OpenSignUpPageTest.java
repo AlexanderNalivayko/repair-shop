@@ -1,6 +1,6 @@
-package com.nalivayko.pool.controller.commands.user;
+package com.nalivayko.pool.repair_shop.controller.commands.user;
 
-import com.nalivayko.pool.util.PagesPath;
+import com.nalivayko.pool.repair_shop.util.PagesPath;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

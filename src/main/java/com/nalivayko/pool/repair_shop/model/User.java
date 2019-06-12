@@ -1,6 +1,6 @@
-package com.nalivayko.pool.model;
+package com.nalivayko.pool.repair_shop.model;
 
-import com.nalivayko.pool.model.enums.UserRole;
+import com.nalivayko.pool.repair_shop.model.enums.UserRole;
 
 public class User {
     private Integer id;

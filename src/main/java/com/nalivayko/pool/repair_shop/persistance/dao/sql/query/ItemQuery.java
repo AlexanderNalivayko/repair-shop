@@ -1,4 +1,4 @@
-package com.nalivayko.pool.persistance.dao.sql.query;
+package com.nalivayko.pool.repair_shop.persistance.dao.sql.query;
 
 public class ItemQuery {
 

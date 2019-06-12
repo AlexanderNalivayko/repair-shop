@@ -1,8 +1,8 @@
-package com.nalivayko.pool.persistance.dao.sql;
+package com.nalivayko.pool.repair_shop.persistance.dao.sql;
 
-import com.nalivayko.pool.exceptions.InternalAppException;
-import com.nalivayko.pool.persistance.TransactionManager;
-import com.nalivayko.pool.persistance.mappers.Mapper;
+import com.nalivayko.pool.repair_shop.exceptions.InternalAppException;
+import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
+import com.nalivayko.pool.repair_shop.persistance.mappers.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -130,7 +130,7 @@ public abstract class AbstractSqlDAO<T> {
     }
 
     /**
-     * Same as {@link com.nalivayko.pool.persistance.dao.sql.AbstractSqlDAO#findAll(String, Mapper)}}
+     * Same as {@link com.nalivayko.pool.repair_shop.persistance.dao.sql.AbstractSqlDAO#findAll(String, Mapper)}}
      * But has PreparedStatementConsumer which should be used to set parameters of query
      */
     protected List<T> findAll(String query, PreparedStatementConsumer preparedStatementConsumer, Mapper<T> mapper) {

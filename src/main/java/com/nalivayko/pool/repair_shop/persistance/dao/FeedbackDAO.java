@@ -1,6 +1,6 @@
-package com.nalivayko.pool.persistance.dao;
+package com.nalivayko.pool.repair_shop.persistance.dao;
 
-import com.nalivayko.pool.model.Feedback;
+import com.nalivayko.pool.repair_shop.model.Feedback;
 
 import java.util.List;
 

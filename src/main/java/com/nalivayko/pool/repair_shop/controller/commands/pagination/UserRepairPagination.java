@@ -1,9 +1,9 @@
-package com.nalivayko.pool.controller.commands.pagination;
+package com.nalivayko.pool.repair_shop.controller.commands.pagination;
 
-import com.nalivayko.pool.model.RepairRequest;
-import com.nalivayko.pool.model.User;
-import com.nalivayko.pool.services.RepairRequestService;
-import com.nalivayko.pool.util.ParametersAndAttributes;
+import com.nalivayko.pool.repair_shop.model.RepairRequest;
+import com.nalivayko.pool.repair_shop.model.User;
+import com.nalivayko.pool.repair_shop.services.RepairRequestService;
+import com.nalivayko.pool.repair_shop.util.ParametersAndAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

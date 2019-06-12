@@ -10,7 +10,7 @@
     <uri>https://nalivayko.com/jsp/tlds/fix-shop-tags</uri>
     <tag>
         <name>stateColor</name>
-        <tag-class>com.nalivayko.pool.web.tags.StateColorTag</tag-class>
+        <tag-class>com.nalivayko.pool.repair_shop.web.tags.StateColorTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>status</name>

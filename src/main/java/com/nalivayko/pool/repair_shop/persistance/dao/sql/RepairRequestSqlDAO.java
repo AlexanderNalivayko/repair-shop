@@ -1,17 +1,17 @@
-package com.nalivayko.pool.persistance.dao.sql;
+package com.nalivayko.pool.repair_shop.persistance.dao.sql;
 
-import com.nalivayko.pool.model.RepairRequest;
-import com.nalivayko.pool.model.enums.RepairRequestStatus;
-import com.nalivayko.pool.model.enums.ReviewStatus;
-import com.nalivayko.pool.persistance.TransactionManager;
-import com.nalivayko.pool.persistance.dao.RepairRequestDAO;
-import com.nalivayko.pool.persistance.dao.sql.query.RepairRequestQuery;
-import com.nalivayko.pool.persistance.mappers.RepairRequestMapper;
+import com.nalivayko.pool.repair_shop.model.RepairRequest;
+import com.nalivayko.pool.repair_shop.model.enums.RepairRequestStatus;
+import com.nalivayko.pool.repair_shop.model.enums.ReviewStatus;
+import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
+import com.nalivayko.pool.repair_shop.persistance.dao.RepairRequestDAO;
+import com.nalivayko.pool.repair_shop.persistance.dao.sql.query.RepairRequestQuery;
+import com.nalivayko.pool.repair_shop.persistance.mappers.RepairRequestMapper;
 
 import java.util.List;
 
 /**
- * @see com.nalivayko.pool.persistance.dao.sql.AbstractSqlDAO
+ * @see com.nalivayko.pool.repair_shop.persistance.dao.sql.AbstractSqlDAO
  */
 public class RepairRequestSqlDAO extends AbstractSqlDAO<RepairRequest> implements RepairRequestDAO {
 
