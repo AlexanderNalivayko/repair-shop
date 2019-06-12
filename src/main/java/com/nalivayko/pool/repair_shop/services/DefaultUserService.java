@@ -4,8 +4,7 @@ import com.nalivayko.pool.model.User;
 import com.nalivayko.pool.model.enums.UserRole;
 import com.nalivayko.pool.persistance.TransactionManager;
 import com.nalivayko.pool.persistance.dao.UserDAO;
-
-//todo pass encryption/decryption
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * Provides methods to work with User (create, validate, find ...)
@@ -32,7 +31,8 @@ public class DefaultUserService implements UserService {
     public void create(String username, String pass,
                        String firstName, String lastName, String email, String phone) {
         try {
-            User user = new User(UserRole.CUSTOMER, username, pass, firstName, lastName, email, phone);
+            User user = new User(UserRole.CUSTOMER, username,
+                    DigestUtils.md5Hex(pass), firstName, lastName, email, phone);
             transactionManager.getConnection();
             userDAO.create(user);
         } finally {
@@ -52,7 +52,7 @@ public class DefaultUserService implements UserService {
         try {
             transactionManager.getConnection();
             User user = userDAO.findByUsername(username);
-            if (user == null || !user.getPassword().equals(pass)) {
+            if (user == null || !user.getPassword().equals(DigestUtils.md5Hex(pass))) {
                 return null;
             }
             return user;
