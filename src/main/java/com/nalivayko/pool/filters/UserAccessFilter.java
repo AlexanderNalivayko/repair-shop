@@ -57,9 +57,8 @@ public class UserAccessFilter implements Filter {
             }
         } else if (!userPermittedToPerformRequest(user, requestPath)) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
-        } else {
-            filterChain.doFilter(servletRequest, servletResponse);
         }
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     /**
