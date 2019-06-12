@@ -2,7 +2,6 @@ package com.nalivayko.pool.services;
 
 import com.nalivayko.pool.model.RepairRequest;
 import com.nalivayko.pool.model.User;
-import com.nalivayko.pool.model.enums.RepairRequestStatus;
 
 import java.util.List;
 

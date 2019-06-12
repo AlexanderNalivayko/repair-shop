@@ -1,5 +1,7 @@
 package com.nalivayko.pool.controller.commands.pagination;
 
+import com.nalivayko.pool.util.ParametersAndAttributes;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -9,10 +11,6 @@ import java.util.List;
  * @param <T>
  */
 public abstract class AbstractPagination<T> {
-    private static final String PAGE = "page";
-    private static final String RECORDS = "records";
-    private static final String NUMBER_OF_PAGES = "numberOfPages";
-    private static final String CURRENT_PAGE = "currentPage";
 
     public abstract void paginate(HttpServletRequest request, T service);
 
@@ -27,9 +25,9 @@ public abstract class AbstractPagination<T> {
     void setPaginationAttributes(HttpServletRequest request, List data, int recordsCount,
                                  int recordsPerPage, int currentPage) {
         int numberOfPages = (int) Math.ceil((float) recordsCount / recordsPerPage);
-        request.setAttribute(RECORDS, data);
-        request.setAttribute(NUMBER_OF_PAGES, numberOfPages);
-        request.setAttribute(CURRENT_PAGE, currentPage);
+        request.setAttribute(ParametersAndAttributes.RECORDS, data);
+        request.setAttribute(ParametersAndAttributes.NUMBER_OF_PAGES, numberOfPages);
+        request.setAttribute(ParametersAndAttributes.CURRENT_PAGE, currentPage);
     }
 
     /**
@@ -38,6 +36,6 @@ public abstract class AbstractPagination<T> {
      * @return - current page
      */
     int getCurrentPage(HttpServletRequest request) {
-        return request.getParameter(PAGE) == null ? 1 : Integer.parseInt(request.getParameter(PAGE));
+        return request.getParameter(ParametersAndAttributes.PAGE) == null ? 1 : Integer.parseInt(request.getParameter(ParametersAndAttributes.PAGE));
     }
 }

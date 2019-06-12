@@ -4,23 +4,22 @@ import com.nalivayko.pool.controller.commands.Command;
 import com.nalivayko.pool.controller.commands.user.OpenLoginPage;
 import com.nalivayko.pool.model.User;
 import com.nalivayko.pool.model.enums.UserRole;
+import com.nalivayko.pool.util.ParametersAndAttributes;
 import com.nalivayko.pool.util.UrlRequests;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
  * {@code UserAccessFilter} - checks if there is user in session and if user role
  * allowing to perform such request
- * <p>
- * Redirect to login page - if null user trying to perform specific requests
- * Redirect to 403 if user not allowed to perform such request.
+ * Redirects to login page - if null user trying to perform specific requests
+ * Sends 403 if user not allowed to perform such request.
  */
 public class UserAccessFilter implements Filter {
-    private static final String[] restrictedForUnregistered = {
+    private static final String[] RESTRICTED_FOR_UNREGISTERED = {
             UrlRequests.MANAGER_PAGE,
             UrlRequests.MASTER_PAGE,
             UrlRequests.CUSTOMER,
@@ -37,36 +36,30 @@ public class UserAccessFilter implements Filter {
             UrlRequests.REPAIR_PAGE,
             UrlRequests.MANAGER_PAGE};
 
-    private Command openLoginPage;
+    private static Command openLoginPage = new OpenLoginPage();
 
     @Override
     public void init(FilterConfig filterConfig) {
-        this.openLoginPage = new OpenLoginPage();
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        HttpSession session = request.getSession(false);
-
         String requestPath = request.getRequestURI();
-        User user = (User) session.getAttribute("user");
+        User user = (User) request.getSession().getAttribute(ParametersAndAttributes.USER);
 
         if (user == null) {
-            for (String restrictedUrl : restrictedForUnregistered) {
+            for (String restrictedUrl : RESTRICTED_FOR_UNREGISTERED) {
                 if (requestPath.contains(restrictedUrl)) {
                     openLoginPage.execute(request, response);
-                    return;
                 }
             }
+        } else if (!userPermittedToPerformRequest(user, requestPath)) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
         } else {
-            if (!userPermittedToPerformRequest(user, requestPath)) {
-                response.sendError(HttpServletResponse.SC_FORBIDDEN);
-                return;
-            }
+            filterChain.doFilter(servletRequest, servletResponse);
         }
-        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     /**

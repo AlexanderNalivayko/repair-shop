@@ -3,6 +3,7 @@ package com.nalivayko.pool.controller.commands.user;
 import com.nalivayko.pool.controller.commands.Command;
 import com.nalivayko.pool.model.User;
 import com.nalivayko.pool.services.UserService;
+import com.nalivayko.pool.util.ParametersAndAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,12 +14,6 @@ import java.io.IOException;
  * @see Command
  */
 public class Login implements Command {
-    private static final String LOGIN = "login";
-    private static final String PASSWORD = "password";
-    private static final String WRONG_INPUT = "wrong_input";
-
-    private static final String USER = "user";
-
     private UserService userService;
     private Command openHomePage;
     private Command openLoginPage;
@@ -31,14 +26,14 @@ public class Login implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = request.getParameter(LOGIN);
-        String pass = request.getParameter(PASSWORD);
+        String login = request.getParameter(ParametersAndAttributes.LOGIN);
+        String pass = request.getParameter(ParametersAndAttributes.PASSWORD);
         User user = userService.validate(login, pass);
         if (user == null) {
-            request.setAttribute(WRONG_INPUT, true);
+            request.setAttribute(ParametersAndAttributes.WRONG_INPUT, true);
             openLoginPage.execute(request, response);
         } else {
-            request.getSession().setAttribute(USER, user);
+            request.getSession().setAttribute(ParametersAndAttributes.USER, user);
             openHomePage.execute(request, response);
         }
     }

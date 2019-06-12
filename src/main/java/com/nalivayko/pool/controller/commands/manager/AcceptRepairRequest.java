@@ -2,6 +2,7 @@ package com.nalivayko.pool.controller.commands.manager;
 
 import com.nalivayko.pool.controller.commands.Command;
 import com.nalivayko.pool.services.RepairRequestService;
+import com.nalivayko.pool.util.ParametersAndAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +13,6 @@ import java.io.IOException;
  * @see Command
  */
 public class AcceptRepairRequest implements Command {
-    private static final String PRICE = "price";
-    private static final String REPAIR_ID = "repairId";
 
     private Command openManagerPage;
     private RepairRequestService repairRequestService;
@@ -25,8 +24,8 @@ public class AcceptRepairRequest implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String repairIdString = request.getParameter(REPAIR_ID);
-        String priseString = request.getParameter(PRICE);
+        String repairIdString = request.getParameter(ParametersAndAttributes.REPAIR_ID);
+        String priseString = request.getParameter(ParametersAndAttributes.PRICE);
         if (repairIdString == null
                 || repairIdString.isEmpty()
                 || priseString == null

@@ -44,8 +44,8 @@ public class DefaultUserService implements UserService {
      * Check if user exists and if it`s password equal to parameter pass
      * @param username - user you want to check
      * @param pass - pass of the user
-     * @return true - if user exists and passwords correct
-     *         false - if user not exists of if password is not correct
+     * @return User with username that was passed in parameters.
+     *         or null - if user not exists of if password is not correct
      */
     @Override
     public User validate(String username, String pass) {
@@ -62,7 +62,7 @@ public class DefaultUserService implements UserService {
     }
 
     /**
-     * Find user by it`s usename
+     * Find user by it`s username
      * @param username - username of user you want to find
      * @return user with passed username
      */

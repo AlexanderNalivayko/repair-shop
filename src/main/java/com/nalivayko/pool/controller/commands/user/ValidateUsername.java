@@ -2,6 +2,7 @@ package com.nalivayko.pool.controller.commands.user;
 
 import com.nalivayko.pool.controller.commands.Command;
 import com.nalivayko.pool.services.UserService;
+import com.nalivayko.pool.util.ParametersAndAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +14,6 @@ import java.io.PrintWriter;
  * @see Command
  */
 public class ValidateUsername  implements Command {
-    private static final String LOGIN = "login";
-    private static final String FREE = "free";
-    private static final String TAKEN = "taken";
 
     private UserService userService;
 
@@ -26,10 +24,10 @@ public class ValidateUsername  implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        if (userService.getUserByUsername(request.getParameter(LOGIN)) == null) {
-            out.print(FREE);
+        if (userService.getUserByUsername(request.getParameter(ParametersAndAttributes.LOGIN)) == null) {
+            out.print(ParametersAndAttributes.FREE);
         } else {
-            out.print(TAKEN);
+            out.print(ParametersAndAttributes.TAKEN);
         }
     }
 }

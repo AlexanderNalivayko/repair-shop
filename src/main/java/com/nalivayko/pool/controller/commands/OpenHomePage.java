@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class OpenHomePage implements Command {
-
     private static final String HOME_PAGE_URL =  UrlRequests.SITE + UrlRequests.HOME_PAGE;
 
     @Override

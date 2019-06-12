@@ -3,6 +3,7 @@ package com.nalivayko.pool.controller.commands.manager;
 
 import com.nalivayko.pool.controller.commands.Command;
 import com.nalivayko.pool.services.RepairRequestService;
+import com.nalivayko.pool.util.ParametersAndAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +14,6 @@ import java.io.IOException;
  * @see Command
  */
 public class RejectRepairRequest implements Command {
-    private static final String REASON = "reason";
-    private static final String REPAIR_ID = "repairId";
-
     private Command openManagerPage;
     private RepairRequestService repairRequestService;
 
@@ -26,8 +24,8 @@ public class RejectRepairRequest implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String stringRepairId = request.getParameter(REPAIR_ID);
-        String reason = request.getParameter(REASON);
+        String stringRepairId = request.getParameter(ParametersAndAttributes.REPAIR_ID);
+        String reason = request.getParameter(ParametersAndAttributes.REASON);
         if (stringRepairId == null || stringRepairId.isEmpty() || reason == null || reason.isEmpty()) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
         } else {
