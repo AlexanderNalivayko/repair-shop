@@ -15,7 +15,7 @@
 
     <filter>
         <filter-name>EncodingFilter</filter-name>
-        <filter-class>com.nalivayko.pool.filters.EncodingFilter</filter-class>
+        <filter-class>com.nalivayko.pool.repair_shop.filters.EncodingFilter</filter-class>
         <init-param>
             <param-name>encoding_type</param-name>
             <param-value>UTF-8</param-value>
@@ -28,7 +28,7 @@
 
     <filter>
         <filter-name>internationalisationFilter</filter-name>
-        <filter-class>com.nalivayko.pool.filters.InternationalisationFilter</filter-class>
+        <filter-class>com.nalivayko.pool.repair_shop.filters.InternationalisationFilter</filter-class>
         <init-param>
             <param-name>bundle</param-name>
             <param-value>lang</param-value>
@@ -45,7 +45,7 @@
 
     <filter>
         <filter-name>UserAccessFilter</filter-name>
-        <filter-class>com.nalivayko.pool.filters.UserAccessFilter</filter-class>
+        <filter-class>com.nalivayko.pool.repair_shop.filters.UserAccessFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>UserAccessFilter</filter-name>
@@ -54,7 +54,7 @@
 
     <servlet>
         <servlet-name>appServlet</servlet-name>
-        <servlet-class>com.nalivayko.pool.web.DispatcherServlet</servlet-class>
+        <servlet-class>com.nalivayko.pool.repair_shop.web.DispatcherServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>appServlet</servlet-name>

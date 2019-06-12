@@ -22,10 +22,10 @@ CREATE TABLE IF NOT EXISTS users (
     UNIQUE (username)
     ) ENGINE=InnoDB CHARACTER SET=UTF8;
 INSERT INTO users (id, role, username, password, first_name, last_name, email, phone)
-VALUES (1, 'MASTER', 'master', 'pass', 'John', 'Smith', 'admin@fix.com', '+38067-777-77-77'),
-(2, 'MANAGER', 'manager', 'pass', 'Jane', 'Richardson', 'manager@fix.com', '+38093-333-33-33'),
-(3, 'CUSTOMER', 'alex', 'pass', 'Alex', 'Black', 'alex@user.com', '+38098-475-21-30'),
-(4, 'CUSTOMER', 'johny', 'pass', 'John', 'Snow', 'user@user.com', '+38098-485-71-85');
+VALUES (1, 'MASTER', 'master', '1a1dc91c907325c69271ddf0c944bc72', 'John', 'Smith', 'admin@fix.com', '+38067-777-77-77'),
+(2, 'MANAGER', 'manager', '1a1dc91c907325c69271ddf0c944bc72', 'Jane', 'Richardson', 'manager@fix.com', '+38093-333-33-33'),
+(3, 'CUSTOMER', 'alex', '1a1dc91c907325c69271ddf0c944bc72', 'Alex', 'Black', 'alex@user.com', '+38098-475-21-30'),
+(4, 'CUSTOMER', 'johny', '1a1dc91c907325c69271ddf0c944bc72', 'John', 'Snow', 'user@user.com', '+38098-485-71-85');
 
 -- ------------------------------------------
 -- fixapp.items
