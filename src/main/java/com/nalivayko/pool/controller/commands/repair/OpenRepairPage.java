@@ -17,9 +17,10 @@ public class OpenRepairPage implements Command {
     private RepairRequestService repairRequestService;
     private AbstractPagination<RepairRequestService> pagination;
 
-    public OpenRepairPage(RepairRequestService repairRequestService, AbstractPagination<RepairRequestService> pagination) {
+    public OpenRepairPage(RepairRequestService repairRequestService,
+                          AbstractPagination<RepairRequestService> userPagination) {
         this.repairRequestService = repairRequestService;
-        this.pagination = pagination;
+        this.pagination = userPagination;
     }
 
     @Override

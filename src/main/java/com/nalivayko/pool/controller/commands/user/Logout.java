@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.nalivayko.pool.util.ParametersAndAttributes.USER;
+
 /**
  * @see Command
  */
 public class Logout implements Command {
-    private static final String USER = "user";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

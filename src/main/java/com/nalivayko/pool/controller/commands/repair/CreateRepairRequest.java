@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.nalivayko.pool.util.ParametersAndAttributes.*;
+
 /**
  * @see Command
  */
 public class CreateRepairRequest implements Command {
-    private static final String USER = "user";
     private RepairRequestService repairRequestService;
     private Command openRepairRequests;
 
@@ -25,15 +26,11 @@ public class CreateRepairRequest implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute(USER);
-        if (user == null) {
-            response.sendError(HttpServletResponse.SC_FORBIDDEN);
-        } else {
-            String type = request.getParameter("prod-type");
-            String brand = request.getParameter("brand");
-            String name = request.getParameter("name");
-            String description = request.getParameter("description");
-            repairRequestService.createRepairRequest(user, type, brand, name, description);
-            openRepairRequests.execute(request, response);
-        }
+        String type = request.getParameter(PRODUCT_TYPE);
+        String brand = request.getParameter(BRAND);
+        String name = request.getParameter(NAME);
+        String description = request.getParameter(DESCRIPTION);
+        repairRequestService.createRepairRequest(user, type, brand, name, description);
+        openRepairRequests.execute(request, response);
     }
 }
