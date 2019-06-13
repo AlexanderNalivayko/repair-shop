@@ -8,12 +8,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FormattingUtil {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FormattingUtil.class);
+    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private FormattingUtil() {
     }
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormattingUtil.class);
-    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * Convert Date to string using pattern yyyy-MM-dd HH:mm:ss
@@ -21,7 +20,7 @@ public class FormattingUtil {
      * @return string representation of date
      */
     public static String dateToString(Date date) {
-        return SIMPLE_DATE_FORMAT.format(date);
+        return date != null ? SIMPLE_DATE_FORMAT.format(date) : null;
     }
 
     /**

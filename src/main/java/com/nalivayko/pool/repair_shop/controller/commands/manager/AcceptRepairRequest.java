@@ -32,7 +32,7 @@ public class AcceptRepairRequest implements Command {
                 || priseString.isEmpty()) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
         } else {
-            repairRequestService.acceptRepairRequest(Integer.parseInt(repairIdString), Integer.parseInt(priseString));
+            repairRequestService.acceptRepairRequest(repairIdString, priseString);
             openManagerPage.execute(request, response);
         }
     }

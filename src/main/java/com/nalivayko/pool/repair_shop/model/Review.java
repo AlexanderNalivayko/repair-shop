@@ -2,23 +2,25 @@ package com.nalivayko.pool.repair_shop.model;
 
 import com.nalivayko.pool.repair_shop.model.enums.ReviewStatus;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Review {
     private Integer id;
     private ReviewStatus status;
-    private Date time;
-    private Integer cost;
+    private String time;
+    private BigDecimal cost;
     private String rejectReason;
 
-    public Review(Integer id, ReviewStatus status, Date time, Integer cost) {
+    public Review(Integer id, ReviewStatus status, String time, BigDecimal cost, String rejectReason) {
         this.id = id;
         this.status = status;
         this.time = time;
         this.cost = cost;
+        this.rejectReason = rejectReason;
     }
 
-    public Review(ReviewStatus status, Integer cost) {
+    public Review(ReviewStatus status, BigDecimal cost) {
         this.status = status;
         this.cost = cost;
     }
@@ -52,19 +54,19 @@ public class Review {
         this.status = status;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public Integer getCost() {
+    public BigDecimal getCost() {
         return cost;
     }
 
-    public void setCost(Integer cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 }

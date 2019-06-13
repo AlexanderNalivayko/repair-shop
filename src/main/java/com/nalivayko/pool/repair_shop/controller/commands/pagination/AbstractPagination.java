@@ -36,6 +36,7 @@ public abstract class AbstractPagination<T> {
      * @return - current page
      */
     int getCurrentPage(HttpServletRequest request) {
-        return request.getParameter(ParametersAndAttributes.PAGE) == null ? 1 : Integer.parseInt(request.getParameter(ParametersAndAttributes.PAGE));
+        return request.getParameter(ParametersAndAttributes.PAGE) == null ? 1
+                : Integer.parseInt(request.getParameter(ParametersAndAttributes.PAGE));
     }
 }

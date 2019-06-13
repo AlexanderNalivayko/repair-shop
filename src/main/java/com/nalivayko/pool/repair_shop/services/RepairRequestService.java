@@ -15,7 +15,7 @@ public interface RepairRequestService {
 
     List<RepairRequest> getAllAccepted(int limit, int offset);
 
-    void acceptRepairRequest(int repairRequestId, Integer cost);
+    void acceptRepairRequest(String repairRequestId, String cost);
 
     void rejectRepairRequest(int repairRequestId, String reason);
 

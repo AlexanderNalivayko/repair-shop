@@ -71,7 +71,7 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="number" name="price" id="price" class="form-control" required>
+                                    <input type="number" step="0.01" name="price" id="price" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-sm-12 p-0">

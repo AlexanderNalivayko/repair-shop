@@ -11,6 +11,7 @@ import com.nalivayko.pool.repair_shop.persistance.dao.ItemDAO;
 import com.nalivayko.pool.repair_shop.persistance.dao.RepairRequestDAO;
 import com.nalivayko.pool.repair_shop.persistance.dao.ReviewDAO;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -87,8 +88,8 @@ public class DefaultRepairRequestService implements RepairRequestService {
      * Find all repair requests with reviewStatus and repairRequestStatus
      * as passed in parameters.
      *
-     * @param limit               amount of results subsequence (used for pagination)
-     * @param offset              start position of result subsequence (used for pagination)
+     * @param limit  amount of results subsequence (used for pagination)
+     * @param offset start position of result subsequence (used for pagination)
      * @return RepairRequest
      */
     @Override
@@ -109,12 +110,13 @@ public class DefaultRepairRequestService implements RepairRequestService {
      * @param cost            of repairRequest
      */
     @Override
-    public void acceptRepairRequest(int repairRequestId, Integer cost) {
+    public void acceptRepairRequest(String repairRequestId, String cost) {
         try {
+            int repairId = Integer.parseInt(repairRequestId);
             transactionManager.startTransaction();
-            int reviewId = reviewDAO.create(new Review(ReviewStatus.ACCEPTED, cost * FRACTIONAL));
-            repairRequestDAO.updateReviewId(repairRequestId, reviewId);
-            repairRequestDAO.updateStatus(repairRequestId, RepairRequestStatus.REVIEWED);
+            int reviewId = reviewDAO.create(new Review(ReviewStatus.ACCEPTED, new BigDecimal(cost)));
+            repairRequestDAO.updateReviewId(repairId, reviewId);
+            repairRequestDAO.updateStatus(repairId, RepairRequestStatus.REVIEWED);
         } finally {
             transactionManager.endTransaction();
         }

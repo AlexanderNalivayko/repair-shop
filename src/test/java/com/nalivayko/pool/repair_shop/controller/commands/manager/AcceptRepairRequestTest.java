@@ -39,7 +39,7 @@ public class AcceptRepairRequestTest {
 
         new AcceptRepairRequest(repairRequestService, openManagerPage).execute(request, response);
 
-        verify(repairRequestService).acceptRepairRequest(Integer.parseInt(idString), Integer.parseInt(PRICE_STRING));
+        verify(repairRequestService).acceptRepairRequest(idString, PRICE_STRING);
         verify(openManagerPage).execute(request, response);
     }
 
@@ -52,7 +52,7 @@ public class AcceptRepairRequestTest {
 
         new AcceptRepairRequest(repairRequestService, openManagerPage).execute(request, response);
 
-        verify(repairRequestService, never()).acceptRepairRequest(anyInt(), anyInt());
+        verify(repairRequestService, never()).acceptRepairRequest(anyString(), anyString());
     }
 
     @Test
@@ -64,6 +64,6 @@ public class AcceptRepairRequestTest {
 
         new AcceptRepairRequest(repairRequestService, openManagerPage).execute(request, response);
 
-        verify(repairRequestService, never()).acceptRepairRequest(anyInt(), anyInt());
+        verify(repairRequestService, never()).acceptRepairRequest(anyString(), anyString());
     }
 }

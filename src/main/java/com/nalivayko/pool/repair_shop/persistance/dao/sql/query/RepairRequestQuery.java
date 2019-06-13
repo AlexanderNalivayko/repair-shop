@@ -60,6 +60,7 @@ public class RepairRequestQuery {
             + ReviewQuery.TABLE_NAME + "." + ReviewQuery.REVIEW_STATUS + ", "
             + ReviewQuery.TABLE_NAME + "." + ReviewQuery.REVIEW_TIME + ", "
             + ReviewQuery.TABLE_NAME + "." + ReviewQuery.COST + ", "
+            + ReviewQuery.TABLE_NAME + "." + ReviewQuery.REJECT_REASON + ", "
             + TABLE_NAME + "." + STATUS + ", "
             + TABLE_NAME + "." + CREATION_TIME + ", "
             + TABLE_NAME + "." + DESCRIPTION

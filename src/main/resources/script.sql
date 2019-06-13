@@ -60,13 +60,13 @@ CREATE TABLE IF NOT EXISTS reviews (
     id INT AUTO_INCREMENT NOT NULL,
     review_status VARCHAR(20),
     review_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    cost BIGINT DEFAULT NULL,
+    cost DECIMAL(8,2) DEFAULT NULL,
     reject_reason VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY (id)
     ) ENGINE=InnoDB CHARACTER SET=UTF8;
 INSERT INTO reviews (id, review_status, cost, reject_reason)
-VALUES (1, 'ACCEPTED', 10000, null),
-(2, 'ACCEPTED', 40000, null),
+VALUES (1, 'ACCEPTED', 102.50, null),
+(2, 'ACCEPTED', 84.12, null),
 (3, 'REJECTED', null, 'We don''t fix cars');
 
 -- ------------------------------------------

@@ -28,6 +28,5 @@ public class OpenRepairPage implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         pagination.paginate(request, repairRequestService);
         request.getRequestDispatcher(PagesPath.REPAIR).forward(request, response);
-
     }
 }

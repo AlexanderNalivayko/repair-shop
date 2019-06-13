@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="https://nalivayko.com/jsp/tlds/fix-shop-tags" prefix="fix-shop-tags"%>
+<%@ taglib uri="https://nalivayko.com/jsp/tlds/fix-shop-tags" prefix="fix-shop-tags" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="${sessionScope.bundle}"/>
@@ -18,14 +18,27 @@
     <div class="card my-2 shadow">
         <div class="card-body">
             <c:if test="${request.review.status != null}">
-                <span class="text-muted">
+                <p class="text-muted">
                     <fmt:message key="repair.review.status"/>:
-                        <%--${request.review.status}--%>
-                </span>
-                <fix-shop-tags:stateColor status="${request.review.status}"/>
+                    <fix-shop-tags:stateColor status="${request.review.status}"/>
+                </p>
+            </c:if>
+            <c:if test="${request.review.time != null}">
+                <p class="text-muted">
+                    <fmt:message key="repair.review.time"/>:
+                        ${request.review.time}
+                </p>
+            </c:if>
+            <c:if test="${request.review.cost != null}">
                 <p class="text-muted">
                     <fmt:message key="repair.price"/>:
                         ${request.review.cost}
+                </p>
+            </c:if>
+            <c:if test="${request.review.rejectReason != null}">
+                <p class="text-muted">
+                    <fmt:message key="repair.reject-reason"/>:
+                        ${request.review.rejectReason}
                 </p>
             </c:if>
             <p class="text-muted">
