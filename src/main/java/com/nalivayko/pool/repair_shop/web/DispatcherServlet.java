@@ -33,6 +33,7 @@ public class DispatcherServlet extends HttpServlet {
         RepairRequestDAO repairRequestDAO = new RepairRequestSqlDAO(transactionManager);
         ReviewDAO reviewDAO = new ReviewSqlDAO(transactionManager);
         ItemDAO itemDAO = new ItemSqlDAO(transactionManager);
+
         RepairRequestService repairRequestService = new DefaultRepairRequestService(reviewDAO, repairRequestDAO,
                 itemDAO, transactionManager);
 

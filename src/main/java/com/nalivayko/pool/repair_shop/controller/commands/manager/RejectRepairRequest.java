@@ -1,6 +1,5 @@
 package com.nalivayko.pool.repair_shop.controller.commands.manager;
 
-
 import com.nalivayko.pool.repair_shop.controller.commands.Command;
 import com.nalivayko.pool.repair_shop.services.RepairRequestService;
 import com.nalivayko.pool.repair_shop.util.ParametersAndAttributes;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Process request to reject repair request
  * @see Command
  */
 public class RejectRepairRequest implements Command {

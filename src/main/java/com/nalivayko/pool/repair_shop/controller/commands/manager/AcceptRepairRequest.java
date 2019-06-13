@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Process request to accept repair request
  * @see Command
  */
 public class AcceptRepairRequest implements Command {
-
     private Command openManagerPage;
     private RepairRequestService repairRequestService;
 

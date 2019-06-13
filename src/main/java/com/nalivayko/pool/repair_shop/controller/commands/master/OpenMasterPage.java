@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Process request to open master page
  * @see Command
  */
 public class OpenMasterPage implements Command {

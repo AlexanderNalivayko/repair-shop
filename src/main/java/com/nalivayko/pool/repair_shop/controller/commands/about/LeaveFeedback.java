@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Process request to create new feedback
  * @see Command
  */
 public class LeaveFeedback implements Command {

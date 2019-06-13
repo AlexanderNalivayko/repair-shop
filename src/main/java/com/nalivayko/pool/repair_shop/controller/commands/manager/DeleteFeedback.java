@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Process request to delete feedback
  * @see Command
  */
 public class DeleteFeedback implements Command {

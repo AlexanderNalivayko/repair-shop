@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Process request to open repair page
  * @see Command
  */
 public class OpenRepairPage implements Command {

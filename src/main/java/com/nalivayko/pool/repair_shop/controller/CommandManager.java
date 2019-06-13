@@ -32,10 +32,8 @@ public class CommandManager {
 
     private Map<String, Command> commands = new HashMap<>();
 
-
     public CommandManager(UserService userService, FeedbackService feedbackService,
                           RepairRequestService repairRequestService) {
-
         AbstractPagination<FeedbackService> feedbackPagination = new FeedbackPagination(FEEDBACK_PER_PAGE);
         AbstractPagination<RepairRequestService> newRepairPagination = new NewRepairPagination(REPAIRS_PER_PAGE);
         AbstractPagination<RepairRequestService> userRepairPagination = new UserRepairPagination(REPAIRS_PER_PAGE);
@@ -75,7 +73,7 @@ public class CommandManager {
     }
 
     /**
-     * choose and perform command that represents user request
+     * choose and perform command
      *
      * @param request  that should be passed from dispatcherServlet
      * @param response that should be passed from dispatcherServlet

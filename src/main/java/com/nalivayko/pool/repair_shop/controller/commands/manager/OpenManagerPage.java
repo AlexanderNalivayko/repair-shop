@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Process request to open manager page
  * @see Command
  */
 public class OpenManagerPage implements Command {

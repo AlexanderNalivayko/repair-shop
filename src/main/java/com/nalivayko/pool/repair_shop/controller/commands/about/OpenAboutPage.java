@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Process request to open about page
  * @see Command
  */
 public class OpenAboutPage implements Command {

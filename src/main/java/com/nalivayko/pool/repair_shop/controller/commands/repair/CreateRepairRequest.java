@@ -12,6 +12,7 @@ import java.io.IOException;
 import static com.nalivayko.pool.repair_shop.util.ParametersAndAttributes.*;
 
 /**
+ * Process request to create repair request
  * @see Command
  */
 public class CreateRepairRequest implements Command {
