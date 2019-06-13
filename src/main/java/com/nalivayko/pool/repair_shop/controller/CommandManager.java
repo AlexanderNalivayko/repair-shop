@@ -79,7 +79,8 @@ public class CommandManager {
      * @param response that should be passed from dispatcherServlet
      */
     public void perform(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String uri = request.getRequestURI().replace(UrlRequests.SITE, "");
+        String requestURI = request.getRequestURI();
+        String uri = requestURI.substring(requestURI.lastIndexOf(UrlRequests.SITE) + UrlRequests.SITE.length());
         Command command = commands.get(uri);
         if (command == null) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);

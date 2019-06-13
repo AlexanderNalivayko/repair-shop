@@ -53,10 +53,12 @@ public class UserAccessFilter implements Filter {
             for (String restrictedUrl : RESTRICTED_FOR_UNREGISTERED) {
                 if (requestPath.contains(restrictedUrl)) {
                     openLoginPage.execute(request, response);
+                    return;
                 }
             }
         } else if (!userPermittedToPerformRequest(user, requestPath)) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return;
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
