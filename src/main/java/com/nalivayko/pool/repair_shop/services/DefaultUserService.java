@@ -4,7 +4,6 @@ import com.nalivayko.pool.repair_shop.model.User;
 import com.nalivayko.pool.repair_shop.model.enums.UserRole;
 import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
 import com.nalivayko.pool.repair_shop.persistance.dao.UserDAO;
-import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * Provides methods to work with User (create, validate, find ...)
@@ -32,7 +31,7 @@ public class DefaultUserService implements UserService {
                        String firstName, String lastName, String email, String phone) {
         try {
             User user = new User(UserRole.CUSTOMER, username,
-                    DigestUtils.md5Hex(pass), firstName, lastName, email, phone);
+                    pass, firstName, lastName, email, phone);
             transactionManager.getConnection();
             userDAO.create(user);
         } finally {
@@ -52,7 +51,7 @@ public class DefaultUserService implements UserService {
         try {
             transactionManager.getConnection();
             User user = userDAO.findByUsername(username);
-            if (user == null || !user.getPassword().equals(DigestUtils.md5Hex(pass))) {
+            if (user == null || !user.getPassword().equals(pass)) {
                 return null;
             }
             return user;

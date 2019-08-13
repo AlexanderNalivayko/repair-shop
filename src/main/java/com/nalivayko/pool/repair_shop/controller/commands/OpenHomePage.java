@@ -2,11 +2,13 @@ package com.nalivayko.pool.repair_shop.controller.commands;
 
 import com.nalivayko.pool.repair_shop.util.PagesPath;
 import com.nalivayko.pool.repair_shop.util.UrlRequests;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 
 public class OpenHomePage implements Command {
     private static final String HOME_PAGE_URL =  UrlRequests.SITE + UrlRequests.HOME_PAGE;

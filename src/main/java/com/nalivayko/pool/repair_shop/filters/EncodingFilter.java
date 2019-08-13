@@ -7,6 +7,7 @@ import java.io.IOException;
  * {@code EncodingFilter} - sets request and response encoding to
  * encoding which it takes from initial parameters of web.xml
  */
+
 public class EncodingFilter implements Filter {
     private static final String ENCODING_TYPE = "encoding_type";
     private static final String contentType = "text/html; charset=";
