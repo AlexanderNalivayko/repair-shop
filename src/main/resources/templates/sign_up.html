@@ -1,0 +1,81 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="header :: header"></div>
+
+<body class="bg-color">
+<div class="container-fluid">
+    <div class="row justify-content-md-center my-5">
+        <div class="col-md-6 card shadow">
+            <div class="card-body">
+                <h2 class="text-muted" th:text="#{sign_up.title}">
+<!--                    <fmt:message key="sign_up.title"/>-->
+                </h2>
+                <form action="${pageContext.request.contextPath}/site/sign_up_page/sign_up" class="form-signup"
+                      id="signupform">
+                    <label for="login" class="mb-0 text-muted" th:text="#{sign_up.username}">
+<!--                        <fmt:message key="sign_up.username"/>-->
+                    </label>
+<!--                    <div id="free" class="text-success" th:text="#{sign_up.free}">-->
+<!--&lt;!&ndash;                        <fmt:message key="sign_up.free"/>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                    <div id="taken" class="text-danger" th:text="#{sign_up.taken}">-->
+<!--&lt;!&ndash;                        <fmt:message key="sign_up.taken"/>&ndash;&gt;-->
+<!--                    </div>-->
+                    <input type="text" name="login" id="login" class="form-control px-2" required autofocus="">
+
+                    <label for="pass" class="mb-0 text-muted" th:text="#{sign_up.pass}">
+<!--                        <fmt:message key="sign_up.pass"/>-->
+                    </label>
+                    <input type="password" name="pass" id="pass" class="form-control px-2" required autofocus="">
+
+                    <label for="confirm_pass" class="mb-0 text-muted" th:text="#{sign_up.pass_repeat}">
+<!--                        <fmt:message key="sign_up.pass_repeat"/>-->
+                    </label>
+                    <input type="password" id="confirm_pass" class="form-control px-2" required autofocus="">
+
+                    <label for="first_name" class="mb-0 text-muted" th:text="#{sign_up.first_name}">
+<!--                        <fmt:message key="sign_up.first_name"/>-->
+                    </label>
+                    <input type="text" name="first_name" id="first_name" class="form-control px-2" autofocus="">
+
+                    <label for="last_name" class="mb-0 text-muted" th:text="#{sign_up.last_name}">
+<!--                        <fmt:message key="sign_up.last_name"/>-->
+                    </label>
+                    <input type="text" name="last_name" id="last_name" class="form-control px-2" autofocus="">
+
+                    <label for="email" class="mb-0 text-muted" th:text="#{sign_up.email}">
+<!--                        <fmt:message key="sign_up.email"/>-->
+                    </label>
+                    <input type="email" name="email" id="email" class="form-control px-2" autofocus="">
+
+                    <label for="phone" class="mb-0 text-muted" th:text="#{sign_up.phone}">
+<!--                        <fmt:message key="sign_up.phone"/>-->
+                    </label>
+                    <input type="tel" maxlength="20" name="phone" id="phone" class="form-control px-2" autofocus="">
+
+                    <div class="my-4">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a th:href="@{/home_page}"
+                                   class="btn btn-danger btn-block" th:text="#{sign_up.btn.home}">
+<!--                                    <fmt:message key="sign_up.btn.home"/>-->
+                                </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-success btn-block" type="submit" th:text="#{sign_up.btn.create}">
+<!--                                    <fmt:message key="sign_up.btn.create"/>-->
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="footer :: footer"></div>
+
+</body>
+
+</html>

@@ -1,55 +1,28 @@
 package com.nalivayko.pool.repair_shop.model;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+
+@Getter
+@Setter
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "feedback")
 public class Feedback {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     private String text;
     private String creationTime;
-
-    public Feedback(int id, User user, String text, String creationTime) {
-        this.id = id;
-        this.user = user;
-        this.text = text;
-        this.creationTime = creationTime;
-    }
-
-    public Feedback(User user, String text) {
-        this.user = user;
-        this.text = text;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(String creationTime) {
-        this.creationTime = creationTime;
-    }
 }
 

@@ -6,10 +6,11 @@ import com.nalivayko.pool.repair_shop.model.Review;
 import com.nalivayko.pool.repair_shop.model.User;
 import com.nalivayko.pool.repair_shop.model.enums.RepairRequestStatus;
 import com.nalivayko.pool.repair_shop.model.enums.ReviewStatus;
-import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
-import com.nalivayko.pool.repair_shop.persistance.dao.ItemDAO;
-import com.nalivayko.pool.repair_shop.persistance.dao.RepairRequestDAO;
-import com.nalivayko.pool.repair_shop.persistance.dao.ReviewDAO;
+import com.nalivayko.pool.repair_shop.persistance.repositories.CustomizedRepairRequestCrudRepository;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,33 +18,22 @@ import java.util.List;
 /**
  * Provides methods to work with RepairRequests (create, find, delete ...)
  */
-public class DefaultRepairRequestService implements RepairRequestService {
-    private static final int FRACTIONAL = 100;
-    private ReviewDAO reviewDAO;
-    private RepairRequestDAO repairRequestDAO;
-    private ItemDAO itemDAO;
-    private TransactionManager transactionManager;
 
-    public DefaultRepairRequestService(ReviewDAO reviewDAO, RepairRequestDAO repairRequestDAO, ItemDAO itemDAO,
-                                       TransactionManager transactionManager) {
-        this.reviewDAO = reviewDAO;
-        this.repairRequestDAO = repairRequestDAO;
-        this.itemDAO = itemDAO;
-        this.transactionManager = transactionManager;
-    }
+@Service
+@NoArgsConstructor
+public class DefaultRepairRequestService implements RepairRequestService {
+
+    @Autowired
+    private
+    CustomizedRepairRequestCrudRepository repository;
 
     /**
      * @param userId - id of user whom repair requests you want to get
      * @return all RepairRequests that was created by user with userId
      */
     @Override
-    public List<RepairRequest> getAllByUserId(int userId, int limit, int offset) {
-        transactionManager.getConnection();
-        try {
-            return repairRequestDAO.findByUserId(userId, limit, offset);
-        } finally {
-            transactionManager.closeConnection();
-        }
+    public List<RepairRequest> getAllByUserId(int userId, Pageable pageable ) {
+           return repository.findAllById(userId, pageable);
     }
 
     /**
@@ -57,16 +47,12 @@ public class DefaultRepairRequestService implements RepairRequestService {
      */
     @Override
     public void createRepairRequest(User user, String itemType, String itemBrand, String itemName, String description) {
-        try {
-            transactionManager.startTransaction();
-            Item item = new Item(itemType, itemBrand, itemName);
+            Item item =
             int itemId = itemDAO.create(item);
+            repository.save(new Item(itemType, itemBrand, itemName);)
             item.setId(itemId);
             RepairRequest repairRequest = new RepairRequest(user, item, RepairRequestStatus.NEW, description);
             repairRequestDAO.create(repairRequest);
-        } finally {
-            transactionManager.endTransaction();
-        }
     }
 
     /**

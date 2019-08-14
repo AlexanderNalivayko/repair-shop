@@ -2,12 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="header">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="../js/script.js" th:src="@{/js/script.js}"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+        <title th:text="#{site.name}">
+        </title>
+    </head>
 
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-color rounded-20">
@@ -21,17 +36,17 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bolder" th:href="@{/site/home_page}"
+                        <a class="nav-link font-weight-bolder" th:href="@{/home_page}"
                            th:text="#{header.home}"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link font-weight-bolder"
-                           th:href="@{/site/about_page}" th:text="#{header.about}"></a>
+                           th:href="@{/about_page}" th:text="#{header.about}"></a>
                     </li>
                     <div th:if="${user?.userRole eq 'CUSTOMER'}">
                         <li class="nav-item">
                             <a class="nav-link font-weight-bolder"
-                               th:href="@{/site/repair_page}" th:text="#{header.repairRequest}">
+                               th:href="@{/repair_page}" th:text="#{header.repairRequest}">
                             </a>
                         </li>
                     </div>
@@ -44,17 +59,17 @@
                             </div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <div th:unless="${user == null}">
+                            <div th:if="${user == null}">
                                 <a class="dropdown-item"
-                                   href="${pageContext.request.contextPath}/site/login_page" th:text="#{action.login}">
+                                   th:href="@{/login_page}" th:text="#{action.login}">
                                 </a>
                             </div>
-                            <a class="dropdown-item" href="${pageContext.request.contextPath}/site/sign_up_page"
+                            <a class="dropdown-item" th:href="@{/sign_up_page}"
                                th:text="#{action.signup}">
                             </a>
-                            <div th:unless="${user == null}">
+                            <div th:if="${user != null}">
                                 <form name="submitForm" method="POST"
-                                      action="${pageContext.request.contextPath}/site/logout">
+                                      th:action="@{/logout}">
                                     <a class="dropdown-item" href="javascript:document.submitForm.submit()"
                                        th:text="#{action.logout}">
                                     </a>
@@ -65,14 +80,14 @@
                     <div th:if="${user?.userRole eq 'MANAGER'}">
                         <li class="nav-item">
                             <a class="nav-link font-weight-bolder"
-                               href="${pageContext.request.contextPath}/site/manager" th:text="#{header.manager}">
+                               th:href="@{/manager}" th:text="#{header.manager}">
                             </a>
                         </li>
                     </div>
                     <div th:if="${user?.userRole eq 'MANAGER'}">
                         <li class="nav-item">
                             <a class="nav-link font-weight-bolder"
-                               href="${pageContext.request.contextPath}/site/master" th:text="#{header.master}">
+                               th:href="@{/master}" th:text="#{header.master}">
                             </a>
                         </li>
                     </div>
@@ -94,17 +109,6 @@
             </div>
         </nav>
     </header>
-
-    <script type="text/javascript">
-    $(document).ready(function () {
-        $("#locales").change(function () {
-            var selectedOption = $('#locales').val();
-            if (selectedOption != '') {
-                window.location.replace('?lang=' + selectedOption);
-            }
-        });
-    });
-    </script>
 
 </div>
 </body>

@@ -2,20 +2,21 @@ package com.nalivayko.pool.repair_shop.services;
 
 import com.nalivayko.pool.repair_shop.model.User;
 import com.nalivayko.pool.repair_shop.model.enums.UserRole;
-import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
-import com.nalivayko.pool.repair_shop.persistance.dao.UserDAO;
+import com.nalivayko.pool.repair_shop.persistance.repositories.CustomizedFeedBackCrudRepository;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Provides methods to work with User (create, validate, find ...)
  */
+@Service
+@NoArgsConstructor
 public class DefaultUserService implements UserService {
-    private UserDAO userDAO;
-    private TransactionManager transactionManager;
 
-    public DefaultUserService(UserDAO userDAO, TransactionManager transactionManager) {
-        this.userDAO = userDAO;
-        this.transactionManager = transactionManager;
-    }
+    @Autowired
+    private CustomizedFeedBackCrudRepository repository;
 
     /**
      * Create and save user
@@ -27,16 +28,12 @@ public class DefaultUserService implements UserService {
      * @param phone - users phone
      */
     @Override
+    @Transactional
     public void create(String username, String pass,
                        String firstName, String lastName, String email, String phone) {
-        try {
-            User user = new User(UserRole.CUSTOMER, username,
-                    pass, firstName, lastName, email, phone);
-            transactionManager.getConnection();
-            userDAO.create(user);
-        } finally {
-            transactionManager.closeConnection();
-        }
+            User user = new User(null, UserRole.CUSTOMER, username,
+                    pass, firstName, lastName, email, phone, null, null);
+            repository.save(user);
     }
 
     /**
@@ -47,17 +44,13 @@ public class DefaultUserService implements UserService {
      *         or null - if user not exists of if password is not correct
      */
     @Override
+    @Transactional
     public User validate(String username, String pass) {
-        try {
-            transactionManager.getConnection();
-            User user = userDAO.findByUsername(username);
+            User user = repository.findByUsername(username);
             if (user == null || !user.getPassword().equals(pass)) {
                 return null;
             }
             return user;
-        } finally {
-            transactionManager.closeConnection();
-        }
     }
 
     /**
@@ -66,12 +59,8 @@ public class DefaultUserService implements UserService {
      * @return user with passed username
      */
     @Override
+    @Transactional
     public User getUserByUsername(String username) {
-        try {
-            transactionManager.getConnection();
-            return userDAO.findByUsername(username);
-        }finally {
-            transactionManager.closeConnection();
-        }
+            return repository.findByUsername(username);
     }
 }

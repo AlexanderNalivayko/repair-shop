@@ -1,87 +1,37 @@
 package com.nalivayko.pool.repair_shop.model;
 
 import com.nalivayko.pool.repair_shop.model.enums.RepairRequestStatus;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+
+@Getter
+@Setter
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "repair_requests")
 public class RepairRequest {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "item_id", referencedColumnName = "id")
     private Item item;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "review_id", referencedColumnName = "id")
     private Review review;
     private RepairRequestStatus repairRequestStatus;
     private String creationTime;
     private String description;
-
-    public RepairRequest(Integer id, User user, Item item, Review review, RepairRequestStatus repairRequestStatus,
-                         String creationTime, String description) {
-        this.id = id;
-        this.user = user;
-        this.item = item;
-        this.review = review;
-        this.repairRequestStatus = repairRequestStatus;
-        this.creationTime = creationTime;
-        this.description = description;
-    }
-
-    public RepairRequest(User user, Item item, RepairRequestStatus repairRequestStatus, String description) {
-        this.user = user;
-        this.item = item;
-        this.repairRequestStatus = repairRequestStatus;
-        this.description = description;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public Review getReview() {
-        return review;
-    }
-
-    public void setReview(Review review) {
-        this.review = review;
-    }
-
-    public RepairRequestStatus getRepairRequestStatus() {
-        return repairRequestStatus;
-    }
-
-    public void setRepairRequestStatus(RepairRequestStatus repairRequestStatus) {
-        this.repairRequestStatus = repairRequestStatus;
-    }
-
-    public String getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(String creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
