@@ -16,8 +16,8 @@ public class Feedback {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id")
     private User user;
 
     private String text;

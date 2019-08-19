@@ -19,15 +19,15 @@ public class RepairRequest {
     private Integer id;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "id")
     private User user;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "item_id", referencedColumnName = "id")
+    @JoinColumn(name = "id")
     private Item item;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "review_id", referencedColumnName = "id")
+    @JoinColumn(name = "id")
     private Review review;
 
     @Enumerated(EnumType.STRING)

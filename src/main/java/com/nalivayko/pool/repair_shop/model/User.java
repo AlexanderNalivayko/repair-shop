@@ -4,6 +4,7 @@ import com.nalivayko.pool.repair_shop.model.enums.UserRole;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -39,6 +40,6 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     RepairRequest repairRequest;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    Feedback feedback;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Feedback> feedback;
 }
