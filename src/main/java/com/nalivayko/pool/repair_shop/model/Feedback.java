@@ -17,7 +17,6 @@ public class Feedback {
     private int id;
 
     @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id")
     private User user;
 
     private String text;

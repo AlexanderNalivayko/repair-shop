@@ -3,44 +3,35 @@
 <body>
 <div th:fragment="pagination">
 
-    <c:set var="url" value="${requestScope['javax.servlet.forward.request_uri']}"/>
-
     <nav>
         <ul class="pagination">
-            <div th:if="${numberOfPages > 1}">
+            <th:block th:if="${records.getTotalPages() > 1}">
+                <li th:if="${records.getNumber() != 0}" class="page-item">
+                    <a class="page-link text-muted"
+                       th:href="@{__${#httpServletRequest.requestURI}__(page=${records.getNumber()-1},size=${records.getSize()})}"
+                       th:text="#{action.previous}"></a>
+                    </a>
+                </li>
 
-                <!--For displaying previous link except for the 1st page -->
-                <c:if test="${currentPage != 1}">
-                    <li class="page-item">
-                        <a class="page-link text-muted" href="${url}?page=${currentPage - 1}">
-                            <fmt:message key="action.previous"/>
-                        </a>
-                    </li>
-                </c:if>
-
-                <c:forEach begin="1" end="${numberOfPages}" var="i">
-                    <c:choose>
-                        <c:when test="${currentPage eq i}">
-                            <li class="page-item disabled">
-                                <a class="page-link text-success" href="${url}?page=${i}">${i}</a>
-                            </li>
-                        </c:when>
-                        <c:otherwise>
-                            <li class="page-item"><a class="page-link text-muted" href="${url}?page=${i}">${i}</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                    <%--<li class="page-item"><a class="page-link" href="${url}?page=${i}">${i}</a></li>--%>
-
-                </c:forEach>
-
-                <c:if test="${currentPage lt numberOfPages}">
-                    <li class="page-item">
-                        <a class="page-link text-muted" href="${url}?page=${currentPage + 1}">
-                            <fmt:message key="action.next"/>
-                        </a>
-                    </li>
-                </c:if>
-            </div>
+                <li th:each="pageNo : ${#numbers.sequence(0, records.getTotalPages() - 1)}"
+                    th:class="${records.getNumber() eq pageNo}? 'page-item disabled' : 'page-item'">
+                    <a th:if="${records.getNumber() == pageNo}" class="page-link text-success"
+                       href="javascript:void(0);"
+                       th:text="${pageNo + 1}">
+                    </a>
+                    <a th:unless="${(records.getNumber() == pageNo)}"
+                       class="page-link text-muted"
+                       th:href="@{__${#httpServletRequest.requestURI}__(page=${pageNo},size=${records.getSize()})}"
+                       th:text="${pageNo + 1}">
+                    </a>
+                </li>
+                <li th:if="${records.getNumber() < records.getTotalPages()-1}" class="page-item">
+                    <a class="page-link text-muted"
+                       th:href="@{__${#httpServletRequest.requestURI}__(page=${records.getNumber()+1},size=${records.getSize()})}"
+                       th:text=#{action.next}>
+                    </a>
+                </li>
+            </th:block>
         </ul>
     </nav>
 

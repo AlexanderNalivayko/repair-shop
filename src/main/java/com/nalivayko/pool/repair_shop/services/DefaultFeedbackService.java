@@ -6,7 +6,7 @@ import com.nalivayko.pool.repair_shop.persistance.repositories.CustomizedFeedBac
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,8 +17,8 @@ public class DefaultFeedbackService implements FeedbackService {
     private CustomizedFeedBackCrudRepository feedBackRepo;
 
     @Override
-    public Page<Feedback> getAll(int limit, int offset) {
-        return feedBackRepo.findAll(PageRequest.of(offset, limit));
+    public Page<Feedback> getAll(Pageable pageable) {
+        return feedBackRepo.findAll(pageable);
     }
 
     @Override
