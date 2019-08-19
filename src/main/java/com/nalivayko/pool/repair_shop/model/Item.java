@@ -1,9 +1,6 @@
 package com.nalivayko.pool.repair_shop.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,14 +9,17 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "items")
 public class Item {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+    @Column(name = "item_type")
     private String itemType;
     private String brand;
+    @Column(name = "item_name")
     private String name;
 
     @OneToOne(mappedBy = "item")

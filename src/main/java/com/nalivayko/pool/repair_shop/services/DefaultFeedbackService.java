@@ -2,60 +2,40 @@ package com.nalivayko.pool.repair_shop.services;
 
 import com.nalivayko.pool.repair_shop.model.Feedback;
 import com.nalivayko.pool.repair_shop.model.User;
-import com.nalivayko.pool.repair_shop.persistance.TransactionManager;
-import com.nalivayko.pool.repair_shop.persistance.dao.FeedbackDAO;
+import com.nalivayko.pool.repair_shop.persistance.repositories.CustomizedFeedBackCrudRepository;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
-/**
- * Provides methods to work with Feedback (create, find, delete ...)
- */
+@Service
+@NoArgsConstructor
 public class DefaultFeedbackService implements FeedbackService {
-    private FeedbackDAO feedbackDAO;
-    private TransactionManager transactionManager;
 
-    public DefaultFeedbackService(TransactionManager transactionManager, FeedbackDAO feedbackDAO) {
-        this.transactionManager = transactionManager;
-        this.feedbackDAO = feedbackDAO;
-    }
+    @Autowired
+    private CustomizedFeedBackCrudRepository feedBackRepo;
 
     @Override
-    public List<Feedback> getAll(int limit, int offset) {
-        try {
-            transactionManager.getConnection();
-            return feedbackDAO.findAll(limit, offset);
-        } finally {
-            transactionManager.closeConnection();
-        }
+    public Page<Feedback> getAll(int limit, int offset) {
+        return feedBackRepo.findAll(PageRequest.of(offset, limit));
     }
 
     @Override
     public void delete(int id) {
-        try {
-            transactionManager.getConnection();
-            feedbackDAO.delete(id);
-        } finally {
-            transactionManager.closeConnection();
-        }
+        feedBackRepo.deleteById(id);
     }
 
     @Override
     public void create(User user, String text) {
-        try {
-            transactionManager.getConnection();
-            feedbackDAO.create(new Feedback(user, text));
-        } finally {
-            transactionManager.closeConnection();
-        }
+        feedBackRepo.save(Feedback.builder()
+                .user(user)
+                .text(text)
+                .build());
     }
 
     @Override
-    public int countAll() {
-        try {
-            transactionManager.getConnection();
-            return feedbackDAO.count();
-        } finally {
-            transactionManager.closeConnection();
-        }
+    public long countAll() {
+        return feedBackRepo.count();
     }
 }

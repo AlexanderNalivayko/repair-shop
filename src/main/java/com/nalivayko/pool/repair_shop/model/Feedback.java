@@ -1,17 +1,14 @@
 package com.nalivayko.pool.repair_shop.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
-@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "feedback")
 public class Feedback {
 
@@ -19,10 +16,13 @@ public class Feedback {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
     private String text;
+
+    @Column(name = "creation_time")
     private String creationTime;
 }
 

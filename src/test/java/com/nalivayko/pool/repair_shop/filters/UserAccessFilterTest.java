@@ -41,7 +41,7 @@ public class UserAccessFilterTest {
         when(request.getRequestURI()).thenReturn(UrlRequests.MANAGER_PAGE);
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute(ParametersAndAttributes.USER)).thenReturn(user);
-        when(user.getUserRole()).thenReturn(UserRole.CUSTOMER);
+        when(user.getRole()).thenReturn(UserRole.CUSTOMER);
 
         userAccessFilter.doFilter(request, response, filterChain);
 
@@ -53,7 +53,7 @@ public class UserAccessFilterTest {
         when(request.getRequestURI()).thenReturn(UrlRequests.MASTER_PAGE);
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute(ParametersAndAttributes.USER)).thenReturn(user);
-        when(user.getUserRole()).thenReturn(UserRole.CUSTOMER);
+        when(user.getRole()).thenReturn(UserRole.CUSTOMER);
 
         userAccessFilter.doFilter(request, response, filterChain);
 
@@ -65,7 +65,7 @@ public class UserAccessFilterTest {
         when(request.getRequestURI()).thenReturn(UrlRequests.LOGIN_PAGE);
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute(ParametersAndAttributes.USER)).thenReturn(user);
-        when(user.getUserRole()).thenReturn(UserRole.CUSTOMER);
+        when(user.getRole()).thenReturn(UserRole.CUSTOMER);
 
         userAccessFilter.doFilter(request, response, filterChain);
 
@@ -77,7 +77,7 @@ public class UserAccessFilterTest {
         when(request.getRequestURI()).thenReturn(UrlRequests.MANAGER_PAGE);
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute(ParametersAndAttributes.USER)).thenReturn(user);
-        when(user.getUserRole()).thenReturn(UserRole.MASTER);
+        when(user.getRole()).thenReturn(UserRole.MASTER);
 
         userAccessFilter.doFilter(request, response, filterChain);
 
@@ -89,7 +89,7 @@ public class UserAccessFilterTest {
         when(request.getRequestURI()).thenReturn(UrlRequests.REPAIR_PAGE);
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute(ParametersAndAttributes.USER)).thenReturn(user);
-        when(user.getUserRole()).thenReturn(UserRole.MASTER);
+        when(user.getRole()).thenReturn(UserRole.MASTER);
 
         userAccessFilter.doFilter(request, response, filterChain);
 
@@ -101,7 +101,7 @@ public class UserAccessFilterTest {
         when(request.getRequestURI()).thenReturn(UrlRequests.REPAIR_PAGE);
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute(ParametersAndAttributes.USER)).thenReturn(user);
-        when(user.getUserRole()).thenReturn(UserRole.MANAGER);
+        when(user.getRole()).thenReturn(UserRole.MANAGER);
 
         userAccessFilter.doFilter(request, response, filterChain);
 
@@ -113,7 +113,7 @@ public class UserAccessFilterTest {
         when(request.getRequestURI()).thenReturn(UrlRequests.MASTER_PAGE);
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute(ParametersAndAttributes.USER)).thenReturn(user);
-        when(user.getUserRole()).thenReturn(UserRole.MANAGER);
+        when(user.getRole()).thenReturn(UserRole.MANAGER);
 
         userAccessFilter.doFilter(request, response, filterChain);
 

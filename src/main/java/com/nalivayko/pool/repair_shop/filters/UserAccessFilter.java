@@ -74,7 +74,7 @@ public class UserAccessFilter implements Filter {
      * @return true - if user permitted to perform request represented by url
      */
     private boolean userPermittedToPerformRequest(User user, String url) {
-        UserRole userRole = user.getUserRole();
+        UserRole userRole = user.getRole();
         if (url.contains(UrlRequests.MASTER_PAGE)) {
             return userRole == UserRole.MASTER;
         } else if (url.contains(UrlRequests.MANAGER_PAGE)) {
@@ -82,19 +82,19 @@ public class UserAccessFilter implements Filter {
         } else if (url.contains(UrlRequests.CUSTOMER)) {
             return userRole == UserRole.CUSTOMER;
         }
-        if (user.getUserRole() == UserRole.MASTER) {
+        if (user.getRole() == UserRole.MASTER) {
             for (String restricted : RESTRICTED_FOR_MASTER) {
                 if (url.contains(restricted)) {
                     return false;
                 }
             }
-        } else if (user.getUserRole() == UserRole.MANAGER) {
+        } else if (user.getRole() == UserRole.MANAGER) {
             for (String restricted : RESTRICTED_FOR_MANAGER) {
                 if (url.contains(restricted)) {
                     return false;
                 }
             }
-        } else if (user.getUserRole() == UserRole.CUSTOMER) {
+        } else if (user.getRole() == UserRole.CUSTOMER) {
             for (String restricted : RESTRICTED_FOR_CUSTOMER) {
                 if (url.contains(restricted)) {
                     return false;
