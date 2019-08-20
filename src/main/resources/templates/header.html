@@ -53,11 +53,12 @@
                     </div>
                     <li class="nav-item dropdown font-weight-bolder">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false" th:text="#{header.user}">
+                           aria-haspopup="true" aria-expanded="false">
+                            <th:block th:text="#{header.user}"></th:block>
+                                (<span sec:authorize="isAuthenticated()" class="text-white" sec:authentication="name"></span>)
+
                         </a>
-                        <div sec:authorize="isAuthenticated()">
-                            <span sec:authentication="name"></span>
-                        </div>
+
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <div th:if="${user == null}">
                                 <a class="dropdown-item"
