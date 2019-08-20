@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
 <div th:fragment="header">
 
@@ -53,11 +54,10 @@
                     <li class="nav-item dropdown font-weight-bolder">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false" th:text="#{header.user}">
-                            <!--                            TODO might have a bug-->
-                            <div th:if="${user != null}">
-                                <div th:text="#{user.username}"></div>
-                            </div>
                         </a>
+                        <div sec:authorize="isAuthenticated()">
+                            <span sec:authentication="name"></span>
+                        </div>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <div th:if="${user == null}">
                                 <a class="dropdown-item"

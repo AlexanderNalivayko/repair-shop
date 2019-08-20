@@ -11,7 +11,7 @@
 
 <body class="bg-color">
 <div class="logreg-forms">
-    <form class="form-signin shadow" method="post" action="@{/login}">
+    <form class="form-signin shadow" method="post" th:action="@{/login}">
         <h1 class="h3 mb-3 font-weight-normal" th:text="#{login.title}">
 <!--            <fmt:message key="login.title"/>-->
         </h1>
