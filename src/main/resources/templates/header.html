@@ -19,7 +19,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="../js/script.js" th:src="@{/js/script.js}"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
         <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
         <title th:text="#{site.name}">
         </title>
@@ -37,38 +38,47 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bolder" th:href="@{/home_page}"
+                        <a class="nav-link font-weight-bolder text-white" th:href="@{/home_page}"
                            th:text="#{header.home}"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bolder"
+                        <a class="nav-link font-weight-bolder text-white"
                            th:href="@{/about_page}" th:text="#{header.about}"></a>
                     </li>
-                    <div th:if="${user?.userRole eq 'CUSTOMER'}">
-                        <li class="nav-item">
-                            <a class="nav-link font-weight-bolder"
+                        <li sec:authorize="hasAuthority('MANAGER')" class="nav-item">
+                            <a class="nav-link font-weight-bolder text-white"
+                               th:href="@{/manager}" th:text="#{header.manager}">
+                            </a>
+                        </li>
+                        <li sec:authorize="hasAuthority('CUSTOMER')" class="nav-item">
+                            <a class="nav-link font-weight-bolder text-white"
                                th:href="@{/repair_page}" th:text="#{header.repairRequest}">
                             </a>
                         </li>
-                    </div>
+                        <li sec:authorize="hasAuthority('MASTER')" class="nav-item">
+                            <a class="nav-link font-weight-bolder text-white"
+                               th:href="@{/master}" th:text="#{header.master}">
+                            </a>
+                        </li>
                     <li class="nav-item dropdown font-weight-bolder">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <th:block th:text="#{header.user}"></th:block>
-                                (<span sec:authorize="isAuthenticated()" class="text-white" sec:authentication="name"></span>)
-
+                            <span sec:authorize="isAuthenticated()" class="text-white">(</span>
+                            <span sec:authorize="isAuthenticated()" class="text-white" sec:authentication="name"></span>
+                            <span sec:authorize="isAuthenticated()" class="text-white">)</span>
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <div th:if="${user == null}">
                                 <a class="dropdown-item"
-                                   th:href="@{/login_page}" th:text="#{action.login}">
+                                   th:href="@{/login}" th:text="#{action.login}">
                                 </a>
                             </div>
                             <a class="dropdown-item" th:href="@{/sign_up_page}"
                                th:text="#{action.signup}">
                             </a>
-                            <div th:if="${user != null}">
+                            <div sec:authorize="isAuthenticated()">
                                 <form name="submitForm" method="POST"
                                       th:action="@{/logout}">
                                     <a class="dropdown-item" href="javascript:document.submitForm.submit()"
@@ -78,20 +88,6 @@
                             </div>
                         </div>
                     </li>
-                    <div th:if="${user?.userRole eq 'MANAGER'}">
-                        <li class="nav-item">
-                            <a class="nav-link font-weight-bolder"
-                               th:href="@{/manager}" th:text="#{header.manager}">
-                            </a>
-                        </li>
-                    </div>
-                    <div th:if="${user?.userRole eq 'MANAGER'}">
-                        <li class="nav-item">
-                            <a class="nav-link font-weight-bolder"
-                               th:href="@{/master}" th:text="#{header.master}">
-                            </a>
-                        </li>
-                    </div>
                 </ul>
                 <ul class=" nav navbar-nav ml-auto">
                     <li class="nav-item">

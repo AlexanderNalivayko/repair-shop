@@ -2,18 +2,18 @@ package com.nalivayko.pool.repair_shop.services;
 
 import com.nalivayko.pool.repair_shop.model.RepairRequest;
 import com.nalivayko.pool.repair_shop.model.User;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface RepairRequestService {
 
     void createRepairRequest(User user, String itemType, String itemBrand, String itemName, String description);
 
-    List<RepairRequest> getAllByUserId(int userId, int limit, int offset);
+    Page<RepairRequest> getAllByUserName(String username, Pageable pageable);
 
-    List<RepairRequest> getAllNew(int limit, int offset);
+    Page<RepairRequest> getAllNew(Pageable pageable);
 
-    List<RepairRequest> getAllAccepted(int limit, int offset);
+    Page<RepairRequest> getAllAccepted(Pageable pageable);
 
     void acceptRepairRequest(String repairRequestId, String cost);
 

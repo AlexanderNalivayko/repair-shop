@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<body>
+
+
+<div th:fragment="requests">
+    <div class="card shadow mb-2 p-2">
+        <h2 class="text-muted" th:text="#{repair.tab.my}">
+        </h2>
+        <th:block th:if="${records.size} < 1">
+            <p class="text-muted" th:text="#{repair.no_requests}">
+            </p>
+        </th:block>
+    </div>
+    <th:block th:each="request : ${records}">
+        <div class="card my-2 shadow">
+            <div class="card-body">
+                <th:block th:if="${request?.review?.status} != null">
+                    <p class="text-muted">
+                        <span class="text-muted" th:text="#{repair.review.status}"></span>
+                        :
+                        <span class="text-muted" th:text="${request.review.status}"></span>
+                    </p>
+                </th:block>
+                <th:block th:if="${request?.review?.time} != null">
+                    <p class="text-muted">
+                        <span class="text-muted" th:text="#{repair.review.time}"></span>
+                        :
+                        <span class="text-muted" th:text="${request.review.time}"></span>
+                    </p>
+                </th:block>
+                <th:block th:if="${request?.review?.cost} != null">
+                    <p class="text-muted">
+                        <span class="text-muted" th:text="#{repair.price}"></span>
+                        :
+                        <span class="text-muted" th:text="${request.review.cost}"></span>
+                    </p>
+                </th:block>
+                <th:block th:if="${request?.review?.rejectReason} != null">
+                    <p class="text-muted">
+                        <span class="text-muted" th:text="#{repair.reject-reason}"></span>
+                        :
+                        <span class="text-muted" th:text="${request.review.rejectReason}"></span>
+                    </p>
+                </th:block>
+                <p class="text-muted">
+                    <span class="text-muted" th:text="#{repair.status}"></span>
+                    :
+                    <span class="text-muted" th:text="${request.status}"></span>
+                </p>
+                <p class="text-muted">
+                    <span class="text-muted" th:text="#{repair.time}"></span>
+                    :
+                    <span class="text-muted" th:text="${request.creationTime}"></span>
+                </p>
+                <p class="text-muted">
+                    <span class="text-muted" th:text="#{repair.item_type}"></span>
+                    :
+                    <span class="text-muted" th:text="${request.item.itemType}"></span>
+                </p>
+                <p class="text-muted">
+                    <span class="text-muted" th:text="#{repair.brand}"></span>
+                    :
+                    <span class="text-muted" th:text="${request.item.brand}"></span>
+                </p>
+                <p class="text-muted">
+                    <span class="text-muted" th:text="#{repair.name}"></span>
+                    :
+                    <span class="text-muted" th:text="${request.item.name}"></span>
+                </p>
+                <p class="text-muted">
+                    <span class="text-muted" th:text="#{repair.description}"></span>
+                    :
+                    <span class="text-muted" th:text="${request.description}"></span>
+                </p>
+            </div>
+        </div>
+    </th:block>
+</div>
+
+
+<div th:fragment="new-request">
+    <div class="card shadow p-4 mb-4">
+        <h2 class="text-muted" th:text="#{repair.new_request}">
+        </h2>
+        <form action="${pageContext.request.contextPath}/site/repair_page/create" class="form-signup" method="post">
+            <label for="prod-type" class="mb-0 text-muted font-weight-bolder" th:text="#{repair.item_type}">
+            </label>
+            <p class="text-muted my-0" th:text="#{repair.item_type.help}">
+            </p>
+            <input type="text" name="prod-type" id="prod-type" class="form-control px-2" required>
+
+            <label for="brand" class="mb-0 text-muted font-weight-bolder" th:text="#{repair.brand}">
+            </label>
+            <p class="text-muted my-0" th:text="#{repair.brand.help}">
+            </p>
+            <input type="text" name="brand" id="brand" class="form-control px-2" required>
+
+            <label for="name" class="mb-0 text-muted font-weight-bolder" th:text="#{repair.name}">
+            </label>
+            <p class="text-muted my-0" th:text="#{repair.name.help}">
+            </p>
+            <input type="text" name="name" id="name" class="form-control px-2" required>
+
+            <label for="description" class="mb-0 text-muted font-weight-bolder" th:text="#{repair.description}">
+            </label>
+            <p class="text-muted my-0" th:text="#{repair.description.help}">
+            </p>
+            <textarea name="description" id="description" class="form-control px-2" rows="3" required></textarea>
+            <button class="btn btn-success btn-block my-2" type="submit" th:text="#{repair.btn.create}">
+            </button>
+        </form>
+    </div>
+</div>
+
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="header :: header"></div>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row justify-content-md-center my-5">
+        <div class="col-md-5 mb-5">
+            <h2 class="text-muted" th:text="#{master.requests}">
+            </h2>
+            <th:block th:if="${records.size} < 1">
+                <p class="text-muted" th:text="#{repair.no_requests}">
+                </p>
+            </th:block>
+            <th:block th:each="request : ${records}">
+                <div class="card my-2 shadow">
+                    <div class="card-body">
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.status}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.status}"></span>
+                        </p>
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.time}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.creationTime}"></span>
+                        </p>
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.item_type}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.item.itemType}"></span>
+                        </p>
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.brand}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.item.brand}"></span>
+                        </p>
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.name}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.item.name}"></span>
+                        </p>
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.description}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.description}"></span>
+                        </p>
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.review.time}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.review.time}"></span>
+                        </p>
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.price}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.review.cost}"></span>
+                        </p>
+                        <form action="${pageContext.request.contextPath}/site/master/perform" method="post">
+                            <input type="hidden" name="repairId" value="${request.id}">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-danger btn-block" name="btn" type="submit"
+                                            th:text="#{master.perform}">
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </th:block>
+            <div class="row justify-content-sm-center">
+                <div th:insert="pages_pagination :: pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="footer :: footer"></div>
+
+</body>
+</html>

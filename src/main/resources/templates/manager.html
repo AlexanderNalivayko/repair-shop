@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="header :: header"></div>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row justify-content-md-center my-5">
+        <div class="col-md-5 mb-5">
+            <h2 class="text-muted" th:text="#{manager.new_requests}">
+            </h2>
+            <p th:if="${records.size} < 1" class="text-muted" th:text="#{repair.no_requests}">
+            </p>
+            <th:block th:each="request : ${records}">
+                <div class="card my-2 shadow">
+                    <div class="card-body">
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.status}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.status}"></span>
+                        </p>
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.time}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.creationTime}"></span>
+                        </p>
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.item_type}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.item.itemType}"></span>
+                        </p>
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.brand}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.item.brand}"></span>
+                        </p>
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.name}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.item.name}"></span>
+                        </p>
+                        <p class="text-muted">
+                            <span class="text-muted" th:text="#{repair.description}"></span>
+                            :
+                            <span class="text-muted" th:text="${request.description}"></span>
+                        </p>
+
+                        <form action="${pageContext.request.contextPath}/site/manager/accept" method="post">
+                            <input type="hidden" name="repairId" value="${request.id}">
+                            <div class="row align-items-center">
+                                <div class="col-sm-2">
+                                    <label for="price" class="control-label text-muted" th:text="#{repair.price}">
+                                    </label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="number" name="price" id="price" class="form-control"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 p-0">
+                                <button class="btn btn-success btn-block" type="submit"
+                                        th:text="#{manager.btn.approve}">
+                                </button>
+                            </div>
+                        </form>
+
+                        <form action="${pageContext.request.contextPath}/site/manager/reject" method="post">
+                            <input type="hidden" name="repairId" value="${request.id}">
+                            <div class="row align-items-center">
+                                <div class="col-sm-3">
+                                    <label for="reason" class="control-label text-muted"
+                                           th:text="#{repair.reject-reason}">
+                                    </label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <textarea name="reason" id="reason" class="form-control" rows="2"
+                                              required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 p-0">
+                                <button class="btn btn-danger btn-block" type="submit" th:text="#{manager.btn.reject}">
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </th:block>
+            <div class="row justify-content-sm-center">
+                <div th:insert="pages_pagination :: pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="footer :: footer"></div>
+
+</body>
+</html>

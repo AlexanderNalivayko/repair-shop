@@ -35,8 +35,12 @@ body {
     font-size: 2rem !important;
 }
 
+.nav-pills .nav-link {
+    border-radius: .47rem !important;
+}
+
 .nav-link {
-    color: white !important;
+    /*color: white !important;*/
 }
 
 .page-footer {

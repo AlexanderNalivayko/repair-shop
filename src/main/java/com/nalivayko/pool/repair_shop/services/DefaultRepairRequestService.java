@@ -4,14 +4,14 @@ import com.nalivayko.pool.repair_shop.model.Item;
 import com.nalivayko.pool.repair_shop.model.RepairRequest;
 import com.nalivayko.pool.repair_shop.model.User;
 import com.nalivayko.pool.repair_shop.model.enums.RepairRequestStatus;
+import com.nalivayko.pool.repair_shop.model.enums.ReviewStatus;
 import com.nalivayko.pool.repair_shop.persistance.repositories.CustomizedItemCrudRepository;
 import com.nalivayko.pool.repair_shop.persistance.repositories.CustomizedRepairRequestCrudRepository;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @NoArgsConstructor
@@ -23,8 +23,8 @@ public class DefaultRepairRequestService implements RepairRequestService {
     private CustomizedItemCrudRepository itemRepo;
 
     @Override
-    public List<RepairRequest> getAllByUserId(int userId, int limit, int offset) {
-        return repairRequestRepo.findAllById(userId, PageRequest.of(offset, limit));
+    public Page<RepairRequest> getAllByUserName(String username, Pageable pageable) {
+        return repairRequestRepo.findAllByUsername(username, pageable);
     }
 
     @Override
@@ -42,25 +42,18 @@ public class DefaultRepairRequestService implements RepairRequestService {
     }
 
     @Override
-    public List<RepairRequest> getAllNew(int limit, int offset) {
-        return repairRequestRepo.findAllByStatus(RepairRequestStatus.NEW.toString(), PageRequest.of(offset, limit));
+    public Page<RepairRequest> getAllNew(Pageable pageable) {
+        return repairRequestRepo.findAllByStatus(RepairRequestStatus.NEW, pageable);
     }
 
     @Override
-    public List<RepairRequest> getAllAccepted(int limit, int offset) {
-//        RepairRequestQuery.SELECT_BY_REVIEW_AND_REQUEST_STATUS;
-//        try {
-//            transactionManager.getConnection();
-//            return repairRequestDAO.findByReviewAndRequestStatus(ReviewStatus.ACCEPTED,
-//                    RepairRequestStatus.REVIEWED, limit, offset);
-//        } finally {
-//            transactionManager.closeConnection();
-//        }
-        return null;
+    public Page<RepairRequest> getAllAccepted(Pageable pageable) {
+        return repairRequestRepo.findByReviewStatusAndRepairRequestStatus(ReviewStatus.ACCEPTED, RepairRequestStatus.REVIEWED, pageable);
     }
 
     @Override
     public void acceptRepairRequest(String repairRequestId, String cost) {
+
 //        try {
 //            int repairId = Integer.parseInt(repairRequestId);
 //            transactionManager.startTransaction();

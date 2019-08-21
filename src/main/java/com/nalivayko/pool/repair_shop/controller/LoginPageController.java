@@ -9,8 +9,8 @@ import java.security.Principal;
 @Controller
 public class LoginPageController {
 
-    @RequestMapping(value = "/login_page", method = RequestMethod.GET)
-    public String openLoginPage() {
-        return "login";
-    }
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String openLoginPage() {
+//        return "login";
+//    }
 }

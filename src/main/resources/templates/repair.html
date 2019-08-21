@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="header :: header"></div>
+
+<body>
+
+<div class="container-fluid my-5">
+    <div class="row justify-content-md-center">
+        <div class="col-3">
+            <div class="nav flex-column nav-pills" >
+                <a class="font-weight-bolder mt-1 text-success active nav-link "
+                   id="v-pills-profile-tab" data-toggle="pill"
+                   href="#my-requests"
+                   th:text="#{repair.tab.my}">
+                </a>
+                <a class="font-weight-bolder mt-1 text-success nav-link "
+                   id="v-pills-home-tab" data-toggle="pill"
+                   href="#new-request"
+                   th:text="#{repair.tab.creation}">
+                </a>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="my-requests">
+                    <div th:insert="repair-tabs :: requests"></div>
+                    <div class="row justify-content-sm-center">
+                        <div th:insert="pages_pagination :: pagination"></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="new-request">
+                    <div th:insert="repair-tabs :: new-request"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="footer :: footer"></div>
+
+</body>
+
+</html>
