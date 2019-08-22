@@ -14,6 +14,7 @@
                 <p class="text-muted" th:text="#{repair.no_requests}">
                 </p>
             </th:block>
+
             <th:block th:each="request : ${records}">
                 <div class="card my-2 shadow">
                     <div class="card-body">
@@ -57,7 +58,7 @@
                             :
                             <span class="text-muted" th:text="${request.review.cost}"></span>
                         </p>
-                        <form action="${pageContext.request.contextPath}/site/master/perform" method="post">
+                        <form action="@{/master/perform}" method="post">
                             <input type="hidden" name="repairId" value="${request.id}">
                             <div class="row">
                                 <div class="col-sm-12">

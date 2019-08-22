@@ -15,19 +15,26 @@ import javax.persistence.*;
 public class RepairRequest {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @Column(name = "user_id")
+    private Integer userId;
+
+    @Column(name = "item_id")
+    private Integer itemId;
+
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "items")
+    @JoinColumn(name = "id", referencedColumnName = "user_id", insertable = false, updatable = false)
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id", referencedColumnName = "item_id", insertable = false, updatable = false)
     private Item item;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id", referencedColumnName = "review_id", insertable = false, updatable = false)
     private Review review;
 
     @Enumerated(EnumType.STRING)

@@ -1,12 +1,13 @@
 package com.nalivayko.pool.repair_shop.services;
 
 import com.nalivayko.pool.repair_shop.model.RepairRequest;
+import com.nalivayko.pool.repair_shop.model.RepairRequestDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface RepairRequestService {
 
-    RepairRequest createRepairRequest(RepairRequest repairRequest);
+    RepairRequest createRepairRequest(RepairRequestDto repairRequest, String username);
 
     Page<RepairRequest> getAllByUserName(String username, Pageable pageable);
 
@@ -14,9 +15,9 @@ public interface RepairRequestService {
 
     Page<RepairRequest> getAllAccepted(Pageable pageable);
 
-    void acceptRepairRequest(String repairRequestId, String cost);
+    void acceptRepairRequest(Integer repairRequestId, Integer price);
 
-    void rejectRepairRequest(int repairRequestId, String reason);
+    void rejectRepairRequest(Integer repairRequestId, String reason);
 
-    void performRepairRequest(int repairRequestId);
+    void performRepairRequest(Integer repairRequestId);
 }

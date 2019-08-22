@@ -84,30 +84,30 @@
     <div class="card shadow p-4 mb-4">
         <h2 class="text-muted" th:text="#{repair.new_request}">
         </h2>
-        <form action="$/repair_page" class="form-signup" method="post" th:object="${repair-request}">
+        <form th:action="@{/repair_page}" class="form-signup" method="post" th:object="${repair_request}">
             <label for="prod-type" class="mb-0 text-muted font-weight-bolder" th:text="#{repair.item_type}">
             </label>
             <p class="text-muted my-0" th:text="#{repair.item_type.help}">
             </p>
-            <input type="text" name="prod-type" id="prod-type" class="form-control px-2" required>
+            <input type="text" th:field="*{type}" id="prod-type" class="form-control px-2" required>
 
             <label for="brand" class="mb-0 text-muted font-weight-bolder" th:text="#{repair.brand}">
             </label>
             <p class="text-muted my-0" th:text="#{repair.brand.help}">
             </p>
-            <input type="text" name="brand" id="brand" class="form-control px-2" required>
+            <input type="text" th:field="*{brand}" id="brand" class="form-control px-2" required>
 
             <label for="name" class="mb-0 text-muted font-weight-bolder" th:text="#{repair.name}">
             </label>
             <p class="text-muted my-0" th:text="#{repair.name.help}">
             </p>
-            <input type="text" name="name" id="name" class="form-control px-2" required>
+            <input type="text" th:field="*{name}" id="name" class="form-control px-2" required>
 
             <label for="description" class="mb-0 text-muted font-weight-bolder" th:text="#{repair.description}">
             </label>
             <p class="text-muted my-0" th:text="#{repair.description.help}">
             </p>
-            <textarea name="description" id="description" class="form-control px-2" rows="3" required></textarea>
+            <textarea th:field="*{description}" id="description" class="form-control px-2" rows="3" required></textarea>
             <button class="btn btn-success btn-block my-2" type="submit" th:text="#{repair.btn.create}">
             </button>
         </form>

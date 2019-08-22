@@ -5,6 +5,7 @@ import com.nalivayko.pool.repair_shop.model.enums.RepairRequestStatus;
 import com.nalivayko.pool.repair_shop.model.enums.ReviewStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -33,13 +34,18 @@ public interface CustomizedRepairRequestCrudRepository extends PagingAndSortingR
             "LEFT JOIN users ON users.id = repair_requests.user_id " +
             "LEFT JOIN items ON items.id = repair_requests.item_id " +
             "LEFT JOIN reviews ON reviews.id = repair_requests.review_id " +
-            "WHERE reviews.review_status LIKE ?1  AND repair_requests.status LIKE ?1 ORDER BY UNIX_TIMESTAMP(creation_time) DESC",
+            "WHERE reviews.review_status LIKE ?1  AND repair_requests.status LIKE ?2 ORDER BY UNIX_TIMESTAMP(creation_time) DESC",
             countQuery = "SELECT COUNT(*)" +
                     "FROM repair_requests " +
                     "LEFT JOIN reviews ON reviews.id = repair_requests.review_id " +
-                    "WHERE review_status LIKE ?1  AND status LIKE ?1",
+                    "WHERE reviews.review_status LIKE ?1  AND repair_requests.status LIKE ?2",
             nativeQuery = true)
     Page<RepairRequest> findByReviewStatusAndRepairRequestStatus(ReviewStatus reviewStatus,
                                                                  RepairRequestStatus repairRequestStatus,
                                                                  Pageable pageable);
+
+    @Modifying(clearAutomatically = true)
+    @Query(value = "UPDATE repair_requests SET review_id = ?2, status = 'REVIEWED' WHERE id = ?1",
+            nativeQuery = true)
+    void updateReviewById(Integer repairRequestId, Integer reviewId);
 }

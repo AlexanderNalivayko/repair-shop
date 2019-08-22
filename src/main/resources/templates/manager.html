@@ -46,8 +46,8 @@
                             <span class="text-muted" th:text="${request.description}"></span>
                         </p>
 
-                        <form action="${pageContext.request.contextPath}/site/manager/accept" method="post">
-                            <input type="hidden" name="repairId" value="${request.id}">
+                        <form th:action="@{/manager/accept}" method="post">
+                            <input type="hidden" name="repairId" th:value="${request.id}">
                             <div class="row align-items-center">
                                 <div class="col-sm-2">
                                     <label for="price" class="control-label text-muted" th:text="#{repair.price}">
@@ -65,8 +65,8 @@
                             </div>
                         </form>
 
-                        <form action="${pageContext.request.contextPath}/site/manager/reject" method="post">
-                            <input type="hidden" name="repairId" value="${request.id}">
+                        <form th:action="@{/manager/reject}" method="post">
+                            <input type="hidden" name="repairId" th:value="${request.id}">
                             <div class="row align-items-center">
                                 <div class="col-sm-3">
                                     <label for="reason" class="control-label text-muted"
