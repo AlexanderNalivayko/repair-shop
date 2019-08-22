@@ -28,11 +28,12 @@ public class DefaultRepairRequestService implements RepairRequestService {
     }
 
     @Override
-    public void createRepairRequest(User user, String itemType, String itemBrand, String itemName, String description) {
+    public RepairRequest createRepairRequest(RepairRequest repairRequest) {
+        Item itemToBeSaved = repairRequest.getItem();
         Item item = itemRepo.save(Item.builder()
-                .itemType(itemType)
-                .brand(itemBrand)
-                .name(itemName)
+                .itemType(itemToBeSaved.getItemType())
+                .brand(itemToBeSaved.getBrand())
+                .name(itemToBeSaved.getName())
                 .build());
         repairRequestRepo.save(RepairRequest.builder()
                 .user(user)
@@ -85,38 +86,5 @@ public class DefaultRepairRequestService implements RepairRequestService {
 //        } finally {
 //            transactionManager.closeConnection();
 //        }
-    }
-
-    @Override
-    public int countByUserId(int userId) {
-//        try {
-//            transactionManager.getConnection();
-//            return repairRequestDAO.countWithUser(userId);
-//        } finally {
-//            transactionManager.closeConnection();
-//        }
-        return 0;
-    }
-
-    @Override
-    public int countNew() {
-//        try {
-//            transactionManager.getConnection();
-//            return repairRequestDAO.countWithStatus(RepairRequestStatus.NEW);
-//        } finally {
-//            transactionManager.closeConnection();
-//        }
-        return 0;
-    }
-
-    @Override
-    public int countAccepted() {
-//        try {
-//            transactionManager.getConnection();
-//            return repairRequestDAO.countWithStatus(ReviewStatus.ACCEPTED, RepairRequestStatus.REVIEWED);
-//        } finally {
-//            transactionManager.closeConnection();
-//        }
-        return 0;
     }
 }

@@ -84,7 +84,7 @@
     <div class="card shadow p-4 mb-4">
         <h2 class="text-muted" th:text="#{repair.new_request}">
         </h2>
-        <form action="${pageContext.request.contextPath}/site/repair_page/create" class="form-signup" method="post">
+        <form action="$/repair_page" class="form-signup" method="post" th:object="${repair-request}">
             <label for="prod-type" class="mb-0 text-muted font-weight-bolder" th:text="#{repair.item_type}">
             </label>
             <p class="text-muted my-0" th:text="#{repair.item_type.help}">

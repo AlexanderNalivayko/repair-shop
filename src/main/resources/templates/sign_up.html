@@ -1,6 +1,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
-<div th:insert="header :: header"></div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="../js/script.js" th:src="@{/js/script.js}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title th:text="#{site.name}">
+    </title>
+</head>
 
 <body class="bg-color">
 <div class="container-fluid">
@@ -8,62 +28,50 @@
         <div class="col-md-6 card shadow">
             <div class="card-body">
                 <h2 class="text-muted" th:text="#{sign_up.title}">
-<!--                    <fmt:message key="sign_up.title"/>-->
                 </h2>
-                <form action="${pageContext.request.contextPath}/site/sign_up_page/sign_up" class="form-signup"
-                      id="signupform">
-                    <label for="login" class="mb-0 text-muted" th:text="#{sign_up.username}">
-<!--                        <fmt:message key="sign_up.username"/>-->
-                    </label>
-<!--                    <div id="free" class="text-success" th:text="#{sign_up.free}">-->
-<!--&lt;!&ndash;                        <fmt:message key="sign_up.free"/>&ndash;&gt;-->
-<!--                    </div>-->
-<!--                    <div id="taken" class="text-danger" th:text="#{sign_up.taken}">-->
-<!--&lt;!&ndash;                        <fmt:message key="sign_up.taken"/>&ndash;&gt;-->
-<!--                    </div>-->
-                    <input type="text" name="login" id="login" class="form-control px-2" required autofocus="">
+                <th:block th:if="${createdUser} != null">
+                    <span class="text-muted" th:text="${createdUser}"></span>
+                    <span class="text-muted" th:text="#{sign_up.success}"></span>
+                </th:block>
+                <th:block th:if="${fail} != null">
+                    <span class="text-muted" th:text="${fail}"></span>
+                    <span class="text-muted" th:text="#{sign_up.success}"></span>
+                </th:block>
+                <form th:action="@{/sign_up}" class="form-signup"
+                      id="signupform" th:object="${user}" method="post">
+                    <label for="username" class="mb-0 text-muted" th:text="#{sign_up.username}"></label>
+                    <input type="text" th:field="*{username}" id="username" class="form-control px-2" required
+                           autofocus="">
 
-                    <label for="pass" class="mb-0 text-muted" th:text="#{sign_up.pass}">
-<!--                        <fmt:message key="sign_up.pass"/>-->
-                    </label>
-                    <input type="password" name="pass" id="pass" class="form-control px-2" required autofocus="">
+                    <label for="password" class="mb-0 text-muted" th:text="#{sign_up.pass}"></label>
+                    <input type="password" th:field="*{password}" id="password" class="form-control px-2" required
+                           autofocus="">
 
-                    <label for="confirm_pass" class="mb-0 text-muted" th:text="#{sign_up.pass_repeat}">
-<!--                        <fmt:message key="sign_up.pass_repeat"/>-->
-                    </label>
+                    <label for="confirm_pass" class="mb-0 text-muted" th:text="#{sign_up.pass_repeat}"></label>
                     <input type="password" id="confirm_pass" class="form-control px-2" required autofocus="">
 
-                    <label for="first_name" class="mb-0 text-muted" th:text="#{sign_up.first_name}">
-<!--                        <fmt:message key="sign_up.first_name"/>-->
-                    </label>
-                    <input type="text" name="first_name" id="first_name" class="form-control px-2" autofocus="">
+                    <label for="firstName" class="mb-0 text-muted" th:text="#{sign_up.first_name}"></label>
+                    <input type="text" th:field="*{firstName}" id="firstName" class="form-control px-2" autofocus="">
 
-                    <label for="last_name" class="mb-0 text-muted" th:text="#{sign_up.last_name}">
-<!--                        <fmt:message key="sign_up.last_name"/>-->
-                    </label>
-                    <input type="text" name="last_name" id="last_name" class="form-control px-2" autofocus="">
+                    <label for="lastName" class="mb-0 text-muted" th:text="#{sign_up.last_name}"></label>
+                    <input type="text" th:field="*{lastName}" id="lastName" class="form-control px-2" autofocus="">
 
-                    <label for="email" class="mb-0 text-muted" th:text="#{sign_up.email}">
-<!--                        <fmt:message key="sign_up.email"/>-->
-                    </label>
-                    <input type="email" name="email" id="email" class="form-control px-2" autofocus="">
+                    <label for="email" class="mb-0 text-muted" th:text="#{sign_up.email}"></label>
+                    <input type="email" th:field="*{email}" id="email" class="form-control px-2" autofocus="">
 
-                    <label for="phone" class="mb-0 text-muted" th:text="#{sign_up.phone}">
-<!--                        <fmt:message key="sign_up.phone"/>-->
-                    </label>
-                    <input type="tel" maxlength="20" name="phone" id="phone" class="form-control px-2" autofocus="">
+                    <label for="phone" class="mb-0 text-muted" th:text="#{sign_up.phone}"></label>
+                    <input type="tel" maxlength="20" th:field="*{phone}" id="phone" class="form-control px-2"
+                           autofocus="">
 
                     <div class="my-4">
                         <div class="row">
                             <div class="col-sm-6">
                                 <a th:href="@{/home_page}"
                                    class="btn btn-danger btn-block" th:text="#{sign_up.btn.home}">
-<!--                                    <fmt:message key="sign_up.btn.home"/>-->
                                 </a>
                             </div>
                             <div class="col-sm-6">
                                 <button class="btn btn-success btn-block" type="submit" th:text="#{sign_up.btn.create}">
-<!--                                    <fmt:message key="sign_up.btn.create"/>-->
                                 </button>
                             </div>
                         </div>
@@ -73,8 +81,6 @@
         </div>
     </div>
 </div>
-
-<div th:insert="footer :: footer"></div>
 
 </body>
 

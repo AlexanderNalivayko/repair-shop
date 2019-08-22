@@ -24,8 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home_page", "/about_page").permitAll()
-                .antMatchers("/manager/**").hasAuthority("MANAGER")
+                .antMatchers("/", "/home_page", "/about_page", "/sign_up").permitAll()
+                .antMatchers("/manager/**", "/delete_feedback").hasAuthority("MANAGER")
                 .antMatchers("/master/**").hasAuthority("MASTER")
                 .antMatchers("/repair_page/**").hasAuthority("CUSTOMER")
                 .anyRequest().authenticated()

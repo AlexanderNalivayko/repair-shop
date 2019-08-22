@@ -5,7 +5,7 @@
 
     <nav>
         <ul class="pagination">
-            <th:block th:if="${records.getTotalPages() > 1}">
+            <th:block th:if="${records?.getTotalPages() > 1}">
                 <li th:if="${records.getNumber() != 0}" class="page-item">
                     <a class="page-link text-muted"
                        th:href="@{__${#httpServletRequest.requestURI}__(page=${records.getNumber()-1},size=${records.getSize()})}"

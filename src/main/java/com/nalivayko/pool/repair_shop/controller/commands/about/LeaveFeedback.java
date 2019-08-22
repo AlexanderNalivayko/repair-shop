@@ -25,13 +25,13 @@ public class LeaveFeedback implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String feedbackText = request.getParameter(ParametersAndAttributes.FEEDBACK_MSG);
-        if (feedbackText == null || feedbackText.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_FORBIDDEN);
-        } else {
-            User user = (User) request.getSession().getAttribute(ParametersAndAttributes.USER);
-            feedbackService.create(user, feedbackText);
-            openAboutPage.execute(request, response);
-        }
+//        String feedbackText = request.getParameter(ParametersAndAttributes.FEEDBACK_MSG);
+//        if (feedbackText == null || feedbackText.isEmpty()) {
+//            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+//        } else {
+//            User user = (User) request.getSession().getAttribute(ParametersAndAttributes.USER);
+//            feedbackService.create(user, feedbackText);
+//            openAboutPage.execute(request, response);
+//        }
     }
 }

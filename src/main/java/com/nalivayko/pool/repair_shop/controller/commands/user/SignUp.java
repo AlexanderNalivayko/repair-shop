@@ -24,16 +24,16 @@ public class SignUp implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = request.getParameter(ParametersAndAttributes.LOGIN);
-        String pass = request.getParameter(ParametersAndAttributes.PASS);
-        String firstName = request.getParameter(ParametersAndAttributes.FIRST_NAME);
-        String lastName = request.getParameter(ParametersAndAttributes.LAST_NAME);
-        String email = request.getParameter(ParametersAndAttributes.EMAIL);
-        String phone = request.getParameter(ParametersAndAttributes.PHONE);
-        userService.create(login, pass, firstName, lastName, email, phone);
-
-        User user = userService.getUserByUsername(login);
-        request.getSession().setAttribute(ParametersAndAttributes.USER, user);
-        openHomePageCommand.execute(request, response);
+//        String login = request.getParameter(ParametersAndAttributes.LOGIN);
+//        String pass = request.getParameter(ParametersAndAttributes.PASS);
+//        String firstName = request.getParameter(ParametersAndAttributes.FIRST_NAME);
+//        String lastName = request.getParameter(ParametersAndAttributes.LAST_NAME);
+//        String email = request.getParameter(ParametersAndAttributes.EMAIL);
+//        String phone = request.getParameter(ParametersAndAttributes.PHONE);
+//        userService.create(login, pass, firstName, lastName, email, phone);
+//
+//        User user = userService.getUserByUsername(login);
+//        request.getSession().setAttribute(ParametersAndAttributes.USER, user);
+//        openHomePageCommand.execute(request, response);
     }
 }
