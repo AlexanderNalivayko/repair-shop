@@ -19,6 +19,7 @@ import java.sql.Timestamp;
 @Service
 @NoArgsConstructor
 public class DefaultRepairRequestService implements RepairRequestService {
+
     @Autowired
     private CustomizedRepairRequestCrudRepository repairRequestRepo;
     @Autowired
@@ -61,15 +62,15 @@ public class DefaultRepairRequestService implements RepairRequestService {
 
     @Override
     public Page<RepairRequest> getAllAccepted(Pageable pageable) {
-        return repairRequestRepo.findByReviewStatusAndRepairRequestStatus(ReviewStatus.ACCEPTED,
-                RepairRequestStatus.REVIEWED, pageable);
+        return repairRequestRepo.findByReviewStatusAndRepairRequestStatus(ReviewStatus.ACCEPTED.toString(),
+                RepairRequestStatus.REVIEWED.toString(), pageable);
     }
 
     @Transactional
     @Override
-    public void acceptRepairRequest(Integer repairRequestId, Integer price) {
+    public void acceptRepairRequest(Integer repairRequestId, String price) {
         Review review = reviewRepo.save(Review.builder()
-                .cost(BigDecimal.valueOf(price))
+                .cost(new BigDecimal(price))
                 .status(ReviewStatus.ACCEPTED)
                 .time(String.valueOf(new Timestamp(System.currentTimeMillis())))
                 .build());
@@ -87,13 +88,9 @@ public class DefaultRepairRequestService implements RepairRequestService {
         repairRequestRepo.updateReviewById(repairRequestId, review.getId());
     }
 
+    @Transactional
     @Override
     public void performRepairRequest(Integer repairRequestId) {
-//        try {
-//            transactionManager.getConnection();
-//            repairRequestDAO.updateStatus(repairRequestId, RepairRequestStatus.DONE);
-//        } finally {
-//            transactionManager.closeConnection();
-//        }
+        repairRequestRepo.performRepariRequestById(repairRequestId);
     }
 }

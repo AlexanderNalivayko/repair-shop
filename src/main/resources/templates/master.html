@@ -58,8 +58,8 @@
                             :
                             <span class="text-muted" th:text="${request.review.cost}"></span>
                         </p>
-                        <form action="@{/master/perform}" method="post">
-                            <input type="hidden" name="repairId" value="${request.id}">
+                        <form th:action="@{/master}" method="post">
+                            <input type="hidden" name="repairId" th:value="${request.id}">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button class="btn btn-danger btn-block" name="btn" type="submit"

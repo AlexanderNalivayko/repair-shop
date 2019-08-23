@@ -28,14 +28,14 @@ public class ManagerPageController {
 
     @RequestMapping(value = "/accept", method = RequestMethod.POST)
     public RedirectView accept(@RequestParam("repairId") Integer id,
-                         @RequestParam("repairId") Integer price) {
+                         @RequestParam("price") String price) {
         repairRequestService.acceptRepairRequest(id, price);
         return new RedirectView("/manager");
 
     }
 
     @RequestMapping(value = "/reject", method = RequestMethod.POST)
-    public RedirectView accept(@RequestParam("repairId") Integer id,
+    public RedirectView reject(@RequestParam("repairId") Integer id,
                          @RequestParam("reason") String reason) {
         repairRequestService.rejectRepairRequest(id, reason);
         return new RedirectView("/manager");

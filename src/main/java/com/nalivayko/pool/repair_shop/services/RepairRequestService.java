@@ -15,7 +15,7 @@ public interface RepairRequestService {
 
     Page<RepairRequest> getAllAccepted(Pageable pageable);
 
-    void acceptRepairRequest(Integer repairRequestId, Integer price);
+    void acceptRepairRequest(Integer repairRequestId, String price);
 
     void rejectRepairRequest(Integer repairRequestId, String reason);
 

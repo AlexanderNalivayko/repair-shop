@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class MasterPageController {
@@ -21,5 +23,11 @@ public class MasterPageController {
             Model model) {
         model.addAttribute("records", repairRequestService.getAllAccepted(pageable));
         return "master";
+    }
+
+    @RequestMapping(value = "/master", method = RequestMethod.POST)
+    public RedirectView reject(@RequestParam("repairId") Integer id) {
+        repairRequestService.performRepairRequest(id);
+        return new RedirectView("/master");
     }
 }
